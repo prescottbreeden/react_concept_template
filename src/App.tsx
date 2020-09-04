@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
 import './App.css';
 import { curry, mergeDeepRight } from 'ramda';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import {Button} from '@material-ui/core';
+import {
+  Button,
+  Input,
+  InputLabel
+} from '@material-ui/core';
 
 // Global Utility
 const handleChange = curry((onChange: Function, name: string, event: any) => {
@@ -26,7 +28,10 @@ const createJoeData = (object: any) => {
     }
     return prev;
   }, {})
-  return data;
+  return {
+    ...data,
+    id: object.id
+  };
 }
 
 type Person = {
@@ -39,6 +44,7 @@ type Person = {
 function App() {
 
   const API_DATA = {
+    id: 28,
     firstName: 'Bob',
     lastName: 'Ross',
     age: 42,
