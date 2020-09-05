@@ -2,7 +2,6 @@ export interface KeyValuePair {
   [key: string]: any
 };
 
-
 export interface Meta<T> {
   meta?: T;
 };
@@ -21,3 +20,25 @@ export interface Person extends Meta<Person> {
   hair: Hair;
 };
 
+export interface ApiAction {
+  type: string;
+  payload: any;
+  meta: {
+    method?: string;
+    url?: string;
+    feature: string;
+  };
+}
+
+export interface ApiRequest {
+  body: any;
+  method: string;
+  url: string;
+  feature: string;
+};
+
+export interface ApiResponse {
+  payload?: any[];
+  error?: string;
+  feature: string;
+};
