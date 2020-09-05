@@ -1,5 +1,4 @@
-import React, {useState, useEffect} from 'react';
-import './App.css';
+import React, {useState} from 'react';
 import { curry, mergeDeepRight } from 'ramda';
 import {
   Button,
@@ -19,38 +18,43 @@ const deepEqual = (a: any, b: any) => {
   return JSON.stringify(a) === JSON.stringify(b);
 };
 
-// Recursive version!! yay!
-const depthSearch = (obj: any, dict: any = {}) => {
-  if (typeof obj !== 'object') return dict;
+// recursive version
+const depthSearch = (obj: any, include: string[] = []) => {
+  if (typeof obj !== 'object') return {};
   const keys = Object.keys(obj);
-  const data = keys.reduce((prev: any, curr: any) => {
-    if (curr === 'meta') return prev;
-    if (typeof obj[curr] === 'object') {
-      const search = depthSearch(obj[curr]);
-      if (Object.keys(search).length > 0) {
-        prev = { ...prev, [curr]: search };
-      }
+  return keys.reduce((prev: any, curr: any) => {
+    if (curr === 'meta') {
+      return prev;
     }
-    else if (!deepEqual(obj[curr], obj.meta[curr])) {
-      prev = { ...prev, [curr]: obj[curr] };
+    if (typeof obj[curr] === 'object') {
+      const search: {[key: string]: any} = depthSearch(obj[curr], include);
+      return Object.keys(search).length > 0
+        ? { ...prev, [curr]: search }
+        : prev;
+    }
+    if (include.includes(curr)) {
+      return { ...prev, [curr]: obj[curr] };
+    }
+    if (!deepEqual(obj[curr], obj.meta[curr])) {
+      return { ...prev, [curr]: obj[curr] };
     }
     return prev;
-  }, dict);
-  return data;
+  }, {});
 };
 
-const createJoeData = (object: any) => {
-  const keys = Object.keys(object);
-  const data = keys.reduce((prev: any, curr: any) => {
+// non-recursive version
+const createJoeData = (obj: any, include: string[] = []) => {
+  const keys = Object.keys(obj);
+  return keys.reduce((prev: any, curr: any) => {
     if (curr === 'meta') return prev;
-    if (!deepEqual(object[curr], object.meta[curr])) {
-      prev = { ...prev, [curr]: object[curr] };
+    if (!deepEqual(obj[curr], obj.meta[curr])) {
+      return { ...prev, [curr]: obj[curr] };
+    }
+    if (include.includes(curr)) {
+      return { ...prev, [curr]: obj[curr] };
     }
     return prev;
-  }, {})
-  return {
-    ...data,
-  };
+  }, {});
 };
 
 interface Meta<T> {
@@ -58,6 +62,7 @@ interface Meta<T> {
 };
 
 interface Hair extends Meta<Hair> {
+  hairId: number;
   color: string;
   length: number;
 };
@@ -78,11 +83,13 @@ function App() {
     lastName: 'Ross',
     age: 42,
     hair: {
+      hairId: 2,
       color: 'blue',
       length: 12
     }
   };
 
+  // probably easiest if the API sets this data up
   const person = {
     ...API_DATA,
     hair: {
@@ -106,16 +113,11 @@ function App() {
   });
 
   const handleSave = () => {
-    const payload = createJoeData(state);
-    const recursive = depthSearch(state);
+    const nonRecursive = createJoeData(state);
+    const recursive = depthSearch(state, ['personId', 'hairId']);
     console.log('original', state.meta);
     console.log('payload', recursive);
   };
-
-  useEffect(() => {
-    console.log(state.hair.color);
-
-  }, [state])
 
   return (
     <div style={{
@@ -123,42 +125,56 @@ function App() {
       placeItems: 'center',
       height: '100vh'
     }}>
-      <div>
-        <InputLabel htmlFor="firstName">First Name</InputLabel>
-        <Input 
-          id="firstName"
-          name="firstName"
-          onChange={onChange('firstName')}
-          value={state.firstName}
-        />
+      <div style={{ display: 'flex', justifyContent: 'space-around', width: '100%'}}>
+        <div>
+          <InputLabel htmlFor="firstName">First Name</InputLabel>
+          <Input 
+            id="firstName"
+            name="firstName"
+            onChange={onChange('firstName')}
+            value={state.firstName}
+          />
+        </div>
+        <div>
+          <InputLabel htmlFor="lastName">Last Name</InputLabel>
+          <Input 
+            id="lastName"
+            name="lastName"
+            onChange={onChange('lastName')}
+            value={state.lastName}
+          />
+        </div>
+        <div>
+          <InputLabel htmlFor="age">Age</InputLabel>
+          <Input 
+            id="age"
+            name="age"
+            onChange={onChange('age')}
+            type="number"
+            value={state.age}
+          />
+        </div>
       </div>
-      <div>
-        <InputLabel htmlFor="lastName">Last Name</InputLabel>
-        <Input 
-          id="lastName"
-          name="lastName"
-          onChange={onChange('lastName')}
-          value={state.lastName}
-        />
-      </div>
-      <div>
-        <InputLabel htmlFor="age">Age</InputLabel>
-        <Input 
-          id="age"
-          name="age"
-          onChange={onChange('age')}
-          type="number"
-          value={state.age}
-        />
-      </div>
-      <div>
-        <InputLabel htmlFor="color">Hair Color</InputLabel>
-        <Input 
-          id="color"
-          name="color"
-          onChange={handleHair('color')}
-          value={state.hair.color}
-        />
+      <div style={{ display: 'flex', justifyContent: 'space-around', width: '100%'}}>
+        <div>
+          <InputLabel htmlFor="color">Hair Color</InputLabel>
+          <Input 
+            id="color"
+            name="color"
+            onChange={handleHair('color')}
+            value={state.hair.color}
+          />
+        </div>
+        <div>
+          <InputLabel htmlFor="length">Hair Length</InputLabel>
+          <Input 
+            id="length"
+            name="length"
+            onChange={handleHair('length')}
+            type="number"
+            value={state.hair.length}
+          />
+        </div>
       </div>
       <Button onClick={handleSave}>Submit</Button>
     </div>
