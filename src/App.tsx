@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
 import { curry, mergeDeepRight } from 'ramda';
-import {
-  Button,
-  Input,
-  InputLabel
-} from '@material-ui/core';
+import { Button, Input, InputLabel } from '@material-ui/core';
+
+type KeyValuePair = {
+  [key: string]: any
+};
 
 // Global Utility
 const handleChange = curry((onChange: Function, name: string, event: any) => {
-  let data: { [key: string]: any } = {};
+  let data: KeyValuePair = {};
   const { value } = event.target;
   data[name] = value;
   onChange(data, name, value);
@@ -18,40 +18,46 @@ const deepEqual = (a: any, b: any) => {
   return JSON.stringify(a) === JSON.stringify(b);
 };
 
-// recursive version
-const depthSearch = (obj: any, include: string[] = []) => {
+/**
+ *  Evaluate objects and nested objects for properties that have changed and 
+ *  return all key-value pairs that have either been changed or are included
+ *  in the include array.
+ *  @param obj The object that is going to be sent to the API
+ *  @param invlude An array of keys that should always be included
+ *  @return Object
+ */
+const depthSearch = (obj: KeyValuePair, include: string[] = []) => {
   if (typeof obj !== 'object') return {};
   const keys = Object.keys(obj);
-  return keys.reduce((prev: any, curr: any) => {
-    if (curr === 'meta') {
+  return keys.reduce((prev: Partial<KeyValuePair>, key: string) => {
+    if (key === 'meta') {
       return prev;
     }
-    if (typeof obj[curr] === 'object') {
-      const search: {[key: string]: any} = depthSearch(obj[curr], include);
+    if (typeof obj[key] === 'object') {
+      const search: KeyValuePair = depthSearch(obj[key], include);
       return Object.keys(search).length > 0
-        ? { ...prev, [curr]: search }
+        ? { ...prev, [key]: search }
         : prev;
     }
-    if (include.includes(curr)) {
-      return { ...prev, [curr]: obj[curr] };
-    }
-    if (!deepEqual(obj[curr], obj.meta[curr])) {
-      return { ...prev, [curr]: obj[curr] };
+    if (include.includes(key) || !deepEqual(obj[key], obj.meta[key])) {
+      return { ...prev, [key]: obj[key] };
     }
     return prev;
   }, {});
 };
 
 // non-recursive version
-const createJoeData = (obj: any, include: string[] = []) => {
+const createJoeData = (obj: KeyValuePair, include: string[] = []) => {
   const keys = Object.keys(obj);
-  return keys.reduce((prev: any, curr: any) => {
-    if (curr === 'meta') return prev;
-    if (!deepEqual(obj[curr], obj.meta[curr])) {
-      return { ...prev, [curr]: obj[curr] };
+  return keys.reduce((prev: Partial<KeyValuePair>, key: string) => {
+    if (key === 'meta') {
+      return prev; 
     }
-    if (include.includes(curr)) {
-      return { ...prev, [curr]: obj[curr] };
+    if (!deepEqual(obj[key], obj.meta[key])) {
+      return { ...prev, [key]: obj[key] };
+    }
+    if (include.includes(key)) {
+      return { ...prev, [key]: obj[key] };
     }
     return prev;
   }, {});
