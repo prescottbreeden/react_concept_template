@@ -1,33 +1,14 @@
 import React, {useState} from 'react';
 import { mergeDeepRight } from 'ramda';
 import { Button, Input, InputLabel } from '@material-ui/core';
-import { Person, Hair } from './types/types';
-import { depthSearch, handleChange, compose } from './utilities';
+import { Person, emptyPerson } from './types';
+import { depthSearch, handleChange, compose, normalizeDatum } from './utilities';
 
-const DATA = {
-  personId: 28,
-  firstName: 'Bob',
-  lastName: 'Ross',
-  age: 42,
-  hair: {
-    hairId: 2,
-    color: 'brown',
-    length: 12
-  }
-};
-
-const API_DATA = {
-  ...DATA,
-  hair: {
-    ...DATA.hair,
-    meta: DATA.hair,
-  },
-  meta: DATA,
-};
+const fakeData = normalizeDatum(emptyPerson());
 
 function App() {
 
-  const [state, setState] = useState<Person>(API_DATA);
+  const [state, setState] = useState<Person>(fakeData);
 
   const updatePerson = compose(
     setState,
@@ -36,76 +17,62 @@ function App() {
 
   const onChange = handleChange(updatePerson);
 
-  const onHairChange = handleChange((data: Partial<Hair>) => {
-    const hair = mergeDeepRight(state.hair, data)
-    updatePerson({ hair });
-  });
-
   const savePerson = () => {
-    const recursive = depthSearch(state, ['personId', 'hairId']);
-    console.log('original', state.meta);
-    console.log('payload', recursive);
+    const postData = depthSearch(state, ['personId', 'hairId']);
+    alert(JSON.stringify(postData, null, 2))
   };
 
   return (
-    <div style={{
-      display: 'grid',
-      placeItems: 'center',
-      height: '100vh'
-    }}>
-      <div style={{ display: 'flex', justifyContent: 'space-around', width: '100%'}}>
-        <div>
-          <InputLabel htmlFor="firstName">First Name</InputLabel>
-          <Input 
-            id="firstName"
-            name="firstName"
-            onChange={onChange('firstName')}
-            value={state.firstName}
-          />
+    <>
+      <h1>Demo</h1>
+      <div className="container">
+        <div className="json">
+          <h2>GET Data</h2>
+          <pre>
+            {JSON.stringify(fakeData, null, 2)}
+          </pre>
+          <h2>POST Data</h2>
+          <pre>
+            {JSON.stringify(depthSearch(state, ['personId']), null, 2)}
+          </pre>
         </div>
-        <div>
-          <InputLabel htmlFor="lastName">Last Name</InputLabel>
-          <Input 
-            id="lastName"
-            name="lastName"
-            onChange={onChange('lastName')}
-            value={state.lastName}
-          />
-        </div>
-        <div>
-          <InputLabel htmlFor="age">Age</InputLabel>
-          <Input 
-            id="age"
-            name="age"
-            onChange={onChange('age')}
-            type="number"
-            value={state.age}
-          />
-        </div>
-      </div>
-      <div style={{ display: 'flex', justifyContent: 'space-around', width: '100%'}}>
-        <div>
-          <InputLabel htmlFor="color">Hair Color</InputLabel>
-          <Input 
-            id="color"
-            name="color"
-            onChange={onHairChange('color')}
-            value={state.hair.color}
-          />
-        </div>
-        <div>
-          <InputLabel htmlFor="length">Hair Length</InputLabel>
-          <Input 
-            id="length"
-            name="length"
-            onChange={onHairChange('length')}
-            type="number"
-            value={state.hair.length}
-          />
+        <div className="form__container">
+          <h2>Form Sample</h2>
+          <div className="form">
+            <div className="form__row">
+              <div>
+                <InputLabel htmlFor="firstName">First Name</InputLabel>
+                <Input 
+                  id="name"
+                  name="name"
+                  onChange={onChange('name')}
+                  value={state.name}
+                />
+              </div>
+              <div>
+                <InputLabel htmlFor="height">Height</InputLabel>
+                <Input 
+                  id="height"
+                  name="height"
+                  onChange={onChange('height')}
+                  value={state.height}
+                />
+              </div>
+              <div>
+                <InputLabel htmlFor="gender">Gender</InputLabel>
+                <Input 
+                  id="gender"
+                  name="gender"
+                  onChange={onChange('gender')}
+                  value={state.gender}
+                />
+              </div>
+              <Button onClick={savePerson}>Submit</Button>
+            </div>
+          </div>
         </div>
       </div>
-      <Button onClick={savePerson}>Submit</Button>
-    </div>
+    </>
   );
 }
 

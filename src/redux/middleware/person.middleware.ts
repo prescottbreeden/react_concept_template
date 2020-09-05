@@ -1,8 +1,8 @@
-import {ApiAction} from "../../types/types";
+import {ApiAction} from "types";
 import {FETCH_PERSON, PERSON, setPerson} from "../actions/person.actions";
 import {apiRequest, API_SUCCESS, API_ERROR} from "../actions/api.actions";
 
-const PERSON_URL = 'api/person';
+const PERSON_URL = 'https://swapi.dev/api/people/';
 
 export const personMiddleware = () => (next: Function) => (action: ApiAction) => {
   next(action);
@@ -18,11 +18,11 @@ export const personMiddleware = () => (next: Function) => (action: ApiAction) =>
       }));
       break;
 
-    case `${API_SUCCESS} ${PERSON}`:
+    case `${PERSON} ${API_SUCCESS}`:
       next(setPerson({ personData: action.payload }));
       break;
 
-    case `${API_ERROR} ${PERSON}`:
+    case `${PERSON} ${API_ERROR}`:
       // next(setNotification(action.payload));
       break;
   }

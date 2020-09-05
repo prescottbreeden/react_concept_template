@@ -1,5 +1,5 @@
-import {KeyValuePair} from "./types/types";
-import { curry } from 'ramda';
+import {KeyValuePair} from "types";
+import { curry, map } from 'ramda';
 import {FormEvent} from "react";
 
 /**
@@ -85,6 +85,36 @@ export const createJoeData = (obj: KeyValuePair, include: string[] = []) => {
     return prev;
   }, {});
 };
+
+/**
+ *  Normalize data received from API to contain meta for each level.
+ *  @param datum The object to be normalized with meta information
+ *  @return Object
+ */
+export const normalizeDatum = (datum: any): any => {
+  if (typeof datum !== 'object') return datum;
+  const keys = Object.keys(datum);
+  keys.forEach((key: string) => {
+    if (typeof datum[key] === 'object' && !(datum[key] instanceof Array)) {
+      return normalizeDatum(datum[key]);
+    }
+  });
+  return {
+    ...datum,
+    meta: datum,
+  };
+};
+
+/**
+ *  Normalize array data received from API to contain meta for each level.
+ *  @param data The array to be normalized with meta information
+ *  @return Array
+ */
+export const normalizeArray = (data: any[]) => {
+  return map((datum: any) => {
+    return normalizeDatum(datum);
+  }, data);
+}
 
 // debug
 export const trace = curry((txt: string, x: any) => {

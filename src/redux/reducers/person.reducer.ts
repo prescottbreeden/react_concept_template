@@ -1,4 +1,4 @@
-import {Person} from "../../types/types";
+import {Person} from "types";
 import {SET_PERSON} from "../actions/person.actions";
 
 const initialState: Person[] = [];

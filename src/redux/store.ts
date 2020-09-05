@@ -3,6 +3,7 @@ import {personReducer} from './reducers/person.reducer';
 import {personMiddleware} from './middleware/person.middleware';
 import {apiMiddleware} from './middleware/api.middleware';
 import {compose} from '../utilities';
+import {normalizeMiddleware} from './middleware/normalize.middleware';
 
 const rootReducer = combineReducers({
   person: personReducer,
@@ -14,6 +15,7 @@ const featureMiddleware: any[] = [
 
 const coreMiddleware: any[] = [
   apiMiddleware,
+  normalizeMiddleware,
 ];
 
 const enhancer = compose(

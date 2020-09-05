@@ -1,4 +1,4 @@
-import {ApiAction} from "../../types/types";
+import {ApiAction} from "types";
 import {API_REQUEST, apiSuccess, apiError} from "../actions/api.actions";
 
 export const apiMiddleware = ({dispatch}: any) => (next: Function) => (action: ApiAction) => {
