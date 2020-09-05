@@ -20,22 +20,22 @@ const deepEqual = (a: any, b: any) => {
 };
 
 // Recursive version!! yay!
-const depthSearch = (obj: any, dict: any) => {
+const depthSearch = (obj: any, dict: any = {}) => {
   if (typeof obj !== 'object') return dict;
   const keys = Object.keys(obj);
   const data = keys.reduce((prev: any, curr: any) => {
     if (curr === 'meta') return prev;
     if (typeof obj[curr] === 'object') {
-      const search = depthSearch(obj[curr], {});
+      const search = depthSearch(obj[curr]);
       if (Object.keys(search).length > 0) {
-        prev = { ...prev, [curr]: depthSearch(obj[curr], {}) };
+        prev = { ...prev, [curr]: search };
       }
     }
     else if (!deepEqual(obj[curr], obj.meta[curr])) {
       prev = { ...prev, [curr]: obj[curr] };
     }
     return prev;
-  }, dict)
+  }, dict);
   return data;
 };
 
@@ -107,7 +107,7 @@ function App() {
 
   const handleSave = () => {
     const payload = createJoeData(state);
-    const recursive = depthSearch(state, {});
+    const recursive = depthSearch(state);
     console.log('original', state.meta);
     console.log('payload', recursive);
   };
