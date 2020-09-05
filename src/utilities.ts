@@ -1,0 +1,94 @@
+import {KeyValuePair} from "./types/types";
+import { curry } from 'ramda';
+import {FormEvent} from "react";
+
+/**
+ *  Compose function that is a little more friendly to use with typescript.
+ *  @param fns any number of comma-separated functions
+ *  @return new function
+ */
+export const compose = (...fns: Function[]) => (x: any) => 
+  fns.reduceRight((y: any, f: any) => f(y), x);
+
+/**
+ *  Curried function that takes the output of an HTMLInputElement Event and 
+ *  wraps it into an object by the name, then executes a given function and 
+ *  providing the key/value pair, the name, and the raw value as parameters.
+ *  @param onChange Function to be executed with the event data
+ *  @param name String of what the data should bind to on an object
+ *  @param event HTMLInputElement Event 
+ *  @return void
+ */
+export const handleChange = curry((
+  onChange: Function,
+  name: string,
+  event: FormEvent<HTMLInputElement>
+) => {
+  let data: KeyValuePair = {};
+  if (!event) return;
+  const { value } = event.currentTarget;
+  data[name] = value;
+  onChange(data, name, value);
+});
+
+/**
+ *  Evaluate any two values for deep equality
+ *  @param a any value
+ *  @param b any value
+ *  @return boolean
+ */
+export const deepEqual = (a: unknown, b: unknown) => {
+  return JSON.stringify(a) === JSON.stringify(b);
+};
+
+/**
+ *  Evaluate objects and nested objects for properties that have changed and 
+ *  return all key-value pairs that have either been changed or are included
+ *  in the include array.
+ *  @param obj The object that is going to be sent to the API
+ *  @param invlude An array of keys that should always be included
+ *  @return Object
+ */
+export const depthSearch = (obj: KeyValuePair, include: string[] = []) => {
+  if (typeof obj !== 'object') return {};
+  const keys = Object.keys(obj);
+  return keys.reduce((prev: Partial<KeyValuePair>, key: string) => {
+    if (key === 'meta') {
+      return prev;
+    }
+    if (typeof obj[key] === 'object') {
+      const search: KeyValuePair = depthSearch(obj[key], include);
+      return Object.keys(search).length > 0
+        ? { ...prev, [key]: search }
+        : prev;
+    }
+    if (include.includes(key) || !deepEqual(obj[key], obj.meta[key])) {
+      return { ...prev, [key]: obj[key] };
+    }
+    return prev;
+  }, {});
+};
+
+// non-recursive version of depthSearch
+export const createJoeData = (obj: KeyValuePair, include: string[] = []) => {
+  const keys = Object.keys(obj);
+  return keys.reduce((prev: Partial<KeyValuePair>, key: string) => {
+    if (key === 'meta') {
+      return prev; 
+    }
+    if (!deepEqual(obj[key], obj.meta[key])) {
+      return { ...prev, [key]: obj[key] };
+    }
+    if (include.includes(key)) {
+      return { ...prev, [key]: obj[key] };
+    }
+    return prev;
+  }, {});
+};
+
+// debug
+export const trace = curry((txt: string, x: any) => {
+  console.log(txt, x);
+  return x;
+});
+

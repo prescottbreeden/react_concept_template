@@ -1,125 +1,47 @@
 import React, {useState} from 'react';
-import { curry, mergeDeepRight } from 'ramda';
+import { mergeDeepRight } from 'ramda';
 import { Button, Input, InputLabel } from '@material-ui/core';
+import { Person, Hair } from './types/types';
+import { depthSearch, handleChange, compose } from './utilities';
 
-type KeyValuePair = {
-  [key: string]: any
+const DATA = {
+  personId: 28,
+  firstName: 'Bob',
+  lastName: 'Ross',
+  age: 42,
+  hair: {
+    hairId: 2,
+    color: 'brown',
+    length: 12
+  }
 };
 
-// Global Utility
-const handleChange = curry((onChange: Function, name: string, event: any) => {
-  let data: KeyValuePair = {};
-  const { value } = event.target;
-  data[name] = value;
-  onChange(data, name, value);
-});
-
-const deepEqual = (a: any, b: any) => {
-  return JSON.stringify(a) === JSON.stringify(b);
-};
-
-/**
- *  Evaluate objects and nested objects for properties that have changed and 
- *  return all key-value pairs that have either been changed or are included
- *  in the include array.
- *  @param obj The object that is going to be sent to the API
- *  @param invlude An array of keys that should always be included
- *  @return Object
- */
-const depthSearch = (obj: KeyValuePair, include: string[] = []) => {
-  if (typeof obj !== 'object') return {};
-  const keys = Object.keys(obj);
-  return keys.reduce((prev: Partial<KeyValuePair>, key: string) => {
-    if (key === 'meta') {
-      return prev;
-    }
-    if (typeof obj[key] === 'object') {
-      const search: KeyValuePair = depthSearch(obj[key], include);
-      return Object.keys(search).length > 0
-        ? { ...prev, [key]: search }
-        : prev;
-    }
-    if (include.includes(key) || !deepEqual(obj[key], obj.meta[key])) {
-      return { ...prev, [key]: obj[key] };
-    }
-    return prev;
-  }, {});
-};
-
-// non-recursive version
-const createJoeData = (obj: KeyValuePair, include: string[] = []) => {
-  const keys = Object.keys(obj);
-  return keys.reduce((prev: Partial<KeyValuePair>, key: string) => {
-    if (key === 'meta') {
-      return prev; 
-    }
-    if (!deepEqual(obj[key], obj.meta[key])) {
-      return { ...prev, [key]: obj[key] };
-    }
-    if (include.includes(key)) {
-      return { ...prev, [key]: obj[key] };
-    }
-    return prev;
-  }, {});
-};
-
-interface Meta<T> {
-  meta?: T;
-};
-
-interface Hair extends Meta<Hair> {
-  hairId: number;
-  color: string;
-  length: number;
-};
-
-interface Person extends Meta<Person> {
-  personId: number;
-  age: number;
-  firstName: string;
-  lastName: string;
-  hair: Hair;
+const API_DATA = {
+  ...DATA,
+  hair: {
+    ...DATA.hair,
+    meta: DATA.hair,
+  },
+  meta: DATA,
 };
 
 function App() {
 
-  const API_DATA = {
-    personId: 28,
-    firstName: 'Bob',
-    lastName: 'Ross',
-    age: 42,
-    hair: {
-      hairId: 2,
-      color: 'blue',
-      length: 12
-    }
-  };
+  const [state, setState] = useState<Person>(API_DATA);
 
-  // probably easiest if the API sets this data up
-  const person = {
-    ...API_DATA,
-    hair: {
-      ...API_DATA.hair,
-      meta: API_DATA.hair,
-    },
-    meta: API_DATA,
-  };
+  const updatePerson = compose(
+    setState,
+    mergeDeepRight(state),
+  );
 
-  const [state, setState] = useState<Person>(person);
+  const onChange = handleChange(updatePerson);
 
-  const onChange = handleChange((data: Partial<Person>) => {
-    const update =  mergeDeepRight(state, data);
-    setState(update);
-  });
-
-  const handleHair = handleChange((data: Partial<Hair>) => {
+  const onHairChange = handleChange((data: Partial<Hair>) => {
     const hair = mergeDeepRight(state.hair, data)
-    const update = mergeDeepRight(state, { hair });
-    setState(update);
+    updatePerson({ hair });
   });
 
-  const handleSave = () => {
-    const nonRecursive = createJoeData(state);
+  const savePerson = () => {
     const recursive = depthSearch(state, ['personId', 'hairId']);
     console.log('original', state.meta);
     console.log('payload', recursive);
@@ -167,7 +89,7 @@ function App() {
           <Input 
             id="color"
             name="color"
-            onChange={handleHair('color')}
+            onChange={onHairChange('color')}
             value={state.hair.color}
           />
         </div>
@@ -176,13 +98,13 @@ function App() {
           <Input 
             id="length"
             name="length"
-            onChange={handleHair('length')}
+            onChange={onHairChange('length')}
             type="number"
             value={state.hair.length}
           />
         </div>
       </div>
-      <Button onClick={handleSave}>Submit</Button>
+      <Button onClick={savePerson}>Submit</Button>
     </div>
   );
 }
