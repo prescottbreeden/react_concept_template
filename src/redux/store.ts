@@ -1,6 +1,6 @@
 import { compose } from 'utils/utilities';
 import { combineReducers, applyMiddleware, createStore } from 'redux';
-import { stateFreezer } from 'redux/reducers/reducerEnhancers/stateFreezer';
+import { stateFreezer } from 'redux/reducers/enhancers/stateFreezer';
 import { personMiddleware } from 'redux/middleware/feature/person.middleware';
 import { apiMiddleware } from 'redux/middleware/core/api.middleware';
 import { normalizeMiddleware } from 'redux/middleware/core/normalize.middleware';
