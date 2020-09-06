@@ -10,9 +10,9 @@ export const Loading: FC = () => {
   return loader.length > 0 ? (
     <div className="loading">
       <div className="loading__content">
-        <p>Loading</p>
+        <p>LOADING</p>
         <CircularProgress />
-        <p>{percentage}% Completed</p>
+        <p>{percentage}%</p>
       </div>
     </div>
   ) : null;

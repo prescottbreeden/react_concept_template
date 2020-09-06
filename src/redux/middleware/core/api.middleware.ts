@@ -15,10 +15,10 @@ export const apiMiddleware = ({ dispatch }: any) => (next: Function) => (
 
   if (action.type.includes(API_REQUEST)) {
     const { url, method, feature } = action.meta;
-    const id = new Date().getMilliseconds();
 
-    dispatch(setLoader({ id, feature }));
-    url &&
+    if (url) {
+      const loaderId = new Date().getMilliseconds();
+      dispatch(setLoader({ id: loaderId, feature }));
       fetch(url, { method })
         .then((response: any) => response.json())
         .then((payload: any) => dispatch(apiSuccess({ payload, feature })))
@@ -26,9 +26,10 @@ export const apiMiddleware = ({ dispatch }: any) => (next: Function) => (
         .finally(() =>
           setTimeout(() => {
             // demonstration purpose timeout only
-            dispatch(removeLoader({ id, feature }));
+            dispatch(removeLoader({ id: loaderId, feature }));
           }, 2000)
         );
+    }
   }
 
   if (action.type.includes(API_ERROR)) {
