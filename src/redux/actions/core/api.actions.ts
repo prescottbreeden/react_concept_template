@@ -1,8 +1,8 @@
 import { ApiRequest, ApiResponse, ReduxBaseAction } from 'types';
 
-export const API_REQUEST = '[API REQUEST]';
-export const API_SUCCESS = '[API SUCCESS]';
-export const API_ERROR = '[API ERROR]';
+export const API_REQUEST = 'API REQUEST';
+export const API_SUCCESS = 'API SUCCESS';
+export const API_ERROR = 'API ERROR';
 
 export const apiRequest = (request: ApiRequest): ReduxBaseAction<any> => {
   const { body, method, url, feature } = request;

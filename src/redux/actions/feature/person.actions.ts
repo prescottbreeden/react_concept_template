@@ -1,8 +1,8 @@
 import { Person } from 'types';
 import { apiRequest } from 'redux/actions/core/api.actions';
+import { PERSON_KEY } from 'redux/keys';
 
-export const PERSON = '[PERSON]';
-export const SET_PERSON = `${PERSON} SET`;
+export const SET_PERSON = `${PERSON_KEY} SET`;
 
 const PERSON_URL = 'https://swapi.dev/api/people/';
 
@@ -11,7 +11,7 @@ export const createPerson = (person: Person) => {
     body: person,
     method: 'POST',
     url: `${PERSON_URL}`,
-    feature: PERSON,
+    feature: PERSON_KEY,
   });
 };
 
@@ -20,7 +20,7 @@ export const readPerson = (id?: number) => {
     body: null,
     method: 'GET',
     url: `${PERSON_URL}${id ? id : ''}`,
-    feature: PERSON,
+    feature: PERSON_KEY,
   });
 };
 
@@ -29,7 +29,7 @@ export const updatePerson = (id: number, person: Partial<Person>) => {
     body: person,
     method: 'PATCH',
     url: `${PERSON_URL}${id}`,
-    feature: PERSON,
+    feature: PERSON_KEY,
   });
 };
 
@@ -38,7 +38,7 @@ export const deletePerson = (id: number) => {
     body: null,
     method: 'DELETE',
     url: `${PERSON_URL}${id}`,
-    feature: PERSON,
+    feature: PERSON_KEY,
   });
 };
 

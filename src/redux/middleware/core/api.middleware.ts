@@ -1,9 +1,9 @@
 import { ApiAction } from 'types';
 import {
   API_REQUEST,
+  API_ERROR,
   apiSuccess,
   apiError,
-  API_ERROR,
 } from 'redux/actions/core/api.actions';
 import { setLoader, removeLoader } from 'redux/actions/core/loader.actions';
 import { setNotification } from 'redux/actions/core/notification.actions';
@@ -21,7 +21,7 @@ export const apiMiddleware = ({ dispatch }: any) => (next: Function) => (
         const loaderId = new Date().getMilliseconds();
         dispatch(setLoader({ id: loaderId, feature }));
         fetch(url, { method })
-          .then((response: Body) => response.json())
+          .then((response: Response) => response.json())
           .then((payload: any) => dispatch(apiSuccess({ payload, feature })))
           .catch((error: any) => dispatch(apiError({ error, feature })))
           .finally(() =>

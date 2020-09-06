@@ -3,6 +3,8 @@ import {
   REMOVE_NOTIFICATION,
 } from 'redux/actions/core/notification.actions';
 import { NotificationAction } from 'types';
+import { prop } from 'ramda';
+import { NOTIFICATION_KEY } from 'redux/keys';
 
 const initState: NotificationAction[] = [];
 
@@ -23,4 +25,9 @@ export const notificationsReducer = (
     default:
       return notifications;
   }
+};
+
+// -- Select From State --------------------------------------------------------
+export const selectNotification = (state: any) => {
+  return prop(NOTIFICATION_KEY, state)[0];
 };

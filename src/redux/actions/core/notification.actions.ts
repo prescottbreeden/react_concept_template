@@ -1,7 +1,8 @@
 import { ReduxBaseAction, NotificationAction } from 'types';
+import { NOTIFICATION_KEY } from 'redux/keys';
 
-export const SET_NOTIFICATION = 'CREATE_NOTIFICATION';
-export const REMOVE_NOTIFICATION = 'REMOVE_NOTIFICATION';
+export const SET_NOTIFICATION = `${NOTIFICATION_KEY} CREATE`;
+export const REMOVE_NOTIFICATION = `${NOTIFICATION_KEY} REMOVE`;
 
 export const setNotification = ({
   message,

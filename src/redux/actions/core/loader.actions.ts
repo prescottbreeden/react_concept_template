@@ -1,7 +1,8 @@
 import { ReduxBaseAction, LoaderAction } from 'types';
+import { LOADING_KEY } from 'redux/keys';
 
-export const SET_LOADER = 'LOADING STARTED';
-export const REMOVE_LOADER = 'LOADING ENDING';
+export const SET_LOADER = `${LOADING_KEY} STARTED`;
+export const REMOVE_LOADER = `${LOADING_KEY} ENDING`;
 
 export const setLoader = ({
   id,

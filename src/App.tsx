@@ -11,15 +11,15 @@ import {
 } from '@material-ui/core';
 import { Person, emptyPerson } from 'types';
 import { depthSearch, handleChange, compose, randomString } from './utilities';
-import { getPersons } from 'redux/selectors/feature/person.selectors';
 import { Page } from 'layout/basic.layout';
 import { setNotification } from 'redux/actions/core/notification.actions';
 import { readPerson } from 'redux/actions/feature/person.actions';
+import { selectPersons } from 'redux/reducers/feature/person.reducer';
 
 function App() {
   // -- redux and state ------------------------
   const dispatch = useDispatch();
-  const people: Person[] = useSelector(getPersons);
+  const people: Person[] = useSelector(selectPersons);
   const [state, setState] = useState<Person>(emptyPerson());
 
   // -- onChange logic -------------------------
