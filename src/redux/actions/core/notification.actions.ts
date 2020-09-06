@@ -1,4 +1,4 @@
-import {NotificationAction} from "types";
+import { NotificationAction } from 'types';
 
 export const SET_NOTIFICATION = 'CREATE_NOTIFICATION';
 export const REMOVE_NOTIFICATION = 'REMOVE_NOTIFICATION';
@@ -16,4 +16,3 @@ export const removeNotification = ({ id }: any) => {
     payload: id,
   };
 };
-

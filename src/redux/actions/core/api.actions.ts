@@ -1,4 +1,4 @@
-import {ApiRequest, ApiResponse, ApiAction} from "types";
+import { ApiRequest, ApiResponse, ApiAction } from 'types';
 
 export const API_REQUEST = '[API REQUEST]';
 export const API_SUCCESS = '[API SUCCESS]';
@@ -14,7 +14,7 @@ export const apiRequest = (request: ApiRequest): ApiAction => {
 };
 
 export const apiSuccess = (response: ApiResponse): ApiAction => {
-  const {payload, feature} = response;
+  const { payload, feature } = response;
   return {
     type: `${feature} ${API_SUCCESS}`,
     payload: payload,
@@ -23,7 +23,7 @@ export const apiSuccess = (response: ApiResponse): ApiAction => {
 };
 
 export const apiError = (response: ApiResponse): ApiAction => {
-  const {error, feature} = response;
+  const { error, feature } = response;
   return {
     type: `${feature} ${API_SUCCESS}`,
     payload: error,

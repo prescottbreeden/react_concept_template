@@ -1,4 +1,4 @@
-import {Meta} from "types/base.type";
+import { Meta } from 'types/core/base.type';
 
 export interface Person extends Meta<Person> {
   personId: number;
@@ -14,7 +14,7 @@ export interface Person extends Meta<Person> {
   species: string[];
   vehicles: string[];
   starships: string[];
-};
+}
 
 export const emptyPerson = (): Person => {
   return {

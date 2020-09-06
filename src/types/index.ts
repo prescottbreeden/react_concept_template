@@ -1,3 +1,2 @@
-export * from 'types/api.type';
-export * from 'types/base.type';
-export * from 'types/features';
+export * from 'types/core';
+export * from 'types/feature';

@@ -1,7 +1,7 @@
-import React, {FC} from 'react';
-import {CircularProgress} from '@material-ui/core';
-import {getLoader} from 'redux/selectors/loader.selectors';
-import {useSelector} from 'react-redux';
+import React, { FC } from 'react';
+import { CircularProgress } from '@material-ui/core';
+import { getLoader } from 'redux/selectors/core/loader.selectors';
+import { useSelector } from 'react-redux';
 
 export const Loading: FC = () => {
   const loader: boolean = useSelector(getLoader);
@@ -14,4 +14,4 @@ export const Loading: FC = () => {
       </div>
     </div>
   ) : null;
-}
+};

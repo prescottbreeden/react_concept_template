@@ -13,11 +13,10 @@ export interface ApiRequest {
   method: string;
   url: string;
   feature: string;
-};
+}
 
 export interface ApiResponse {
   payload?: any[];
   error?: string;
   feature: string;
-};
-
+}
