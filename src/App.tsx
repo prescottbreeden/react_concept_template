@@ -5,14 +5,17 @@ import { Person, emptyPerson } from './types';
 import { depthSearch, handleChange, compose, normalizeDatum } from './utilities';
 import {Loading} from 'components/Loading.component';
 import {Notification} from 'components/Notification.component';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {getPersons} from 'redux/selectors/person.selectors';
+import {fetchPerson} from 'redux/actions/person.actions';
+import {getLoader} from 'redux/selectors/loader.selectors';
 
 const fakeData = normalizeDatum(emptyPerson());
 
 function App() {
 
   const people: Person[] = useSelector(getPersons);
+  const loader: boolean = useSelector(getLoader);
   const [state, setState] = useState<Person>(fakeData);
 
   const updatePerson = compose(
@@ -25,6 +28,11 @@ function App() {
   const savePerson = () => {
     const postData = depthSearch(state, ['personId', 'hairId']);
     alert(JSON.stringify(postData, null, 2))
+  };
+
+  const dispatch = useDispatch();
+  const loadPeople = () => {
+    dispatch(fetchPerson({}));
   };
 
   const renderPeople = map((person: Person) => (
@@ -42,10 +50,10 @@ function App() {
   return (
     <div className="page">
       <Notification />
-      {false && <Loading />}
+      {loader && <Loading />}
       <div className="header">
         <h1>Demo</h1>
-        <Button>Get Data</Button>
+        <Button onClick={loadPeople}>Get Data</Button>
       </div>
       <div className="container">
         <div className="json">
@@ -59,12 +67,6 @@ function App() {
           </pre>
         </div>
         <div className="elements">
-          <div className="list__container">
-              <h2>List of Persons in Redux</h2>
-             <List>
-               {renderPeople(people)}
-            </List>
-          </div>
           <div className="form__container">
             <h2>Form Sample</h2>
             <div className="form">
@@ -99,6 +101,12 @@ function App() {
                 <Button onClick={savePerson}>Submit</Button>
               </div>
             </div>
+          </div>
+          <div className="list__container">
+              <h2>List of Persons in Redux</h2>
+             <List>
+               {renderPeople(people.length ? people : [])}
+            </List>
           </div>
         </div>
       </div>

@@ -4,9 +4,13 @@ import {personMiddleware} from './middleware/person.middleware';
 import {apiMiddleware} from './middleware/api.middleware';
 import {compose} from '../utilities';
 import {normalizeMiddleware} from './middleware/normalize.middleware';
+import {loaderReducer} from './reducers/loader.reducer';
+import {notificationsReducer} from './reducers/notifications.reducer';
 
 const rootReducer = combineReducers({
   person: personReducer,
+  loader: loaderReducer,
+  notification: notificationsReducer,
 });
 
 const featureMiddleware: any[] = [
