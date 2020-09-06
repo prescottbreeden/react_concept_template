@@ -1,7 +1,9 @@
-import {Person} from "types";
+import {Person, emptyPerson} from "types";
 import {SET_PERSON} from "../actions/person.actions";
 
-const initialState: Person[] = [];
+const initialState: Person[] = [
+  emptyPerson(),
+];
 
 export const personReducer = (person = initialState, action: any) => {
   switch(action.type) {
