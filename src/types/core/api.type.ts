@@ -9,9 +9,9 @@ export interface ApiAction extends ReduxBaseAction<any> {
 }
 
 export interface ApiRequest {
-  body: any;
+  body?: any;
   method: string;
-  url: string;
+  param?: string;
   feature: string;
 }
 
@@ -19,4 +19,5 @@ export interface ApiResponse {
   payload?: any[];
   error?: string;
   feature: string;
+  method?: string;
 }

@@ -11,6 +11,7 @@ export const Notification: FC = () => {
   return (
     <div className={getClass()}>
       <p>{notification && notification.message}</p>
+      {notification && notification.payload}
     </div>
   );
 };

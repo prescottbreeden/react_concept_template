@@ -16,25 +16,29 @@ export const apiMiddleware = ({ dispatch }: any) => (next: Function) => (
   if (action.type.includes(API_REQUEST)) {
     const { url, method, feature } = action.meta;
 
-    switch (method) {
-      case 'GET':
-        const loaderId = new Date().getMilliseconds();
-        dispatch(setLoader({ id: loaderId, feature }));
-        fetch(url, { method })
-          .then((response: Response) => response.json())
-          .then((payload: any) => dispatch(apiSuccess({ payload, feature })))
-          .catch((error: any) => dispatch(apiError({ error, feature })))
-          .finally(() =>
-            setTimeout(() => {
-              // demonstration purpose timeout only
-              dispatch(removeLoader({ id: loaderId, feature }));
-            }, 2000)
-          );
-        break;
-    }
+    const loaderId = new Date().getMilliseconds();
+    dispatch(setLoader({ id: loaderId, feature }));
+    fetch(url, { method })
+      .then((response: Response) => response.json())
+      .then((payload: any) =>
+        dispatch(apiSuccess({ payload, feature, method }))
+      )
+      .catch((error: any) => dispatch(apiError({ error, feature, method })))
+      .finally(() =>
+        setTimeout(() => {
+          // demonstration purpose timeout only
+          dispatch(removeLoader({ id: loaderId, feature }));
+        }, 0)
+      );
   }
 
   if (action.type.includes(API_ERROR)) {
-    next(setNotification({ message: 'An error occurred', status: 'error' }));
+    next(
+      setNotification({
+        payload: action.payload,
+        message: 'dingo',
+        status: 'error',
+      })
+    );
   }
 };

@@ -1,12 +1,15 @@
 import { ApiAction } from 'types';
-import { dataNormalized } from 'redux/actions/core/data.actions';
+import { dataNormalized, SET_DATA } from 'redux/actions/core/data.actions';
 import { normalizeArray, normalizeDatum } from 'utilities';
 import { mergeDeepRight } from 'ramda';
 
 export const normalizeMiddleware = ({ dispatch }: any) => (next: Function) => (
   action: ApiAction
 ) => {
-  if (action.type.includes('SET')) {
+  if (action.type.includes(SET_DATA)) {
+    if (!action.payload) {
+      throw new Error('mother fucker');
+    }
     const payload = Array.isArray(action.payload)
       ? normalizeArray(action.payload)
       : [normalizeDatum(action.payload)];

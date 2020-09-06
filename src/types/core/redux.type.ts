@@ -8,6 +8,7 @@ export interface NotificationAction {
   id?: number;
   message: string;
   status: 'success' | 'error' | 'warning';
+  payload?: any;
 }
 
 export interface LoaderAction {

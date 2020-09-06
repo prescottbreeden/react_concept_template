@@ -1,51 +1,40 @@
-import { Person } from 'types';
-import { apiRequest } from 'redux/actions/core/api.actions';
 import { PERSON_KEY } from 'redux/keys';
-
-export const SET_PERSON = `${PERSON_KEY} SET`;
-
-const PERSON_URL = 'https://swapi.dev/api/people/';
+import { Person } from 'types';
 
 export const createPerson = (person: Person) => {
-  return apiRequest({
-    body: person,
-    method: 'POST',
-    url: `${PERSON_URL}`,
-    feature: PERSON_KEY,
-  });
+  return {
+    type: `${PERSON_KEY} CREATE`,
+    payload: {
+      body: person,
+    },
+  };
 };
 
 export const readPerson = (id?: number) => {
-  return apiRequest({
-    body: null,
-    method: 'GET',
-    url: `${PERSON_URL}${id ? id : ''}`,
-    feature: PERSON_KEY,
-  });
+  return {
+    type: `${PERSON_KEY} READ`,
+    payload: {
+      body: null,
+      param: `${id ? id : ''}`,
+    },
+  };
 };
 
 export const updatePerson = (id: number, person: Partial<Person>) => {
-  return apiRequest({
-    body: person,
-    method: 'PATCH',
-    url: `${PERSON_URL}${id}`,
-    feature: PERSON_KEY,
-  });
+  return {
+    type: `${PERSON_KEY} UPDATE`,
+    payload: {
+      body: person,
+      param: `${id}`,
+    },
+  };
 };
 
 export const deletePerson = (id: number) => {
-  return apiRequest({
-    body: null,
-    method: 'DELETE',
-    url: `${PERSON_URL}${id}`,
-    feature: PERSON_KEY,
-  });
-};
-
-export const setPerson = ({ data, feature }: any) => {
   return {
-    type: SET_PERSON,
-    payload: data,
-    meta: { feature },
+    type: `${PERSON_KEY} UPDATE`,
+    payload: {
+      param: `${id}`,
+    },
   };
 };
