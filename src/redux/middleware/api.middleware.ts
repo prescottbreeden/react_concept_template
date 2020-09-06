@@ -1,6 +1,7 @@
 import {ApiAction} from "types";
-import {API_REQUEST, apiSuccess, apiError} from "../actions/api.actions";
+import {API_REQUEST, apiSuccess, apiError, API_ERROR} from "../actions/api.actions";
 import {setLoader} from "redux/actions/loader.actions";
+import {setNotification} from "redux/actions/notification.actions";
 
 export const apiMiddleware = ({dispatch}: any) => (next: Function) => (action: ApiAction) => {
   next(action);
@@ -14,5 +15,9 @@ export const apiMiddleware = ({dispatch}: any) => (next: Function) => (action: A
       .then((payload: any) => dispatch(apiSuccess({payload, feature})))
       .catch((error: any) => dispatch(apiError({ error, feature })))
       .finally(() => dispatch(setLoader({ payload: false, feature })));
+  }
+
+  if (action.type.includes(API_ERROR)) {
+    next(setNotification({ message: 'An error occurred', status: 'error' }));
   }
 };

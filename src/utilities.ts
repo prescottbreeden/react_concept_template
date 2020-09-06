@@ -2,6 +2,8 @@ import {KeyValuePair} from "types";
 import { curry, map } from 'ramda';
 import {FormEvent} from "react";
 
+export const randomString = () => Math.random().toString(36).substring(7);
+
 /**
  *  Compose function that is a little more friendly to use with typescript.
  *  @param fns any number of comma-separated functions
@@ -56,7 +58,7 @@ export const depthSearch = (obj: KeyValuePair, include: string[] = []) => {
     if (key === 'meta') {
       return prev;
     }
-    if (typeof obj[key] === 'object') {
+    if (typeof obj[key] === 'object' && !(Array.isArray(obj[key]))) {
       const search: KeyValuePair = depthSearch(obj[key], include);
       return Object.keys(search).length > 0
         ? { ...prev, [key]: search }

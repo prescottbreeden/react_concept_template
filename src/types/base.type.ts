@@ -5,3 +5,10 @@ export interface KeyValuePair {
 export interface Meta<T> {
   meta?: T;
 };
+
+export interface NotificationAction {
+  id?: any;
+  message: string;
+  status: 'success' | 'error' | 'warning';
+}
+

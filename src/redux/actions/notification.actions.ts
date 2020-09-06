@@ -1,19 +1,19 @@
-export const SET_NOTIFICATION = 'SET_NOTIFICATION';
+import {NotificationAction} from "types";
+
+export const SET_NOTIFICATION = 'CREATE_NOTIFICATION';
 export const REMOVE_NOTIFICATION = 'REMOVE_NOTIFICATION';
 
-export const setNotification = ({ message, feature, status }: any) => {
+export const setNotification = ({ message, status }: NotificationAction) => {
   return {
-    type: `${feature} ${SET_NOTIFICATION}`,
-    payload: message,
-    meta: {feature, status}
+    type: SET_NOTIFICATION,
+    payload: { message, status },
   };
 };
 
-export const removeNotification = ({ notificationId, feature }: any) => {
+export const removeNotification = ({ id }: any) => {
   return {
-    type: `${feature} ${SET_NOTIFICATION}`,
-    payload: notificationId,
-    meta: {feature}
+    type: REMOVE_NOTIFICATION,
+    payload: id,
   };
 };
 

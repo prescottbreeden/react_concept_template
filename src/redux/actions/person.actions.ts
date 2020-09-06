@@ -1,6 +1,6 @@
 export const PERSON = '[PERSON]';
-export const FETCH_PERSON = `${PERSON} Fetch`;
-export const SET_PERSON = `${PERSON} Set`;
+export const FETCH_PERSON = `${PERSON} FETCH`;
+export const SET_PERSON = `${PERSON} SET`;
 
 export const fetchPerson = ({query}: any) => {
   return {
@@ -9,10 +9,11 @@ export const fetchPerson = ({query}: any) => {
   };
 };
 
-export const setPerson = ({personData}: any) => {
+export const setPerson = ({data, feature}: any) => {
   return {
     type: SET_PERSON,
-    payload: personData,
+    payload: data,
+    meta: { feature }
   };
 };
 

@@ -1,22 +1,20 @@
 import {SET_NOTIFICATION, setNotification, removeNotification} from "redux/actions/notification.actions";
 
 export const notificationMiddleware = () => (next: Function) => (action: any) => {
+
   if (action.type.includes(SET_NOTIFICATION)) {
-    const { payload, meta } = action;
+    const { payload } = action;
     const id = new Date().getMilliseconds();
     const notification = {
+      ...payload,
       id,
-      message: payload,
     };
-    next(setNotification({
-      message: notification,
-      feature: meta.feature,
-      status: meta.status,
-    }));
+    next(setNotification(notification));
 
     setTimeout(() => {
-      next(removeNotification({ notificationId: id, feature: meta.feature }));
-    }, 1500);
+      next(removeNotification({ id }));
+    }, 2500);
+
   } else {
     next(action);
   }

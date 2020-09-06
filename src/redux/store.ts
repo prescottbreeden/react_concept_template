@@ -6,6 +6,7 @@ import {compose} from '../utilities';
 import {normalizeMiddleware} from './middleware/normalize.middleware';
 import {loaderReducer} from './reducers/loader.reducer';
 import {notificationsReducer} from './reducers/notifications.reducer';
+import {notificationMiddleware} from './middleware/notification.middleware';
 
 const rootReducer = combineReducers({
   person: personReducer,
@@ -20,6 +21,7 @@ const featureMiddleware: any[] = [
 const coreMiddleware: any[] = [
   apiMiddleware,
   normalizeMiddleware,
+  notificationMiddleware,
 ];
 
 const enhancer = compose(
