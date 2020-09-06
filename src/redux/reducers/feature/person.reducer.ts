@@ -1,9 +1,9 @@
-import { Person, emptyPerson } from 'types';
+import { Person } from 'types';
 import { prop } from 'ramda';
 import { PERSON_KEY } from 'redux/keys';
 import { SET_DATA } from 'redux/actions/data.actions';
 
-const initialState: Person[] = [emptyPerson()];
+const initialState: Person[] = [];
 
 export const personReducer = (person = initialState, action: any) => {
   switch (action.type) {
