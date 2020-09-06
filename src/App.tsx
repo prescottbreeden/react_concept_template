@@ -3,6 +3,8 @@ import { mergeDeepRight } from 'ramda';
 import { Button, Input, InputLabel } from '@material-ui/core';
 import { Person, emptyPerson } from './types';
 import { depthSearch, handleChange, compose, normalizeDatum } from './utilities';
+import {Loading} from 'components/Loading.component';
+import {Notification} from 'components/Notification.component';
 
 const fakeData = normalizeDatum(emptyPerson());
 
@@ -23,7 +25,9 @@ function App() {
   };
 
   return (
-    <>
+    <div className="page">
+      <Notification />
+      {false && <Loading />}
       <h1>Demo</h1>
       <div className="container">
         <div className="json">
@@ -72,7 +76,7 @@ function App() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
