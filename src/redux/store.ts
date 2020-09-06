@@ -1,4 +1,4 @@
-import { compose } from '../utilities';
+import { compose } from 'utilities';
 import { combineReducers, applyMiddleware, createStore } from 'redux';
 import { personReducer } from 'redux/reducers/feature/person.reducer';
 import { personMiddleware } from 'redux/middleware/feature/person.middleware';

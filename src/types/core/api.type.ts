@@ -1,9 +1,9 @@
-export interface ApiAction {
-  type: string;
-  payload: any;
+import { ReduxBaseAction } from './redux.type';
+
+export interface ApiAction extends ReduxBaseAction<any> {
   meta: {
-    method?: string;
-    url?: string;
+    method: string;
+    url: string;
     feature: string;
   };
 }

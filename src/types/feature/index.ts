@@ -1,1 +1,1 @@
-export * from 'types/feature/people.type';
+export * from './people.type';

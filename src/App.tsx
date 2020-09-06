@@ -12,9 +12,9 @@ import {
 import { Person, emptyPerson } from 'types';
 import { depthSearch, handleChange, compose, randomString } from './utilities';
 import { getPersons } from 'redux/selectors/feature/person.selectors';
-import { fetchPerson } from 'redux/actions/feature/person.actions';
 import { Page } from 'layout/basic.layout';
 import { setNotification } from 'redux/actions/core/notification.actions';
+import { readPerson } from 'redux/actions/feature/person.actions';
 
 function App() {
   // -- redux and state ------------------------
@@ -47,7 +47,7 @@ function App() {
     );
   };
   useEffect(() => {
-    dispatch(fetchPerson({}));
+    dispatch(readPerson());
   }, [dispatch]);
 
   return (

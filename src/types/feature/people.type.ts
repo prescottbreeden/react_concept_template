@@ -1,4 +1,4 @@
-import { Meta } from 'types/core/base.type';
+import { Meta } from 'types';
 
 export interface Person extends Meta<Person> {
   personId: number;
