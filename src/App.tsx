@@ -17,8 +17,8 @@ import {
   randomString,
 } from './utils/utilities';
 import { Page } from 'layout/basic.layout';
-import { setNotification } from 'redux/actions/core/notification.actions';
-import { readPerson } from 'redux/actions/feature/person.actions';
+import { setNotification } from 'redux/actions/notification.actions';
+import { readPerson } from 'services/person.service';
 import { selectPersons } from 'redux/reducers/feature/person.reducer';
 
 function App() {

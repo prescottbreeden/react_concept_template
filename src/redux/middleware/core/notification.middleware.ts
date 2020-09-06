@@ -2,7 +2,7 @@ import {
   SET_NOTIFICATION,
   setNotification,
   removeNotification,
-} from 'redux/actions/core/notification.actions';
+} from 'redux/actions/notification.actions';
 import { mergeDeepRight } from 'ramda';
 import { ReduxBaseAction, NotificationAction } from 'types';
 

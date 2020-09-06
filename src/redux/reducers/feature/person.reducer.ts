@@ -1,13 +1,13 @@
 import { Person, emptyPerson } from 'types';
-import { SET_PERSON } from 'redux/actions/feature/person.actions';
 import { prop } from 'ramda';
 import { PERSON_KEY } from 'redux/keys';
+import { SET_DATA } from 'redux/actions/data.actions';
 
 const initialState: Person[] = [emptyPerson()];
 
 export const personReducer = (person = initialState, action: any) => {
   switch (action.type) {
-    case SET_PERSON:
+    case `${PERSON_KEY} ${SET_DATA}`:
       return action.payload;
 
     default:

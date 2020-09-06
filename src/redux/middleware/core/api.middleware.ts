@@ -4,9 +4,9 @@ import {
   API_ERROR,
   apiSuccess,
   apiError,
-} from 'redux/actions/core/api.actions';
-import { setLoader, removeLoader } from 'redux/actions/core/loader.actions';
-import { setNotification } from 'redux/actions/core/notification.actions';
+} from 'redux/actions/api.actions';
+import { setLoader, removeLoader } from 'redux/actions/loader.actions';
+import { setNotification } from 'redux/actions/notification.actions';
 import { makeRequest } from 'utils/fetchData';
 
 export const apiMiddleware = ({ dispatch }: any) => (next: Function) => (

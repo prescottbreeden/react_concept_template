@@ -1,7 +1,7 @@
 import {
   SET_NOTIFICATION,
   REMOVE_NOTIFICATION,
-} from 'redux/actions/core/notification.actions';
+} from 'redux/actions/notification.actions';
 import { NotificationAction } from 'types';
 import { prop } from 'ramda';
 import { NOTIFICATION_KEY } from 'redux/keys';

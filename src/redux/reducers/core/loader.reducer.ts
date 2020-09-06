@@ -1,4 +1,4 @@
-import { SET_LOADER, REMOVE_LOADER } from 'redux/actions/core/loader.actions';
+import { SET_LOADER, REMOVE_LOADER } from 'redux/actions/loader.actions';
 import { LOADING_KEY } from 'redux/keys';
 import { prop } from 'ramda';
 

@@ -1,8 +1,6 @@
 import { Person, ApiRequest, ReduxBaseAction } from 'types';
-import { apiRequest } from 'redux/actions/core/api.actions';
+import { apiRequest } from 'redux/actions/api.actions';
 import { PERSON_KEY } from 'redux/keys';
-
-export const SET_PERSON = `${PERSON_KEY} SET`;
 
 const PERSON_URL = 'https://swapi.dev/api/people/';
 
@@ -40,12 +38,4 @@ export const deletePerson = (id: number) => {
     url: `${PERSON_URL}${id}`,
     feature: PERSON_KEY,
   });
-};
-
-export const setPerson = ({ data, feature }: any) => {
-  return {
-    type: SET_PERSON,
-    payload: data,
-    meta: { feature },
-  };
 };

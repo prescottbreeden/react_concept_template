@@ -1,7 +1,8 @@
 import { ReduxBaseAction } from 'types';
-import { setPerson, readPerson } from 'redux/actions/feature/person.actions';
-import { API_SUCCESS } from 'redux/actions/core/api.actions';
+import { readPerson } from 'services/person.service';
+import { API_SUCCESS } from 'redux/actions/api.actions';
 import { PERSON_KEY } from 'redux/keys';
+import { setData } from 'redux/actions/data.actions';
 
 export const personMiddleware = () => (next: Function) => (
   action: ReduxBaseAction<any>
@@ -12,8 +13,8 @@ export const personMiddleware = () => (next: Function) => (
   switch (action.type) {
     case `${PERSON_KEY} ${API_SUCCESS} GET`:
       next(
-        setPerson({
-          data: payload.results,
+        setData({
+          payload: payload.results,
           feature: meta.feature,
         })
       );
