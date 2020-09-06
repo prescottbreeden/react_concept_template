@@ -9,6 +9,7 @@ import { personReducer } from 'redux/reducers/feature/person.reducer';
 import { loaderReducer } from 'redux/reducers/core/loader.reducer';
 import { notificationsReducer } from 'redux/reducers/core/notifications.reducer';
 import { PERSON_KEY, LOADING_KEY, NOTIFICATION_KEY } from './keys';
+import DevTools from 'components/DevTools';
 
 const rootReducer = combineReducers({
   [PERSON_KEY]: personReducer,
@@ -24,8 +25,12 @@ const coreMiddleware: any[] = [
   notificationMiddleware,
 ];
 
-const enhancer = compose(
-  applyMiddleware(...featureMiddleware, ...coreMiddleware)
-);
+const enhancer =
+  process.env.NODE_ENV === 'development'
+    ? compose(
+        applyMiddleware(...featureMiddleware, ...coreMiddleware),
+        DevTools.instrument()
+      )
+    : compose(applyMiddleware(...featureMiddleware, ...coreMiddleware));
 
 export const store = createStore(stateFreezer(rootReducer), {}, enhancer);

@@ -20,6 +20,7 @@ import { Page } from 'layout/basic.layout';
 import { setNotification } from 'redux/actions/notification.actions';
 import { readPerson } from 'services/person.service';
 import { selectPersons } from 'redux/reducers/feature/person.reducer';
+import DevTools from 'components/DevTools';
 
 function App() {
   // -- redux and state ------------------------
@@ -114,8 +115,12 @@ function App() {
           </div>
           <div className="list__container">
             <h2>Select a Person</h2>
+            <br />
+            <p>Use Ctrl-H to bring up redux dev tools</p>
+            <br />
             <List>{renderPeople(people)}</List>
           </div>
+          <DevTools />
         </div>
       </div>
     </Page>
