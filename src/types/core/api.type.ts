@@ -1,11 +1,7 @@
-import { ReduxBaseAction } from './redux.type';
-
-export interface ApiAction extends ReduxBaseAction<any> {
-  meta: {
-    method: string;
-    url: string;
-    feature: string;
-  };
+export interface ApiOptions {
+  url: string;
+  method: string;
+  body: any;
 }
 
 export interface ApiRequest {
@@ -19,4 +15,5 @@ export interface ApiResponse {
   payload?: any[];
   error?: string;
   feature: string;
+  method: string;
 }

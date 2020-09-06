@@ -1,4 +1,4 @@
-import { ApiAction } from 'types';
+import { ApiOptions, ReduxBaseAction } from 'types';
 import {
   API_REQUEST,
   API_ERROR,
@@ -7,31 +7,31 @@ import {
 } from 'redux/actions/core/api.actions';
 import { setLoader, removeLoader } from 'redux/actions/core/loader.actions';
 import { setNotification } from 'redux/actions/core/notification.actions';
+import { makeRequest } from 'utils/fetchData';
 
 export const apiMiddleware = ({ dispatch }: any) => (next: Function) => (
-  action: ApiAction
+  action: ReduxBaseAction<ApiOptions>
 ) => {
   next(action);
 
   if (action.type.includes(API_REQUEST)) {
-    const { url, method, feature } = action.meta;
+    const { feature } = action.meta;
+    const { method } = action.payload;
 
-    switch (method) {
-      case 'GET':
-        const loaderId = new Date().getMilliseconds();
-        dispatch(setLoader({ id: loaderId, feature }));
-        fetch(url, { method })
-          .then((response: Response) => response.json())
-          .then((payload: any) => dispatch(apiSuccess({ payload, feature })))
-          .catch((error: any) => dispatch(apiError({ error, feature })))
-          .finally(() =>
-            setTimeout(() => {
-              // demonstration purpose timeout only
-              dispatch(removeLoader({ id: loaderId, feature }));
-            }, 2000)
-          );
-        break;
-    }
+    const loaderId = new Date().getMilliseconds();
+    dispatch(setLoader({ id: loaderId, feature }));
+    makeRequest(action.payload)
+      .then((response: Response) => response.json())
+      .then((payload: any) =>
+        dispatch(apiSuccess({ payload, feature, method }))
+      )
+      .catch((error: any) => dispatch(apiError({ error, feature, method })))
+      .finally(() =>
+        setTimeout(() => {
+          // demonstration purpose timeout only
+          dispatch(removeLoader({ id: loaderId, feature }));
+        }, 2000)
+      );
   }
 
   if (action.type.includes(API_ERROR)) {

@@ -1,4 +1,4 @@
-import { Person } from 'types';
+import { Person, ApiRequest, ReduxBaseAction } from 'types';
 import { apiRequest } from 'redux/actions/core/api.actions';
 import { PERSON_KEY } from 'redux/keys';
 
@@ -15,7 +15,7 @@ export const createPerson = (person: Person) => {
   });
 };
 
-export const readPerson = (id?: number) => {
+export const readPerson = (id?: number): ReduxBaseAction<ApiRequest> => {
   return apiRequest({
     body: null,
     method: 'GET',

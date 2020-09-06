@@ -10,7 +10,12 @@ import {
   ListItemText,
 } from '@material-ui/core';
 import { Person, emptyPerson } from 'types';
-import { depthSearch, handleChange, compose, randomString } from './utilities';
+import {
+  depthSearch,
+  handleChange,
+  compose,
+  randomString,
+} from './utils/utilities';
 import { Page } from 'layout/basic.layout';
 import { setNotification } from 'redux/actions/core/notification.actions';
 import { readPerson } from 'redux/actions/feature/person.actions';
