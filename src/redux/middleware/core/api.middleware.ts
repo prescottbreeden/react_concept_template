@@ -5,7 +5,7 @@ import {
   apiError,
   API_ERROR,
 } from '../../actions/core/api.actions';
-import { setLoader } from 'redux/actions/core/loader.actions';
+import { setLoader, removeLoader } from 'redux/actions/core/loader.actions';
 import { setNotification } from 'redux/actions/core/notification.actions';
 
 export const apiMiddleware = ({ dispatch }: any) => (next: Function) => (
@@ -15,14 +15,20 @@ export const apiMiddleware = ({ dispatch }: any) => (next: Function) => (
 
   if (action.type.includes(API_REQUEST)) {
     const { url, method, feature } = action.meta;
+    const id = new Date().getMilliseconds();
 
-    dispatch(setLoader({ payload: true, feature }));
+    dispatch(setLoader({ id, feature }));
     url &&
       fetch(url, { method })
         .then((response: any) => response.json())
         .then((payload: any) => dispatch(apiSuccess({ payload, feature })))
         .catch((error: any) => dispatch(apiError({ error, feature })))
-        .finally(() => dispatch(setLoader({ payload: false, feature })));
+        .finally(() =>
+          setTimeout(() => {
+            // demonstration purpose timeout only
+            dispatch(removeLoader({ id, feature }));
+          }, 2000)
+        );
   }
 
   if (action.type.includes(API_ERROR)) {

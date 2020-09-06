@@ -1,11 +1,17 @@
-import { SET_LOADER } from 'redux/actions/core/loader.actions';
+import { SET_LOADER, REMOVE_LOADER } from 'redux/actions/core/loader.actions';
 
-const initialState: boolean = false;
+const initialState: any[] = [];
 
 export const loaderReducer = (loader = initialState, action: any) => {
-  switch (action.type) {
-    case SET_LOADER:
-      return action.payload;
+  switch (true) {
+    case action.type.includes(SET_LOADER):
+      return [...loader, action.payload];
+
+    case action.type.includes(REMOVE_LOADER):
+      const { payload } = action;
+      return loader.filter(({ id }: any) => {
+        return id !== payload.id;
+      });
 
     default:
       return loader;

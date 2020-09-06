@@ -4,13 +4,15 @@ import { getLoader } from 'redux/selectors/core/loader.selectors';
 import { useSelector } from 'react-redux';
 
 export const Loading: FC = () => {
-  const loader: boolean = useSelector(getLoader);
+  const loader: [] = useSelector(getLoader);
+  const percentage = Math.floor(100 / (loader.length + 1));
 
-  return loader ? (
+  return loader.length > 0 ? (
     <div className="loading">
       <div className="loading__content">
         <p>Loading</p>
         <CircularProgress />
+        <p>{percentage}% Completed</p>
       </div>
     </div>
   ) : null;
