@@ -25,7 +25,7 @@ export const apiSuccess = (response: ApiResponse): ReduxBaseAction<any> => {
 export const apiError = (response: ApiResponse): ReduxBaseAction<any> => {
   const { error, feature, method } = response;
   return {
-    type: `${feature} ${API_SUCCESS} ${method}`,
+    type: `${feature} ${API_ERROR} ${method}`,
     payload: error,
     meta: { feature },
   };
