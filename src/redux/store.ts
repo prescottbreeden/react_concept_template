@@ -1,4 +1,5 @@
 import { compose } from 'utils/utilities';
+import { DevTools } from 'components/DevTools';
 import { combineReducers, applyMiddleware, createStore } from 'redux';
 import { stateFreezer } from 'redux/reducers/enhancers/stateFreezer';
 import { personMiddleware } from 'redux/middleware/feature/person.middleware';
@@ -9,7 +10,6 @@ import { personReducer } from 'redux/reducers/feature/person.reducer';
 import { loaderReducer } from 'redux/reducers/core/loader.reducer';
 import { notificationsReducer } from 'redux/reducers/core/notifications.reducer';
 import { PERSON_KEY, LOADING_KEY, NOTIFICATION_KEY } from './keys';
-import DevTools from 'components/DevTools';
 
 const rootReducer = combineReducers({
   [PERSON_KEY]: personReducer,

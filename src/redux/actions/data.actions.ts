@@ -1,4 +1,4 @@
-const DATA_NORMALIZED = 'DATA_NORMALIZED';
+export const DATA_NORMALIZED = 'DATA_NORMALIZED';
 export const SET_DATA = 'SET_DATA';
 
 export const dataNormalized = ({ feature }: any) => {

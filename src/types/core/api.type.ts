@@ -12,7 +12,7 @@ export interface ApiRequest {
 }
 
 export interface ApiResponse {
-  payload?: any[];
+  payload?: any[] | any;
   error?: string;
   feature: string;
   method: string;

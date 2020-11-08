@@ -32,7 +32,7 @@ code {
   left: 0;
   right: 0;
   background-color: #fff;
-  opacity: .9;
+  opacity: 0.9;
   z-index: 5000;
   overflow: hidden;
 }
@@ -49,7 +49,7 @@ code {
   bottom: 2%;
   right: 2%;
   background-color: #fff;
-  box-shadow: 0 1rem 2rem rgba(0, 0, 0, .5);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.5);
   /* height: 10rem; */
   width: 20rem;
   padding: 1rem;
@@ -60,6 +60,9 @@ code {
 }
 .notification--display {
   transform: translateX(0);
+}
+.notification--error {
+  border: 3px solid red;
 }
 
 .page {
@@ -87,11 +90,10 @@ code {
 .list__item {
   border: 1px solid #333;
   border-radius: 2px;
-
 }
 .list__item:hover {
   cursor: pointer;
-  background-color: rgba(0, 10, 150, .2);
+  background-color: rgba(0, 10, 150, 0.2);
 }
 
 .json {
@@ -119,4 +121,3 @@ pre {
   justify-content: space-around;
   width: 100%;
 }
-

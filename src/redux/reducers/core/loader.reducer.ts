@@ -1,7 +1,11 @@
-import { SET_LOADER, REMOVE_LOADER } from 'redux/actions/loader.actions';
 import { LOADING_KEY } from 'redux/keys';
 import { prop } from 'ramda';
+import { ReduxBaseAction, LoaderAction } from 'types';
 
+export const SET_LOADER = `${LOADING_KEY} STARTED`;
+export const REMOVE_LOADER = `${LOADING_KEY} ENDING`;
+
+// -- reducer ------------------------------------------------------------------
 const initialState: any[] = [];
 
 export const loaderReducer = (loader = initialState, action: any) => {
@@ -18,6 +22,27 @@ export const loaderReducer = (loader = initialState, action: any) => {
     default:
       return loader;
   }
+};
+
+// -- Loader Actions -----------------------------------------------------------
+export const setLoader = ({
+  id,
+  feature,
+}: LoaderAction): ReduxBaseAction<LoaderAction> => {
+  return {
+    type: `${SET_LOADER} ${feature}`,
+    payload: { id, feature },
+  };
+};
+
+export const removeLoader = ({
+  id,
+  feature,
+}: LoaderAction): ReduxBaseAction<LoaderAction> => {
+  return {
+    type: `${REMOVE_LOADER} ${feature}`,
+    payload: { id, feature },
+  };
 };
 
 // -- Select From State --------------------------------------------------------

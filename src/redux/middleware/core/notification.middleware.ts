@@ -2,7 +2,7 @@ import {
   SET_NOTIFICATION,
   setNotification,
   removeNotification,
-} from 'redux/actions/notification.actions';
+} from 'redux/reducers/core/notifications.reducer';
 import { mergeDeepRight } from 'ramda';
 import { ReduxBaseAction, NotificationAction } from 'types';
 
@@ -17,7 +17,7 @@ export const notificationMiddleware = () => (next: Function) => (
 
     setTimeout(() => {
       next(removeNotification(id));
-    }, 2500);
+    }, 5500);
   } else {
     next(action);
   }

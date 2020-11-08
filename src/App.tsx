@@ -1,57 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { mergeDeepRight, map } from 'ramda';
-import {
-  Button,
-  Input,
-  InputLabel,
-  List,
-  ListItem,
-  ListItemText,
-} from '@material-ui/core';
+import { useDispatch } from 'react-redux';
+import { mergeDeepRight } from 'ramda';
 import { Person, emptyPerson } from 'types';
-import {
-  depthSearch,
-  handleChange,
-  compose,
-  randomString,
-} from './utils/utilities';
-import { Page } from 'layout/basic.layout';
-import { setNotification } from 'redux/actions/notification.actions';
+import { handleChange, compose } from './utils/utilities';
 import { readPerson } from 'services/person.service';
-import { selectPersons } from 'redux/reducers/feature/person.reducer';
-import DevTools from 'components/DevTools';
+import { Page } from 'layout/basic.layout';
+import { DataSelection } from 'components/DataSelection.component';
+import { DataState } from 'components/DataState.component';
+import { DevTools } from 'components/DevTools';
+import { PersonForm } from 'forms/Person.form';
 
 function App() {
   // -- redux and state ------------------------
   const dispatch = useDispatch();
-  const people: Person[] = useSelector(selectPersons);
   const [state, setState] = useState<Person>(emptyPerson());
 
   // -- onChange logic -------------------------
   const updatePerson = compose(setState, mergeDeepRight(state));
   const onChange = handleChange(updatePerson);
 
-  // -- display logic --------------------------
-  const renderPeople = map((person: Person) => (
-    <ListItem
-      key={randomString()}
-      className="list__item"
-      onClick={() => setState(person)}
-    >
-      <ListItemText primary={person.name} />
-    </ListItem>
-  ));
-
-  // -- save/load ------------------------------
-  const savePerson = () => {
-    dispatch(
-      setNotification({
-        status: 'success',
-        message: 'Save successful',
-      })
-    );
-  };
   useEffect(() => {
     dispatch(readPerson());
   }, [dispatch]);
@@ -59,67 +26,10 @@ function App() {
   return (
     <Page>
       <div className="container">
-        <div className="json">
-          <h2>Original Data of Selected</h2>
-          {state.meta ? (
-            <pre>{JSON.stringify(state.meta, null, 2)}</pre>
-          ) : (
-            <p>Select a Person to see api data.</p>
-          )}
-          <br />
-          <h2>Edited Data of Selected</h2>
-          {state.personId !== -1 && (
-            <pre>{JSON.stringify(depthSearch(state), null, 2)}</pre>
-          )}
-        </div>
+        <DataState state={state} />
         <div className="elements">
-          <div className="form__container">
-            <h2>Form Sample</h2>
-            <br />
-            <p>
-              Select a Person on the right to load their data and then change
-              their data to see what the payload to the API would be.
-            </p>
-            <div className="form">
-              <div className="form__row">
-                <InputLabel htmlFor="firstName">First Name</InputLabel>
-                <Input
-                  id="name"
-                  name="name"
-                  onChange={onChange('name')}
-                  value={state.name}
-                />
-              </div>
-              <div className="form__row">
-                <InputLabel htmlFor="height">Height</InputLabel>
-                <Input
-                  id="height"
-                  name="height"
-                  onChange={onChange('height')}
-                  value={state.height}
-                />
-              </div>
-              <div className="form__row">
-                <InputLabel htmlFor="gender">Gender</InputLabel>
-                <Input
-                  id="gender"
-                  name="gender"
-                  onChange={onChange('gender')}
-                  value={state.gender}
-                />
-              </div>
-              <Button onClick={savePerson} className="button">
-                Click Me to Submit
-              </Button>
-            </div>
-          </div>
-          <div className="list__container">
-            <h2>Select a Person</h2>
-            <br />
-            <p>Use Ctrl-H to bring up redux dev tools</p>
-            <br />
-            <List>{renderPeople(people)}</List>
-          </div>
+          <PersonForm person={state} onChange={onChange} />
+          <DataSelection setState={setState} state={state} />
           <DevTools />
         </div>
       </div>
