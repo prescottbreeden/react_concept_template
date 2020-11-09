@@ -5,26 +5,7 @@ import { ReduxBaseAction, LoaderAction } from 'types';
 export const SET_LOADER = `${LOADING_KEY} STARTED`;
 export const REMOVE_LOADER = `${LOADING_KEY} ENDING`;
 
-// -- reducer ------------------------------------------------------------------
-const initialState: any[] = [];
-
-export const loaderReducer = (loader = initialState, action: any) => {
-  switch (true) {
-    case action.type.includes(SET_LOADER):
-      return [...loader, action.payload];
-
-    case action.type.includes(REMOVE_LOADER):
-      const { payload } = action;
-      return loader.filter(({ id }: any) => {
-        return id !== payload.id;
-      });
-
-    default:
-      return loader;
-  }
-};
-
-// -- Loader Actions -----------------------------------------------------------
+// -- actions ------------------------------------------------------------------
 export const setLoader = ({
   id,
   feature,
@@ -45,7 +26,26 @@ export const removeLoader = ({
   };
 };
 
-// -- Select From State --------------------------------------------------------
+// -- reducer ------------------------------------------------------------------
+const initialState: any[] = [];
+
+export const loaderReducer = (loader = initialState, action: any) => {
+  switch (true) {
+    case action.type.includes(SET_LOADER):
+      return [...loader, action.payload];
+
+    case action.type.includes(REMOVE_LOADER):
+      const { payload } = action;
+      return loader.filter(({ id }: any) => {
+        return id !== payload.id;
+      });
+
+    default:
+      return loader;
+  }
+};
+
+// -- selectors ----------------------------------------------------------------
 export const selectLoader = (state: any) => {
   return prop(LOADING_KEY, state);
 };

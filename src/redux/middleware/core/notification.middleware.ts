@@ -14,10 +14,9 @@ export const notificationMiddleware = () => (next: Function) => (
     const id = new Date().getMilliseconds();
     const notification = mergeDeepRight(payload, { id });
     next(setNotification(notification));
-
     setTimeout(() => {
       next(removeNotification(id));
-    }, 5500);
+    }, 2500);
   } else {
     next(action);
   }

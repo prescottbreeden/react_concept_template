@@ -5,7 +5,25 @@ import { NOTIFICATION_KEY } from 'redux/keys';
 export const SET_NOTIFICATION = `${NOTIFICATION_KEY} CREATE`;
 export const REMOVE_NOTIFICATION = `${NOTIFICATION_KEY} REMOVE`;
 
-// -- Notification Reducer -----------------------------------------------------
+// -- actions ------------------------------------------------------------------
+export const setNotification = ({
+  message,
+  status,
+}: NotificationAction): ReduxBaseAction<NotificationAction> => {
+  return {
+    type: SET_NOTIFICATION,
+    payload: { message, status },
+  };
+};
+
+export const removeNotification = (id: number): ReduxBaseAction<number> => {
+  return {
+    type: REMOVE_NOTIFICATION,
+    payload: id,
+  };
+};
+
+// -- reducer ------------------------------------------------------------------
 const initState: NotificationAction[] = [];
 
 export const notificationsReducer = (
@@ -27,25 +45,7 @@ export const notificationsReducer = (
   }
 };
 
-// -- Notification Actions -----------------------------------------------------
-export const setNotification = ({
-  message,
-  status,
-}: NotificationAction): ReduxBaseAction<NotificationAction> => {
-  return {
-    type: SET_NOTIFICATION,
-    payload: { message, status },
-  };
-};
-
-export const removeNotification = (id: number): ReduxBaseAction<number> => {
-  return {
-    type: REMOVE_NOTIFICATION,
-    payload: id,
-  };
-};
-
-// -- Select From State --------------------------------------------------------
+// -- selectors ----------------------------------------------------------------
 export const selectNotification = (state: any) => {
   return prop(NOTIFICATION_KEY, state)[0];
 };

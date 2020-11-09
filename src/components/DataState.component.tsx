@@ -1,24 +1,34 @@
 import React from 'react';
 import { Person } from 'types';
-import { depthSearch } from '../utils/utilities';
+import { equals, isNil, prop } from 'ramda';
+import { compose, depthSearch } from '../utils/utilities';
 
 interface DataStateProps {
   state: Person;
 }
 export const DataState: React.FC<DataStateProps> = ({ state }) => {
+  // -- helpers ----------------------------------------------------------------
+  const metaIsNil = compose(isNil, prop('meta'));
+  const newPerson = compose(equals(-1), prop('personId'));
+
+  // -- display logic ----------------------------------------------------------
+  const showMeta = metaIsNil(state) ? (
+    <p>Select a Person to see api data.</p>
+  ) : (
+    <pre>{JSON.stringify(state.meta, null, 2)}</pre>
+  );
+
+  const showEditedData = !newPerson(state) && (
+    <pre>{JSON.stringify(depthSearch(state), null, 2)}</pre>
+  );
+
   return (
     <div className="json">
       <h2>Original Data of Selected</h2>
-      {state.meta ? (
-        <pre>{JSON.stringify(state.meta, null, 2)}</pre>
-      ) : (
-        <p>Select a Person to see api data.</p>
-      )}
+      {showMeta}
       <br />
       <h2>Edited Data of Selected</h2>
-      {state.personId !== -1 && (
-        <pre>{JSON.stringify(depthSearch(state), null, 2)}</pre>
-      )}
+      {showEditedData}
     </div>
   );
 };

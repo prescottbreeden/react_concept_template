@@ -35,12 +35,15 @@ export const PersonForm: React.FC<PersonFormProps> = ({ onChange, person }) => {
     }
   };
 
+  // -- display logic ----------------------------------------------------------
+  const error = (prop: string) =>
+    v.getError(prop) ? <p>{v.getError(prop)}</p> : null;
+
   // -- lifecycle --------------------------------------------------------------
   useEffect(() => {
     v.resetValidationState();
   }, [person.personId]); //eslint-disable-line
 
-  // -- jsx dom ----------------------------------------------------------------
   return (
     <div className="form__container">
       <h2>Form Sample</h2>
@@ -60,7 +63,7 @@ export const PersonForm: React.FC<PersonFormProps> = ({ onChange, person }) => {
               onChange={handleChange}
               value={person.name}
             />
-            {v.getError('name') && <p>{v.getError('name')}</p>}
+            {error('name')}
           </div>
         </div>
         <div className="form__row">
@@ -73,7 +76,7 @@ export const PersonForm: React.FC<PersonFormProps> = ({ onChange, person }) => {
               onChange={handleChange}
               value={person.height}
             />
-            {v.getError('height') && <p>{v.getError('height')}</p>}
+            {error('height')}
           </div>
         </div>
         <div className="form__row">
@@ -86,7 +89,7 @@ export const PersonForm: React.FC<PersonFormProps> = ({ onChange, person }) => {
               onChange={handleChange}
               value={person.gender}
             />
-            {v.getError('gender') && <p>{v.getError('gender')}</p>}
+            {error('gender')}
           </div>
         </div>
         <Button onClick={savePerson} className="button">

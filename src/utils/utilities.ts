@@ -17,12 +17,11 @@ export const compose = (...fns: Function[]) => (x: any) =>
   fns.reduceRight((y: any, f: any) => f(y), x);
 
 /**
- *  Curried function that takes the output of an HTMLInputElement Event and
- *  wraps it into an object by the name, then executes a given function and
- *  providing the key/value pair, the name, and the raw value as parameters.
+ *  Curried function that takes the output of an event, wraps it into an
+ *  object by the name of the event and then executes the onChange function
+ *  providing the key/value pair as the argument.
  *  @param onChange Function to be executed with the event data
- *  @param name String of what the data should bind to on an object
- *  @param event HTMLInputElement Event
+ *  @param event
  *  @return void
  */
 export const handleChange = curry(

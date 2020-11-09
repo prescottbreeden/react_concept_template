@@ -6,23 +6,26 @@ import { compose } from 'utils/utilities';
 import { prop, equals } from 'ramda';
 
 export const Notification: FC = () => {
-  const notification: NotificationAction = useSelector(selectNotification);
-
+  // -- helpers ----------------------------------------------------------------
   const isSuccessNotification = compose(equals('success'), prop('status'));
 
+  // -- redux and state --------------------------------------------------------
+  const notification: NotificationAction = useSelector(selectNotification);
+
+  // -- display logic ----------------------------------------------------------
   const className = notification
     ? 'notification notification--display'
     : 'notification';
 
   const success = (
     <div className={className}>
-      <p>{notification && notification.message}</p>
+      <p>{prop('message', notification)}</p>
     </div>
   );
 
   const error = (
     <div className={`${className} notification--error`}>
-      <p>{notification && notification.message}</p>
+      <p>{prop('message', notification)}</p>
     </div>
   );
 

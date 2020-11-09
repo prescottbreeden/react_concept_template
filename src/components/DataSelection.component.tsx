@@ -7,15 +7,13 @@ import { selectPersons } from 'redux/reducers/feature/person.reducer';
 import { randomString } from 'utils/utilities';
 
 interface DataSelectionProps {
-  state: Person;
   setState: Function;
 }
-export const DataSelection: React.FC<DataSelectionProps> = ({
-  state,
-  setState,
-}) => {
+export const DataSelection: React.FC<DataSelectionProps> = ({ setState }) => {
+  // -- redux and state --------------------------------------------------------
   const people: Person[] = useSelector(selectPersons);
-  // -- display logic --------------------------
+
+  // -- display logic ----------------------------------------------------------
   const renderPeople = map((person: Person) => (
     <ListItem
       key={randomString()}
