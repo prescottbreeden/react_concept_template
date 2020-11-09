@@ -1,6 +1,6 @@
 import { KeyValuePair } from 'types';
 import { curry, map, mergeDeepRight } from 'ramda';
-import { FormEvent } from 'react';
+import { ChangeEvent } from 'react';
 
 /**
  * Creates a random 7 character string.
@@ -26,12 +26,9 @@ export const compose = (...fns: Function[]) => (x: any) =>
  *  @return void
  */
 export const handleChange = curry(
-  (onChange: Function, name: string, event: FormEvent<HTMLInputElement>) => {
-    let data: KeyValuePair = {};
-    if (!event) return;
-    const { value } = event.currentTarget;
-    data[name] = value;
-    onChange(data, name, value);
+  (updateFunction: Function, event: ChangeEvent<any>) => {
+    const { name, value } = event.target;
+    updateFunction({ [name]: value });
   }
 );
 

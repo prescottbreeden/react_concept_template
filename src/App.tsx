@@ -2,34 +2,35 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { mergeDeepRight } from 'ramda';
 import { Person, emptyPerson } from 'types';
-import { handleChange, compose } from './utils/utilities';
-import { readPerson } from 'services/person.service';
 import { Page } from 'layout/basic.layout';
 import { DataSelection } from 'components/DataSelection.component';
 import { DataState } from 'components/DataState.component';
 import { DevTools } from 'components/DevTools';
 import { PersonForm } from 'forms/Person.form';
+import { readPerson } from 'services/person.service';
+import { handleChange, compose } from './utils/utilities';
 
 function App() {
-  // -- redux and state ------------------------
+  // -- redux and state --------------------------------------------------------
   const dispatch = useDispatch();
-  const [state, setState] = useState<Person>(emptyPerson());
+  const [person, setPerson] = useState<Person>(emptyPerson());
 
-  // -- onChange logic -------------------------
-  const updatePerson = compose(setState, mergeDeepRight(state));
-  const onChange = handleChange(updatePerson);
+  // -- onChange logic ---------------------------------------------------------
+  const onChange = handleChange(compose(setPerson, mergeDeepRight(person)));
 
+  // -- lifecycle --------------------------------------------------------------
   useEffect(() => {
     dispatch(readPerson());
   }, [dispatch]);
 
+  // -- jsx dom ----------------------------------------------------------------
   return (
     <Page>
       <div className="container">
-        <DataState state={state} />
+        <DataState state={person} />
         <div className="elements">
-          <PersonForm person={state} onChange={onChange} />
-          <DataSelection setState={setState} state={state} />
+          <PersonForm person={person} onChange={onChange} />
+          <DataSelection setState={setPerson} state={person} />
           <DevTools />
         </div>
       </div>
