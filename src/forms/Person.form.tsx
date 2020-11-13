@@ -36,7 +36,7 @@ export const PersonForm: React.FC<PersonFormProps> = ({ onChange, person }) => {
   };
 
   // -- display logic ----------------------------------------------------------
-  const error = (prop: string) =>
+  const error = (prop: keyof Person) =>
     v.getError(prop) ? <p>{v.getError(prop)}</p> : null;
 
   // -- lifecycle --------------------------------------------------------------

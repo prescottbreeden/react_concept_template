@@ -6,7 +6,9 @@ export const PersonValidation = () => {
     name: [
       {
         errorMessage: 'Name is required.',
-        validation: (val: string, _) => val.trim().length > 0,
+        validation: (val: string, person: Person) => {
+          return person && val.trim().length > 0;
+        },
       },
     ],
     height: [
