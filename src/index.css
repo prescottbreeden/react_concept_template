@@ -121,3 +121,13 @@ pre {
   justify-content: space-around;
   width: 100%;
 }
+
+.form__group {
+  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+label {
+  margin-bottom: 0.4rem;
+}

@@ -24,12 +24,11 @@ export const compose = (...fns: Function[]) => (x: any) =>
  *  @param event
  *  @return void
  */
-export const handleChange = curry(
-  (updateFunction: Function, event: ChangeEvent<any>) => {
-    const { name, value } = event.target;
-    updateFunction({ [name]: value });
-  }
-);
+export const handleChange = (event: ChangeEvent<any>) => {
+  if (!event) return;
+  const { name, value } = event.target;
+  return { [name]: value };
+};
 
 /**
  *  Evaluate any two values for deep equality
