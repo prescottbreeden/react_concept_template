@@ -1,4 +1,4 @@
-import { KeyValuePair } from 'types';
+import { KeyValuePair, Phone } from 'types';
 import { curry, map, mergeDeepRight } from 'ramda';
 import { ChangeEvent } from 'react';
 
@@ -114,3 +114,8 @@ export const trace = curry((txt: string, x: any) => {
   console.log(txt, x);
   return x;
 });
+
+// upsert :: [a] -> b -> [a]
+export const upsert = (list: Phone[]) => (b: Phone) => {
+  return list.map((a: Phone) => (a.id === b.id ? b : a));
+};

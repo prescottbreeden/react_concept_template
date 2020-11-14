@@ -21,7 +21,7 @@ export const PhoneForm: React.FC<PhoneFormProps> = ({
   const blur = v.validateOnBlur(phone);
 
   // -- display logic ----------------------------------------------------------
-  const error = (prop: keyof Phone) =>
+  const displayError = (prop: keyof Phone) =>
     v.getError(prop) ? (
       <p style={{ color: 'red' }}>{v.getError(prop)}</p>
     ) : null;
@@ -41,7 +41,7 @@ export const PhoneForm: React.FC<PhoneFormProps> = ({
           onChange={change}
           value={phone.number}
         />
-        {error('number')}
+        {displayError('number')}
       </div>
       <div className="form__group">
         <label htmlFor="">Description</label>
@@ -51,7 +51,7 @@ export const PhoneForm: React.FC<PhoneFormProps> = ({
           onChange={change}
           value={phone.description}
         />
-        {error('description')}
+        {displayError('description')}
       </div>
     </div>
   );

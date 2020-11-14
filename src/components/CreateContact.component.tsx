@@ -6,9 +6,13 @@ import { map } from 'ramda';
 import { compose } from 'redux';
 import { Phone } from 'types/feature/contact.type';
 import { PhoneValidation } from 'validations/phone.validation';
+import { upsert } from 'utils/utilities';
+import { useDispatch } from 'react-redux';
+import { setNotification } from 'redux/reducers/core/notifications.reducer';
 
 interface CreateContactProps {}
 export const CreateContact: FC<CreateContactProps> = (props) => {
+  const dispatch = useDispatch();
   const [canSubmit, setCanSubmit] = useState<boolean>(true);
   const [phones, setCreateContact] = useState<Phone[]>([
     { id: '1', description: 'description', number: '' },
@@ -16,16 +20,20 @@ export const CreateContact: FC<CreateContactProps> = (props) => {
     { id: '3', description: 'description', number: '' },
   ]);
 
-  // upsert :: [a] -> b -> [a]
-  const upsert = (list: Phone[]) => (b: Phone) => {
-    return list.map((a: Phone) => (a.id === b.id ? b : a));
-  };
-
   // -- onChange logic ---------------------------------------------------------
-  const onChange = compose(setCreateContact, upsert(phones));
-
   const v = PhoneValidation();
-  const allValid = compose(setCanSubmit, all, map(v.validateAll));
+  const onChange = compose(setCreateContact, upsert(phones));
+  const allValid = compose(all, map(v.validateAll));
+
+  const handleSave = () => {
+    return allValid(phones)
+      ? dispatch(
+          setNotification({ status: 'success', message: 'Form is valid.' })
+        )
+      : dispatch(
+          setNotification({ status: 'error', message: 'Form is not valid.' })
+        );
+  };
 
   return (
     <div className="form__group">
@@ -44,7 +52,7 @@ export const CreateContact: FC<CreateContactProps> = (props) => {
         <Button onClick={() => null} className="button">
           Add Phone
         </Button>
-        <Button onClick={() => allValid(phones)} className="button">
+        <Button onClick={handleSave} className="button">
           Click Me to Submit
         </Button>
       </div>
