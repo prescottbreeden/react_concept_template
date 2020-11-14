@@ -5,38 +5,15 @@ import { Contact, Email } from 'types';
 import { compose } from 'utils/utilities';
 import {
   isStringValid,
-  lessThan20Characters,
-  onlyContainsLetters,
   validateEmail,
+  nameValidations,
 } from 'utils/validationUtils';
 
 export const ContactValidation = () => {
   const { validateAll: validatePhone } = PhoneValidation();
   return useValidation<Contact>({
-    firstName: [
-      {
-        errorMessage: 'First Name is required.',
-        validation: isStringValid,
-      },
-      {
-        errorMessage: 'First Name can only contain letters',
-        validation: onlyContainsLetters,
-      },
-      {
-        errorMessage: 'First Name must be less than 20 characters.',
-        validation: lessThan20Characters,
-      },
-    ],
-    lastName: [
-      {
-        errorMessage: 'Last Name is required.',
-        validation: isStringValid,
-      },
-      {
-        errorMessage: 'Last Name must be less than 20 characters.',
-        validation: lessThan20Characters,
-      },
-    ],
+    firstName: nameValidations('First Name'),
+    lastName: nameValidations('Last Name'),
     subscriptionEmail: [
       {
         errorMessage: 'Please provide an email for your subscription service.',

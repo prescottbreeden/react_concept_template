@@ -4058,10 +4058,10 @@ data-urls@^2.0.0:
     whatwg-mimetype "^2.3.0"
     whatwg-url "^8.0.0"
 
-de-formed-validations@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/de-formed-validations/-/de-formed-validations-2.0.2.tgz#2e58d860efd0aec4a8d6947a700f3e08b173f4f7"
-  integrity sha512-FmdAgKx26O3xWPzJ6qk5mp8Lmic81rqwskF6GvJN8zYRlHG1OcZf1SrDa8bx13OJM8lhv+KYSW2XgkvPT7xPpA==
+de-formed-validations@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/de-formed-validations/-/de-formed-validations-2.0.3.tgz#4b78538838cff7c0044a8c71b45e435a2e957c75"
+  integrity sha512-sAfg2nieqcXF3mazu2pkzVaygMauAdMJaRYVyrXBfDNLCi36WvcDkJ6nG7GR+7KxaxAoJjryyYJ2IlwHipmy9g==
   dependencies:
     "@types/ramda" "^0.27.30"
     "@types/react" "^16.9.52"

@@ -26,13 +26,17 @@ export const CreateContact: FC<CreateContactProps> = (props) => {
   const allValid = compose(all, map(v.validateAll));
 
   const handleSave = () => {
-    return allValid(phones)
-      ? dispatch(
-          setNotification({ status: 'success', message: 'Form is valid.' })
-        )
-      : dispatch(
-          setNotification({ status: 'error', message: 'Form is not valid.' })
-        );
+    if (allValid(phones)) {
+      dispatch(
+        setNotification({ status: 'success', message: 'Form is valid.' })
+      );
+      setCanSubmit(true);
+    } else {
+      dispatch(
+        setNotification({ status: 'error', message: 'Form is not valid.' })
+      );
+      setCanSubmit(false);
+    }
   };
 
   return (
