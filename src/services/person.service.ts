@@ -7,9 +7,7 @@ import { ReduxBaseAction } from 'types/core/baseAction.type';
 import { ApiRequest } from 'types/core/api.type';
 
 const ENV_URL = 'https://swapi.dev/';
-
 const generateURL = compose(concat(ENV_URL), join('/'), map(defaultTo('')));
-
 const PERSON_URL = ['api', 'people'];
 
 export const createPerson = (person: Person) => {
