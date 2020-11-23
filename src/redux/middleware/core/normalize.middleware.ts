@@ -1,7 +1,8 @@
-import { ReduxBaseAction, ApiResponse } from 'types';
 import { dataNormalized, SET_DATA } from 'redux/actions/data.actions';
-import { normalizeArray, normalizeDatum } from 'utils/utilities';
 import { mergeDeepRight } from 'ramda';
+import { ReduxBaseAction } from 'types/core/baseAction.type';
+import { ApiResponse } from 'types/core/api.type';
+import { normalizeArray, normalizeDatum } from 'utilities/general.utils';
 
 export const normalizeMiddleware = ({ dispatch }: any) => (next: Function) => (
   action: ReduxBaseAction<ApiResponse>

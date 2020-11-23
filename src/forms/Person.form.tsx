@@ -1,24 +1,34 @@
 import React, { ChangeEvent, useEffect } from 'react';
-import { Person } from 'types';
 import { useDispatch } from 'react-redux';
 import { setNotification } from 'redux/reducers/core/notifications.reducer';
 import { Button, Input, InputLabel } from '@material-ui/core';
 import { PersonValidation } from 'validations/person.validation';
+import { Person } from 'types/feature/person.type';
+import { compose, handleChangeEvent, safeGet } from 'utilities/general.utils';
 
 interface PersonFormProps {
   person: Person;
   onChange: (event: ChangeEvent<any>) => void;
 }
 export const PersonForm: React.FC<PersonFormProps> = ({ onChange, person }) => {
-  // -- redux and state --------------------------------------------------------
+  // -- dependencies --
   const dispatch = useDispatch();
-  const v = PersonValidation();
+  const {
+    getError,
+    resetValidationState,
+    validateAll,
+    validateOnChange,
+    validateOnBlur,
+  } = PersonValidation();
 
-  // -- form logic ---------------------------------------------------------
-  const handleChange = v.validateOnChange(onChange, person);
-  const handleBlur = v.validateOnBlur(person);
+  // -- form logic --
+  const handleChange = validateOnChange(
+    compose(onChange, handleChangeEvent),
+    person
+  );
+  const handleBlur = validateOnBlur(person);
   const savePerson = () => {
-    if (v.validateAll(person)) {
+    if (validateAll(person)) {
       dispatch(
         setNotification({
           status: 'success',
@@ -35,14 +45,13 @@ export const PersonForm: React.FC<PersonFormProps> = ({ onChange, person }) => {
     }
   };
 
-  // -- display logic ----------------------------------------------------------
-  const error = (prop: keyof Person) =>
-    v.getError(prop) ? <p>{v.getError(prop)}</p> : null;
-
-  // -- lifecycle --------------------------------------------------------------
+  // -- lifecycle --
   useEffect(() => {
-    v.resetValidationState();
+    resetValidationState();
   }, [person.personId]); //eslint-disable-line
+
+  // -- display logic --
+  const get = safeGet(person);
 
   return (
     <div className="form__container">
@@ -59,11 +68,11 @@ export const PersonForm: React.FC<PersonFormProps> = ({ onChange, person }) => {
             <Input
               id="name"
               name="name"
-              onBlur={handleBlur as any}
+              onBlur={handleBlur}
               onChange={handleChange}
-              value={person.name}
+              value={get('name')}
             />
-            {error('name')}
+            {getError('name') && <p className="error">{getError('name')}</p>}
           </div>
         </div>
         <div className="form__row">
@@ -72,11 +81,13 @@ export const PersonForm: React.FC<PersonFormProps> = ({ onChange, person }) => {
             <Input
               id="height"
               name="height"
-              onBlur={handleBlur as any}
+              onBlur={handleBlur}
               onChange={handleChange}
-              value={person.height}
+              value={get('height')}
             />
-            {error('height')}
+            {getError('height') && (
+              <p className="error">{getError('height')}</p>
+            )}
           </div>
         </div>
         <div className="form__row">
@@ -85,11 +96,13 @@ export const PersonForm: React.FC<PersonFormProps> = ({ onChange, person }) => {
             <Input
               id="gender"
               name="gender"
-              onBlur={handleBlur as any}
+              onBlur={handleBlur}
               onChange={handleChange}
-              value={person.gender}
+              value={get('gender')}
             />
-            {error('gender')}
+            {getError('gender') && (
+              <p className="error">{getError('gender')}</p>
+            )}
           </div>
         </div>
         <Button onClick={savePerson} className="button">

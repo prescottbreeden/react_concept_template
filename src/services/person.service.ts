@@ -1,8 +1,10 @@
-import { Person, ApiRequest, ReduxBaseAction } from 'types';
 import { apiRequest } from 'redux/actions/api.actions';
 import { PERSON_KEY } from 'redux/keys';
-import { compose } from 'utils/utilities';
+import { compose } from 'utilities/general.utils';
 import { join, concat, defaultTo, map } from 'ramda';
+import { Person } from 'types/feature/person.type';
+import { ReduxBaseAction } from 'types/core/baseAction.type';
+import { ApiRequest } from 'types/core/api.type';
 
 const ENV_URL = 'https://swapi.dev/';
 

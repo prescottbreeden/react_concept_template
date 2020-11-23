@@ -1,4 +1,4 @@
-import { compose } from 'utils/utilities';
+import { compose } from 'utilities/general.utils';
 import { DevTools } from 'components/DevTools';
 import { combineReducers, applyMiddleware, createStore } from 'redux';
 import { stateFreezer } from 'redux/reducers/enhancers/stateFreezer';

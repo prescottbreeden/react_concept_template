@@ -1,7 +1,7 @@
-import { Person } from 'types';
 import { PERSON_KEY } from 'redux/keys';
 import { SET_DATA } from 'redux/actions/data.actions';
 import { prop } from 'ramda';
+import { Person } from 'types/feature/person.type';
 
 // -- reducer ------------------------------------------------------------------
 const initialState: Person[] = [];

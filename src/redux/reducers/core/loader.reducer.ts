@@ -1,6 +1,7 @@
 import { LOADING_KEY } from 'redux/keys';
 import { prop } from 'ramda';
-import { ReduxBaseAction, LoaderAction } from 'types';
+import { LoaderAction } from 'types/core/loaderAction.type';
+import { ReduxBaseAction } from 'types/core/baseAction.type';
 
 export const SET_LOADER = `${LOADING_KEY} STARTED`;
 export const REMOVE_LOADER = `${LOADING_KEY} ENDING`;

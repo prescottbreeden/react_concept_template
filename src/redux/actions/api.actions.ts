@@ -1,4 +1,5 @@
-import { ApiRequest, ApiResponse, ReduxBaseAction } from 'types';
+import { ApiRequest, ApiResponse } from 'types/core/api.type';
+import { ReduxBaseAction } from 'types/core/baseAction.type';
 
 export const API_REQUEST = 'API REQUEST';
 export const API_SUCCESS = 'API SUCCESS';

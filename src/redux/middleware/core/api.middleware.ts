@@ -1,4 +1,3 @@
-import { ApiOptions, ReduxBaseAction } from 'types';
 import {
   API_REQUEST,
   API_ERROR,
@@ -7,7 +6,9 @@ import {
 } from 'redux/actions/api.actions';
 import { setLoader, removeLoader } from 'redux/reducers/core/loader.reducer';
 import { setNotification } from 'redux/reducers/core/notifications.reducer';
-import { makeRequest } from 'utils/fetchData';
+import { ApiOptions } from 'types/core/api.type';
+import { ReduxBaseAction } from 'types/core/baseAction.type';
+import { makeRequest } from 'utilities/fetchData';
 
 const handleSWAPIcrap = (payload: any) => {
   return 'results' in payload ? payload.results : payload;

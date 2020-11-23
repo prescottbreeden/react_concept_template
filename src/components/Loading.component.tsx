@@ -3,7 +3,7 @@ import { CircularProgress } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import { selectLoader } from 'redux/reducers/core/loader.reducer';
 import { add, divide, prop } from 'ramda';
-import { compose } from 'utils/utilities';
+import { compose } from 'utilities/general.utils';
 
 export const Loading: FC = () => {
   // -- helpers ----------------------------------------------------------------

@@ -1,4 +1,5 @@
-import { ApiOptions } from 'types';
+import { ApiOptions } from 'types/core/api.type';
+
 export const makeRequest = ({ url, method, body }: ApiOptions) => {
   return fetch(url, {
     method,

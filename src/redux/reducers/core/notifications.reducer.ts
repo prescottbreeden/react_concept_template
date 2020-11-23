@@ -1,6 +1,7 @@
-import { NotificationAction, ReduxBaseAction } from 'types';
 import { prop } from 'ramda';
 import { NOTIFICATION_KEY } from 'redux/keys';
+import { ReduxBaseAction } from 'types/core/baseAction.type';
+import { NotificationAction } from 'types/core/notificationAction.type';
 
 export const SET_NOTIFICATION = `${NOTIFICATION_KEY} CREATE`;
 export const REMOVE_NOTIFICATION = `${NOTIFICATION_KEY} REMOVE`;

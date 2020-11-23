@@ -1,7 +1,7 @@
 import React from 'react';
-import { Person } from 'types';
 import { equals, isNil, prop } from 'ramda';
-import { compose, depthSearch } from '../utils/utilities';
+import { Person } from 'types/feature/person.type';
+import { compose, depthSearch } from 'utilities/general.utils';
 
 interface DataStateProps {
   state: Person;

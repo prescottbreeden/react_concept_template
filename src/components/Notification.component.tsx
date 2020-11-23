@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
-import { NotificationAction } from 'types';
+import { NotificationAction } from 'types/core/notificationAction.type';
 import { selectNotification } from 'redux/reducers/core/notifications.reducer';
-import { compose } from 'utils/utilities';
+import { compose } from 'utilities/general.utils';
 import { prop, equals } from 'ramda';
 
 export const Notification: FC = () => {

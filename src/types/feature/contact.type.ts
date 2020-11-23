@@ -1,20 +1,17 @@
-export type Email = {
-  id: string;
-  email: string;
-};
+export interface PermissionRole {
+  permissionRoleId: number;
+  permissionRoleName: string;
+  permissionRoleLabelName: string;
+  permissionRoleDescription: string;
+  canAssignRoles: boolean;
+}
 
-export type Contact = {
-  id: string;
-  firstName: string;
-  lastName: string;
-  isSubcribed: boolean;
-  subscriptionEmail: string;
-  emails: Email[];
-  phones: Phone[];
-};
-
-export type Phone = {
-  id: string;
-  description: string;
-  number: string;
+export const emptyPermissionRole = (): PermissionRole => {
+  return {
+    permissionRoleId: -1,
+    permissionRoleName: '',
+    permissionRoleLabelName: '',
+    permissionRoleDescription: '',
+    canAssignRoles: false,
+  };
 };

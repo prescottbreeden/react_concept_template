@@ -1,5 +1,5 @@
 import { useValidation } from 'de-formed-validations';
-import { Person } from 'types';
+import { Person } from 'types/feature/person.type';
 
 export const PersonValidation = () => {
   return useValidation<Person>({

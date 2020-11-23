@@ -1,10 +1,10 @@
 import React from 'react';
-import { Person } from 'types';
 import { List, ListItem, ListItemText } from '@material-ui/core';
 import { map, prop } from 'ramda';
 import { useSelector } from 'react-redux';
 import { selectPersons } from 'redux/reducers/feature/person.reducer';
-import { randomString } from 'utils/utilities';
+import { randomString } from 'utilities/general.utils';
+import { Person } from 'types/feature/person.type';
 
 interface DataSelectionProps {
   setState: Function;

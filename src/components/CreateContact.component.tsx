@@ -1,72 +1,61 @@
 import React, { FC, useState } from 'react';
-import { Button } from '@material-ui/core';
-import { all } from 'de-formed-validations';
-import { PhoneForm } from 'forms/Contact.form';
-import { map } from 'ramda';
-import { compose } from 'redux';
-import { Phone } from 'types/feature/contact.type';
-import { PhoneValidation } from 'validations/phone.validation';
-import { upsert } from 'utils/utilities';
-import { useDispatch } from 'react-redux';
-import { setNotification } from 'redux/reducers/core/notifications.reducer';
+import { mergeDeepRight } from 'ramda';
+import { UserValidation } from 'validations/user.validation';
+import { Button, FlexColumn, FlexRow } from 'layouts';
+import { UserForm } from 'forms/User.form';
+import { User, emptyUser } from 'types/feature/user.type';
+import { compose } from 'utilities/general.utils';
 
-interface CreateContactProps {}
-export const CreateContact: FC<CreateContactProps> = (props) => {
-  const dispatch = useDispatch();
-  const [canSubmit, setCanSubmit] = useState<boolean>(true);
-  const [phones, setCreateContact] = useState<Phone[]>([
-    { id: '1', description: 'description', number: '' },
-    { id: '2', description: 'description', number: '' },
-    { id: '3', description: 'description', number: '' },
-  ]);
+export const CreateUser: FC = () => {
+  // -- validation functions --
+  const { resetValidationState, validateAll } = UserValidation();
 
-  // -- onChange logic ---------------------------------------------------------
-  const v = PhoneValidation();
-  const onChange = compose(setCreateContact, upsert(phones));
-  const allValid = compose(all, map(v.validateAll));
+  // -- local states --
+  const [submitFailed, setSubmitFailed] = useState<boolean>(false);
+  const [resetValidation, setResetValidation] = useState<boolean>(false);
+  const [contact, setUser] = useState<User>(emptyUser());
+
+  // -- component logic --
+  const onChange = compose(setUser, mergeDeepRight(contact));
 
   const handleSave = () => {
-    if (allValid(phones)) {
-      dispatch(
-        setNotification({ status: 'success', message: 'Form is valid.' })
-      );
-      setCanSubmit(true);
+    if (validateAll(contact)) {
+      setSubmitFailed(false);
+      alert('Validations all passed!');
+      // do the save-y bits
     } else {
-      dispatch(
-        setNotification({ status: 'error', message: 'Form is not valid.' })
-      );
-      setCanSubmit(false);
+      setSubmitFailed(true);
+      // do the oops-y bits
     }
   };
 
+  const handleReset = () => {
+    setSubmitFailed(false);
+    setResetValidation(!resetValidation);
+    setUser(emptyUser());
+    resetValidationState();
+  };
+
   return (
-    <div className="form__group">
-      {map(
-        (phone: Phone) => (
-          <PhoneForm
-            key={phone.id}
-            canSubmit={canSubmit}
+    <>
+      <FlexRow>
+        <FlexColumn>
+          <UserForm
+            data={contact}
             onChange={onChange}
-            phone={phone}
+            resetValidation={resetValidation}
+            submitFailed={submitFailed}
           />
-        ),
-        phones
-      )}
-      <div className="form__row">
-        <Button onClick={() => null} className="button">
-          Add Phone
-        </Button>
-        <Button onClick={handleSave} className="button">
-          Click Me to Submit
-        </Button>
-      </div>
-      <div>
-        {canSubmit ? (
-          <span style={{ color: 'green' }}>All Valid</span>
-        ) : (
-          <span style={{ color: 'red' }}>Not All Valid</span>
-        )}
-      </div>
-    </div>
+        </FlexColumn>
+      </FlexRow>
+      <FlexRow>
+        <FlexColumn>
+          <Button onClick={handleSave}>Submit</Button>
+        </FlexColumn>
+        <FlexColumn>
+          <Button onClick={handleReset}>Reset Form</Button>
+        </FlexColumn>
+      </FlexRow>
+    </>
   );
 };

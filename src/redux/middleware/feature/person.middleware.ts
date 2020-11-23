@@ -1,8 +1,8 @@
-import { ReduxBaseAction } from 'types';
 import { readPerson } from 'services/person.service';
 import { API_SUCCESS } from 'redux/actions/api.actions';
 import { PERSON_KEY } from 'redux/keys';
 import { setData } from 'redux/actions/data.actions';
+import { ReduxBaseAction } from 'types/core/baseAction.type';
 
 export const personMiddleware = ({ dispatch }: any) => (next: Function) => (
   action: ReduxBaseAction<any>

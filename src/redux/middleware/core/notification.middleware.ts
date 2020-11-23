@@ -4,7 +4,8 @@ import {
   removeNotification,
 } from 'redux/reducers/core/notifications.reducer';
 import { mergeDeepRight } from 'ramda';
-import { ReduxBaseAction, NotificationAction } from 'types';
+import { ReduxBaseAction } from 'types/core/baseAction.type';
+import { NotificationAction } from 'types/core/notificationAction.type';
 
 export const notificationMiddleware = () => (next: Function) => (
   action: ReduxBaseAction<NotificationAction>
