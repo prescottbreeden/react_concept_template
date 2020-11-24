@@ -1,5 +1,5 @@
 import { compose } from 'utilities/general.utils';
-import { DevTools } from 'components/DevTools';
+import { DevTools } from 'utilities/DevTools';
 import { combineReducers, applyMiddleware, createStore } from 'redux';
 import { stateFreezer } from 'redux/reducers/enhancers/stateFreezer';
 import { personMiddleware } from 'redux/middleware/feature/person.middleware';

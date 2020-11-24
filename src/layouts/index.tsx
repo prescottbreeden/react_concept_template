@@ -19,7 +19,7 @@ export const Button: React.FC<any> = (props) => {
 
 export const FlexColumn: React.FC<any> = (props) => {
   return (
-    <div className="form__group" {...props}>
+    <div className="flex__column" {...props}>
       {props.children}
     </div>
   );
@@ -27,7 +27,7 @@ export const FlexColumn: React.FC<any> = (props) => {
 
 export const FlexRow: React.FC<any> = (props) => {
   return (
-    <div className="form__row" {...props}>
+    <div className="flex__row" {...props}>
       {props.children}
     </div>
   );

@@ -10,10 +10,10 @@ interface DataSelectionProps {
   setState: Function;
 }
 export const DataSelection: React.FC<DataSelectionProps> = ({ setState }) => {
-  // -- redux and state --------------------------------------------------------
+  // -- local state --
   const people: Person[] = useSelector(selectPersons);
 
-  // -- display logic ----------------------------------------------------------
+  // -- display logic --
   const renderPeople = map((person: Person) => (
     <ListItem
       key={randomString()}

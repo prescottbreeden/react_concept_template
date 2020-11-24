@@ -1,10 +1,9 @@
 import React from 'react';
 import { equals, isNil, prop } from 'ramda';
-import { Person } from 'types/feature/person.type';
 import { compose, depthSearch } from 'utilities/general.utils';
 
 interface DataStateProps {
-  state: Person;
+  state: any;
 }
 export const DataState: React.FC<DataStateProps> = ({ state }) => {
   // -- helpers ----------------------------------------------------------------

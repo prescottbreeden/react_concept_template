@@ -4,6 +4,7 @@ import { PersonValidation } from 'validations/person.validation';
 import { Person } from 'types/feature/person.type';
 import { compose, handleChangeEvent, safeGet } from 'utilities/general.utils';
 import { FormType } from 'types/core/form.type';
+import { FlexColumn, FlexRow } from 'layouts';
 
 export const PersonForm: React.FC<FormType<Person>> = ({
   onChange,
@@ -44,16 +45,15 @@ export const PersonForm: React.FC<FormType<Person>> = ({
   const get = safeGet(data);
 
   return (
-    <div className="form__container">
-      <h2>Form Sample</h2>
-      <br />
+    <div>
+      <h2>Edit Person</h2>
       <p>
         Select a data on the right to load their data and then change their data
         to see what the payload to the API would be.
       </p>
       <div className="form">
-        <div className="form__row">
-          <div>
+        <FlexRow>
+          <FlexColumn>
             <InputLabel htmlFor="firstName">First Name</InputLabel>
             <Input
               id="name"
@@ -63,10 +63,10 @@ export const PersonForm: React.FC<FormType<Person>> = ({
               value={get('name')}
             />
             {getError('name') && <p className="error">{getError('name')}</p>}
-          </div>
-        </div>
-        <div className="form__row">
-          <div>
+          </FlexColumn>
+        </FlexRow>
+        <FlexRow>
+          <FlexColumn>
             <InputLabel htmlFor="height">Height</InputLabel>
             <Input
               id="height"
@@ -78,10 +78,10 @@ export const PersonForm: React.FC<FormType<Person>> = ({
             {getError('height') && (
               <p className="error">{getError('height')}</p>
             )}
-          </div>
-        </div>
-        <div className="form__row">
-          <div>
+          </FlexColumn>
+        </FlexRow>
+        <FlexRow>
+          <FlexColumn>
             <InputLabel htmlFor="gender">Gender</InputLabel>
             <Input
               id="gender"
@@ -93,8 +93,8 @@ export const PersonForm: React.FC<FormType<Person>> = ({
             {getError('gender') && (
               <p className="error">{getError('gender')}</p>
             )}
-          </div>
-        </div>
+          </FlexColumn>
+        </FlexRow>
       </div>
     </div>
   );

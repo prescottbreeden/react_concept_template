@@ -1,0 +1,39 @@
+.page {
+  width: 100%;
+}
+
+.container {
+  display: flex;
+}
+.elements {
+  width: 100%;
+  display: flex;
+}
+.list__container {
+  padding: 2rem;
+  width: 100%;
+}
+.list__item {
+  border: 1px solid #333;
+  border-radius: 2px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(0, 10, 150, 0.2);
+  }
+}
+
+.json {
+  width: 35%;
+  border-right: 1px solid #333;
+  padding: 2rem;
+}
+.form {
+  display: grid;
+  place-items: center;
+}
+
+.form__container {
+  padding: 2rem;
+  width: 100%;
+}

@@ -30,7 +30,12 @@ export const apiMiddleware = ({ dispatch }: any) => (next: Function) => (
       .then((payload) => handleSWAPIcrap(payload))
       .then((payload) => dispatch(apiSuccess({ payload, feature, method })))
       .catch((error: any) => dispatch(apiError({ error, feature, method })))
-      .finally(() => dispatch(removeLoader({ id: loaderId, feature })));
+      .finally(() =>
+        setTimeout(() => {
+          // for testing purposes
+          dispatch(removeLoader({ id: loaderId, feature }));
+        }, 2000)
+      );
   }
 
   if (action.type.includes(API_ERROR)) {

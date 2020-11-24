@@ -1,0 +1,20 @@
+.notification {
+  position: fixed;
+  bottom: 2%;
+  right: 2%;
+  background-color: #fff;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.5);
+  width: 20rem;
+  padding: 1rem;
+  border: 3px solid green;
+  border-radius: 4px;
+  transform: translateX(40rem);
+  transition: all 200ms;
+
+  &--display {
+    transform: translateX(0);
+  }
+  &--error {
+    border: 3px solid red;
+  }
+}

@@ -5,26 +5,41 @@ import { Button, FlexColumn, FlexRow } from 'layouts';
 import { UserForm } from 'forms/User.form';
 import { User, emptyUser } from 'types/feature/user.type';
 import { compose } from 'utilities/general.utils';
+import { BaseLayout } from 'layouts/BaseLayout.layout';
+import { DataState } from './DataState.component';
+import { DataSelection } from './DataSelection.component';
+import { useDispatch } from 'react-redux';
+import { setNotification } from 'redux/reducers/core/notifications.reducer';
 
 export const CreateUser: FC = () => {
-  // -- validation functions --
+  // -- dependencies
+  const dispatch = useDispatch();
   const { resetValidationState, validateAll } = UserValidation();
 
   // -- local states --
   const [submitFailed, setSubmitFailed] = useState<boolean>(false);
   const [resetValidation, setResetValidation] = useState<boolean>(false);
-  const [contact, setUser] = useState<User>(emptyUser());
+  const [user, setUser] = useState<User>(emptyUser());
 
   // -- component logic --
-  const onChange = compose(setUser, mergeDeepRight(contact));
+  const onChange = compose(setUser, mergeDeepRight(user));
 
   const handleSave = () => {
-    if (validateAll(contact)) {
+    if (validateAll(user)) {
       setSubmitFailed(false);
-      alert('Validations all passed!');
+      dispatch(
+        setNotification({
+          status: 'success',
+          message: 'Save successful',
+        })
+      );
       // do the save-y bits
     } else {
       setSubmitFailed(true);
+      setNotification({
+        status: 'error',
+        message: 'Not all validations passed.',
+      });
       // do the oops-y bits
     }
   };
@@ -38,24 +53,30 @@ export const CreateUser: FC = () => {
 
   return (
     <>
-      <FlexRow>
-        <FlexColumn>
-          <UserForm
-            data={contact}
-            onChange={onChange}
-            resetValidation={resetValidation}
-            submitFailed={submitFailed}
-          />
-        </FlexColumn>
-      </FlexRow>
-      <FlexRow>
-        <FlexColumn>
-          <Button onClick={handleSave}>Submit</Button>
-        </FlexColumn>
-        <FlexColumn>
-          <Button onClick={handleReset}>Reset Form</Button>
-        </FlexColumn>
-      </FlexRow>
+      <BaseLayout>
+        <div className="container">
+          <DataState state={user} />
+          <div className="elements">
+            <FlexColumn>
+              <UserForm
+                onChange={onChange}
+                data={user}
+                resetValidation={resetValidation}
+                submitFailed={submitFailed}
+              />
+              <FlexRow>
+                <Button onClick={handleSave} className="button">
+                  Submit
+                </Button>
+                <Button onClick={handleReset} className="button">
+                  Reset Form
+                </Button>
+              </FlexRow>
+            </FlexColumn>
+            <DataSelection setState={setUser} />
+          </div>
+        </div>
+      </BaseLayout>
     </>
   );
 };

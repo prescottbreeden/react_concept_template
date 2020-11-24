@@ -1,0 +1,14 @@
+.flex {
+  &__column {
+    margin: 2rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  &__row {
+    margin: 2rem 0;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+  }
+}

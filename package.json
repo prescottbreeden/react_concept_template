@@ -4,11 +4,14 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.0",
+    "@types/react-router-dom": "^5.1.6",
     "de-formed-validations": "^2.0.3",
+    "node-sass": "^5.0.0",
     "ramda": "^0.27.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.0",
     "redux": "^4.0.5",
     "typescript": "^4.0.5"
@@ -16,6 +19,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "compile:sass": "node-sass src/sass/main.scss src/index.css",
+    "watch:sass": "node-sass src/sass/main.scss src/index.css -w",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

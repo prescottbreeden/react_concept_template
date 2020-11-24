@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { DataSelection } from 'components/DataSelection.component';
 import { DataState } from 'components/DataState.component';
-import { DevTools } from 'components/DevTools';
 import { readPerson } from 'services/person.service';
 import { mergeDeepRight } from 'ramda';
 import { PersonForm } from 'forms/Person.form';
@@ -15,9 +14,11 @@ import { FlexColumn, FlexRow } from 'layouts';
 import { Button } from '@material-ui/core';
 
 export const EditPerson: React.FC = () => {
-  // -- dependendencies --
+  // -- dependencies --
   const dispatch = useDispatch();
   const { resetValidationState, validateAll } = PersonValidation();
+
+  // -- local states --
   const [person, setPerson] = useState<Person>(emptyPerson());
   const [submitFailed, setSubmitFailed] = useState<boolean>(false);
   const [resetValidation, setResetValidation] = useState<boolean>(false);
@@ -27,21 +28,22 @@ export const EditPerson: React.FC = () => {
 
   const handleSave = () => {
     if (validateAll(person)) {
+      setSubmitFailed(false);
       dispatch(
         setNotification({
           status: 'success',
           message: 'Save successful',
         })
       );
-      setSubmitFailed(false);
-      alert('Validations all passed!');
       // do the save-y bits
     } else {
       setSubmitFailed(true);
-      setNotification({
-        status: 'error',
-        message: 'Not all validations passed.',
-      });
+      dispatch(
+        setNotification({
+          status: 'error',
+          message: 'Not all validations passed.',
+        })
+      );
       // do the oops-y bits
     }
   };
@@ -72,16 +74,15 @@ export const EditPerson: React.FC = () => {
                 submitFailed={submitFailed}
               />
               <FlexRow>
-                <Button onClick={handleSave} className="button">
+                <Button color="primary" onClick={handleSave} size="large">
                   Submit
                 </Button>
-                <Button onClick={handleReset} className="button">
+                <Button color="secondary" onClick={handleReset} size="large">
                   Reset Form
                 </Button>
               </FlexRow>
             </FlexColumn>
             <DataSelection setState={setPerson} />
-            <DevTools />
           </div>
         </div>
       </BaseLayout>
