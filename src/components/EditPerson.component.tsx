@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { DataSelection } from 'components/DataSelection.component';
+import { PersonSelection } from 'components/PersonSelection.component';
 import { DataState } from 'components/DataState.component';
 import { readPerson } from 'services/person.service';
 import { mergeDeepRight } from 'ramda';
@@ -10,7 +10,7 @@ import { compose } from 'utilities/general.utils';
 import { BaseLayout } from 'layouts/BaseLayout.layout';
 import { PersonValidation } from 'validations/person.validation';
 import { setNotification } from 'redux/reducers/core/notifications.reducer';
-import { FlexColumn, FlexRow } from 'layouts';
+import { FlexRow, Paper } from 'layouts';
 import { Button } from '@material-ui/core';
 
 export const EditPerson: React.FC = () => {
@@ -63,27 +63,29 @@ export const EditPerson: React.FC = () => {
   return (
     <>
       <BaseLayout>
-        <div className="container">
-          <DataState state={person} />
-          <div className="elements">
-            <FlexColumn>
-              <PersonForm
-                onChange={onChange}
-                data={person}
-                resetValidation={resetValidation}
-                submitFailed={submitFailed}
-              />
-              <FlexRow>
-                <Button color="primary" onClick={handleSave} size="large">
-                  Submit
-                </Button>
-                <Button color="secondary" onClick={handleReset} size="large">
-                  Reset Form
-                </Button>
-              </FlexRow>
-            </FlexColumn>
-            <DataSelection setState={setPerson} />
-          </div>
+        <div style={{ display: 'flex' }}>
+          <Paper>
+            <DataState state={person} />
+          </Paper>
+          <Paper>
+            <PersonForm
+              onChange={onChange}
+              data={person}
+              resetValidation={resetValidation}
+              submitFailed={submitFailed}
+            />
+            <FlexRow>
+              <Button color="primary" onClick={handleSave} size="large">
+                Submit
+              </Button>
+              <Button color="secondary" onClick={handleReset} size="large">
+                Reset Form
+              </Button>
+            </FlexRow>
+          </Paper>
+          <Paper>
+            <PersonSelection setState={setPerson} />
+          </Paper>
         </div>
       </BaseLayout>
     </>

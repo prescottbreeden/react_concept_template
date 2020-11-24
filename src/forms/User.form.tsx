@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { DynamicForm } from 'components/DynamicForm.component';
-import { FlexColumn, FlexRow, Input, Label } from 'layouts';
+import { Error, FlexColumn, FlexRow, Input, Label } from 'layouts';
 import { UserValidation } from 'validations/user.validation';
 import { PhoneForm } from 'forms/Phone.form';
 import { FormType } from 'types/core/form.type';
@@ -75,9 +75,7 @@ export const UserForm: React.FC<FormType<User>> = ({
             onChange={handleOnChange}
             value={get('firstName')}
           />
-          {getError('firstName') && (
-            <p className="form__error">{getError('firstName')}</p>
-          )}
+          {getError('firstName') && <Error>{getError('firstName')}</Error>}
         </FlexColumn>
         <FlexColumn>
           <Label htmlFor="lastName">Last Name</Label>
@@ -88,9 +86,7 @@ export const UserForm: React.FC<FormType<User>> = ({
             onChange={handleOnChange}
             value={get('lastName')}
           />
-          {getError('lastName') && (
-            <p className="form__error">{getError('lastName')}</p>
-          )}
+          {getError('lastName') && <Error>{getError('lastName')}</Error>}
         </FlexColumn>
       </FlexRow>
       <DynamicForm

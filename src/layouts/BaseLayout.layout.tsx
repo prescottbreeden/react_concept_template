@@ -4,7 +4,7 @@ import { Notification } from 'components/Notification.component';
 
 export const BaseLayout: FC<any> = (props) => {
   return (
-    <div className="page">
+    <div className="layout--base">
       {props.children}
       <Notification />
       <Loading />

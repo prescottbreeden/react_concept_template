@@ -1,7 +1,8 @@
 import React from 'react';
-import { Box, Button, FlexColumn, FlexRow } from 'layouts';
+import { FlexColumn, FlexRow } from 'layouts';
 import { idOrRandom } from 'utilities/general.utils';
 import { DynamicFormProps } from 'types/core/form.type';
+import Button from '@material-ui/core/Button';
 
 export const DynamicForm: React.FC<DynamicFormProps> = ({
   addForm,
@@ -23,21 +24,19 @@ export const DynamicForm: React.FC<DynamicFormProps> = ({
               resetValidation,
               submitFailed,
             })}
-            <Box>
+            <div className="u-relative">
               <Button
                 className="button form__btn--add"
                 onClick={() => removeForm(data)}
               >
                 Remove
               </Button>
-            </Box>
+            </div>
           </FlexRow>
         ))}
       </FlexColumn>
       <FlexRow>
-        <Button onClick={addForm} className="button form__btn--add">
-          + Add New Phone
-        </Button>
+        <Button onClick={() => addForm()}>+ Add New Phone</Button>
       </FlexRow>
     </>
   );

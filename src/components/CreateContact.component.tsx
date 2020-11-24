@@ -7,7 +7,7 @@ import { User, emptyUser } from 'types/feature/user.type';
 import { compose } from 'utilities/general.utils';
 import { BaseLayout } from 'layouts/BaseLayout.layout';
 import { DataState } from './DataState.component';
-import { DataSelection } from './DataSelection.component';
+import { PersonSelection } from './PersonSelection.component';
 import { useDispatch } from 'react-redux';
 import { setNotification } from 'redux/reducers/core/notifications.reducer';
 
@@ -73,7 +73,7 @@ export const CreateUser: FC = () => {
                 </Button>
               </FlexRow>
             </FlexColumn>
-            <DataSelection setState={setUser} />
+            <PersonSelection setState={setUser} />
           </div>
         </div>
       </BaseLayout>

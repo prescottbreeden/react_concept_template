@@ -4,7 +4,7 @@ import { PersonValidation } from 'validations/person.validation';
 import { Person } from 'types/feature/person.type';
 import { compose, handleChangeEvent, safeGet } from 'utilities/general.utils';
 import { FormType } from 'types/core/form.type';
-import { FlexColumn, FlexRow } from 'layouts';
+import { Error, FlexColumn, FlexRow } from 'layouts';
 
 export const PersonForm: React.FC<FormType<Person>> = ({
   onChange,
@@ -45,57 +45,45 @@ export const PersonForm: React.FC<FormType<Person>> = ({
   const get = safeGet(data);
 
   return (
-    <div>
-      <h2>Edit Person</h2>
-      <p>
-        Select a data on the right to load their data and then change their data
-        to see what the payload to the API would be.
-      </p>
-      <div className="form">
-        <FlexRow>
-          <FlexColumn>
-            <InputLabel htmlFor="firstName">First Name</InputLabel>
-            <Input
-              id="name"
-              name="name"
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value={get('name')}
-            />
-            {getError('name') && <p className="error">{getError('name')}</p>}
-          </FlexColumn>
-        </FlexRow>
-        <FlexRow>
-          <FlexColumn>
-            <InputLabel htmlFor="height">Height</InputLabel>
-            <Input
-              id="height"
-              name="height"
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value={get('height')}
-            />
-            {getError('height') && (
-              <p className="error">{getError('height')}</p>
-            )}
-          </FlexColumn>
-        </FlexRow>
-        <FlexRow>
-          <FlexColumn>
-            <InputLabel htmlFor="gender">Gender</InputLabel>
-            <Input
-              id="gender"
-              name="gender"
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value={get('gender')}
-            />
-            {getError('gender') && (
-              <p className="error">{getError('gender')}</p>
-            )}
-          </FlexColumn>
-        </FlexRow>
-      </div>
-    </div>
+    <>
+      <FlexRow>
+        <h2>Edit Person</h2>
+      </FlexRow>
+      <FlexRow>
+        <FlexColumn>
+          <InputLabel htmlFor="firstName">First Name</InputLabel>
+          <Input
+            id="name"
+            name="name"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value={get('name')}
+          />
+          {getError('name') && <Error>{getError('name')}</Error>}
+        </FlexColumn>
+        <FlexColumn>
+          <InputLabel htmlFor="height">Height</InputLabel>
+          <Input
+            id="height"
+            name="height"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value={get('height')}
+          />
+          {getError('height') && <Error>{getError('height')}</Error>}
+        </FlexColumn>
+        <FlexColumn>
+          <InputLabel htmlFor="gender">Gender</InputLabel>
+          <Input
+            id="gender"
+            name="gender"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value={get('gender')}
+          />
+          {getError('gender') && <Error>{getError('gender')}</Error>}
+        </FlexColumn>
+      </FlexRow>
+    </>
   );
 };

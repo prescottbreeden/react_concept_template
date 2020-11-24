@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { mergeDeepRight } from 'ramda';
 import { PhoneValidation } from 'validations/phone.validation';
-import { FlexColumn, Input, Label } from 'layouts';
+import { Error, FlexColumn, Input } from 'layouts';
 import { FormType } from 'types/core/form.type';
 import { Phone } from 'types/feature/phone.type';
 import {
@@ -10,6 +10,7 @@ import {
   handleChangeEvent,
   formatPhone,
 } from 'utilities/general.utils';
+import { InputLabel } from '@material-ui/core';
 
 export const PhoneForm: React.FC<FormType<Phone>> = ({
   data,
@@ -50,7 +51,7 @@ export const PhoneForm: React.FC<FormType<Phone>> = ({
   return (
     <>
       <FlexColumn>
-        <Label htmlFor={`number_${get('id')}`}>Phone Number</Label>
+        <InputLabel htmlFor={`number_${get('id')}`}>Phone Number</InputLabel>
         <Input
           id={`number_${get('id')}`}
           name="number"
@@ -58,12 +59,12 @@ export const PhoneForm: React.FC<FormType<Phone>> = ({
           onChange={handleOnChange}
           value={formatPhone(get('number'))}
         />
-        {getError('number') && (
-          <p className="form__error">{getError('number')}</p>
-        )}
+        {getError('number') && <Error>{getError('number')}</Error>}
       </FlexColumn>
       <FlexColumn>
-        <Label htmlFor={`description_${get('id')}`}>Description</Label>
+        <InputLabel htmlFor={`description_${get('id')}`}>
+          Description
+        </InputLabel>
         <Input
           id={`description_${get('id')}`}
           name="description"
@@ -71,9 +72,7 @@ export const PhoneForm: React.FC<FormType<Phone>> = ({
           onChange={handleOnChange}
           value={get('description')}
         />
-        {getError('description') && (
-          <p className="form__error">{getError('description')}</p>
-        )}
+        {getError('description') && <Error>{getError('description')}</Error>}
       </FlexColumn>
     </>
   );

@@ -5,11 +5,14 @@ import { useSelector } from 'react-redux';
 import { selectPersons } from 'redux/reducers/feature/person.reducer';
 import { randomString } from 'utilities/general.utils';
 import { Person } from 'types/feature/person.type';
+import { FlexRow } from 'layouts';
 
-interface DataSelectionProps {
+interface PersonSelectionProps {
   setState: Function;
 }
-export const DataSelection: React.FC<DataSelectionProps> = ({ setState }) => {
+export const PersonSelection: React.FC<PersonSelectionProps> = ({
+  setState,
+}) => {
   // -- local state --
   const people: Person[] = useSelector(selectPersons);
 
@@ -26,10 +29,9 @@ export const DataSelection: React.FC<DataSelectionProps> = ({ setState }) => {
 
   return (
     <div className="list__container">
-      <h2>Select a Person</h2>
-      <br />
-      <p>Use Ctrl-H to bring up redux dev tools</p>
-      <br />
+      <FlexRow>
+        <h2>Select a Person</h2>
+      </FlexRow>
       <List>{renderPeople(people)}</List>
     </div>
   );
