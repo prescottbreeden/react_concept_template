@@ -9,16 +9,51 @@ import { PersonForm } from 'forms/Person.form';
 import { emptyPerson, Person } from 'types/feature/person.type';
 import { compose } from 'utilities/general.utils';
 import { BaseLayout } from 'layouts/BaseLayout.layout';
+import { PersonValidation } from 'validations/person.validation';
+import { setNotification } from 'redux/reducers/core/notifications.reducer';
+import { FlexColumn, FlexRow } from 'layouts';
+import { Button } from '@material-ui/core';
 
 export const EditPerson: React.FC = () => {
-  // -- redux and state --------------------------------------------------------
+  // -- dependendencies --
   const dispatch = useDispatch();
+  const { resetValidationState, validateAll } = PersonValidation();
   const [person, setPerson] = useState<Person>(emptyPerson());
+  const [submitFailed, setSubmitFailed] = useState<boolean>(false);
+  const [resetValidation, setResetValidation] = useState<boolean>(false);
 
-  // -- onChange logic ---------------------------------------------------------
+  // -- component logic --
   const onChange = compose(setPerson, mergeDeepRight(person));
 
-  // -- lifecycle --------------------------------------------------------------
+  const handleSave = () => {
+    if (validateAll(person)) {
+      dispatch(
+        setNotification({
+          status: 'success',
+          message: 'Save successful',
+        })
+      );
+      setSubmitFailed(false);
+      alert('Validations all passed!');
+      // do the save-y bits
+    } else {
+      setSubmitFailed(true);
+      setNotification({
+        status: 'error',
+        message: 'Not all validations passed.',
+      });
+      // do the oops-y bits
+    }
+  };
+
+  const handleReset = () => {
+    setSubmitFailed(false);
+    setResetValidation(!resetValidation);
+    setPerson(emptyPerson());
+    resetValidationState();
+  };
+
+  // -- lifecycle --
   useEffect(() => {
     dispatch(readPerson());
   }, [dispatch]);
@@ -29,7 +64,22 @@ export const EditPerson: React.FC = () => {
         <div className="container">
           <DataState state={person} />
           <div className="elements">
-            <PersonForm person={person} onChange={onChange} />
+            <FlexColumn>
+              <PersonForm
+                onChange={onChange}
+                data={person}
+                resetValidation={resetValidation}
+                submitFailed={submitFailed}
+              />
+              <FlexRow>
+                <Button onClick={handleSave} className="button">
+                  Submit
+                </Button>
+                <Button onClick={handleReset} className="button">
+                  Reset Form
+                </Button>
+              </FlexRow>
+            </FlexColumn>
             <DataSelection setState={setPerson} />
             <DevTools />
           </div>

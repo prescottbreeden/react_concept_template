@@ -1,18 +1,17 @@
-import React, { ChangeEvent, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { setNotification } from 'redux/reducers/core/notifications.reducer';
-import { Button, Input, InputLabel } from '@material-ui/core';
+import React, { useEffect } from 'react';
+import { Input, InputLabel } from '@material-ui/core';
 import { PersonValidation } from 'validations/person.validation';
 import { Person } from 'types/feature/person.type';
 import { compose, handleChangeEvent, safeGet } from 'utilities/general.utils';
+import { FormType } from 'types/core/form.type';
 
-interface PersonFormProps {
-  person: Person;
-  onChange: (event: ChangeEvent<any>) => void;
-}
-export const PersonForm: React.FC<PersonFormProps> = ({ onChange, person }) => {
+export const PersonForm: React.FC<FormType<Person>> = ({
+  onChange,
+  data,
+  resetValidation,
+  submitFailed,
+}) => {
   // -- dependencies --
-  const dispatch = useDispatch();
   const {
     getError,
     resetValidationState,
@@ -24,42 +23,33 @@ export const PersonForm: React.FC<PersonFormProps> = ({ onChange, person }) => {
   // -- form logic --
   const handleChange = validateOnChange(
     compose(onChange, handleChangeEvent),
-    person
+    data
   );
-  const handleBlur = validateOnBlur(person);
-  const savePerson = () => {
-    if (validateAll(person)) {
-      dispatch(
-        setNotification({
-          status: 'success',
-          message: 'Save successful',
-        })
-      );
-    } else {
-      dispatch(
-        setNotification({
-          status: 'error',
-          message: 'Person is invalid.',
-        })
-      );
-    }
-  };
+  const handleBlur = validateOnBlur(data);
 
   // -- lifecycle --
   useEffect(() => {
     resetValidationState();
-  }, [person.personId]); //eslint-disable-line
+  }, [data.personId]); //eslint-disable-line
+
+  useEffect(() => {
+    resetValidationState();
+  }, [resetValidation]); //eslint-disable-line
+
+  useEffect(() => {
+    submitFailed && validateAll(data);
+  }, [submitFailed, data]); //eslint-disable-line
 
   // -- display logic --
-  const get = safeGet(person);
+  const get = safeGet(data);
 
   return (
     <div className="form__container">
       <h2>Form Sample</h2>
       <br />
       <p>
-        Select a Person on the right to load their data and then change their
-        data to see what the payload to the API would be.
+        Select a data on the right to load their data and then change their data
+        to see what the payload to the API would be.
       </p>
       <div className="form">
         <div className="form__row">
@@ -105,9 +95,6 @@ export const PersonForm: React.FC<PersonFormProps> = ({ onChange, person }) => {
             )}
           </div>
         </div>
-        <Button onClick={savePerson} className="button">
-          Click Me to Submit
-        </Button>
       </div>
     </div>
   );
