@@ -23,7 +23,8 @@ export const personMiddleware = ({ dispatch }: any) => (next: Function) => (
 
       case `${PERSON_KEY} ${API_SUCCESS} POST`:
       case `${PERSON_KEY} ${API_SUCCESS} PUT`:
-        next(readPerson());
+      case `${PERSON_KEY} ${API_SUCCESS} PATCH`:
+        next(readPerson(payload));
         break;
     }
   }

@@ -14,10 +14,10 @@ interface PersonSelectionProps {
 export const PersonSelection: React.FC<PersonSelectionProps> = ({
   setState,
 }) => {
-  // -- local state --
+  // --[ local state ]---------------------------------------------------------
   const people: Person[] = useSelector(selectPersons);
 
-  // -- display logic --
+  // --[ render logic ]--------------------------------------------------------
   const renderPeople = map((person: Person) => (
     <ListItem
       key={randomString()}

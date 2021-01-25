@@ -1,33 +1,45 @@
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { NotificationAction } from 'types/core/notificationAction.type';
-import { selectNotification } from 'redux/reducers/core/notifications.reducer';
+import { selectNotifications } from 'redux/reducers/core/notifications.reducer';
 import { compose } from 'utilities/general.utils';
 import { prop, equals } from 'ramda';
+import { FlexColumn } from 'layouts';
+import { map, randomString } from 'fp-tools';
 
 export const Notification: FC = () => {
   // --[ helpers ]-------------------------------------------------------------
   const isSuccessNotification = compose(equals('success'), prop('status'));
 
   // --[ local state ]---------------------------------------------------------
-  const notification: NotificationAction = useSelector(selectNotification);
+  const notifications: NotificationAction[] = useSelector(selectNotifications);
 
   // --[ render logic ]--------------------------------------------------------
-  const className = notification
+  const className = notifications.length
     ? 'notification notification--display'
     : 'notification';
 
-  const success = (
-    <div className={className}>
+  const success = (notification: NotificationAction) => (
+    <div className={className} key={randomString()}>
       <p>{prop('message', notification)}</p>
     </div>
   );
 
-  const error = (
-    <div className={`${className} notification--error`}>
+  const error = (notification: NotificationAction) => (
+    <div className={`${className} notification--error`} key={randomString()}>
       <p>{prop('message', notification)}</p>
     </div>
   );
 
-  return isSuccessNotification(notification) ? success : error;
+  const render = (notification: NotificationAction) => {
+    return isSuccessNotification(notification)
+      ? success(notification)
+      : error(notification);
+  };
+
+  return (
+    <div className="notification__container">
+      <FlexColumn>{map(render, notifications)}</FlexColumn>
+    </div>
+  );
 };

@@ -1,13 +1,15 @@
 import { curry } from 'fp-tools';
-import { ApiRequest, ApiResponse } from 'types/core/api.type';
+import { ApiRequest } from 'types/core/api.type';
 import { ReduxBaseAction } from 'types/core/baseAction.type';
 
+// --[ constants ]-------------------------------------------------------------
 export const API_REQUEST = 'API REQUEST';
 export const API_SUCCESS = 'API SUCCESS';
 export const API_ERROR = 'API ERROR';
 
+// --[ actions ]---------------------------------------------------------------
 export const apiRequest = (request: ApiRequest): ReduxBaseAction<any> => {
-  const { body, method, url, feature } = request;
+  const { body = null, method, url, feature } = request;
   return {
     type: `${feature} ${API_REQUEST} ${method}`,
     payload: { url, method, body },

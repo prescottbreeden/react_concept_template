@@ -13,16 +13,16 @@ import { setNotification } from 'redux/reducers/core/notifications.reducer';
 import { Button } from '@material-ui/core';
 
 export const CreateUser: FC = () => {
-  // -- dependencies
+  // --[ dependencies ]--------------------------------------------------------
   const dispatch = useDispatch();
   const { resetValidationState, validateAll } = UserValidation();
 
-  // -- local states --
+  // --[ local state ]---------------------------------------------------------
   const [submitFailed, setSubmitFailed] = useState<boolean>(false);
   const [resetValidation, setResetValidation] = useState<boolean>(false);
   const [user, setUser] = useState<User>(emptyUser());
 
-  // -- component logic --
+  // --[ component logic ]-----------------------------------------------------
   const onChange = compose(setUser, mergeDeepRight(user));
 
   const handleSave = () => {
@@ -51,6 +51,8 @@ export const CreateUser: FC = () => {
     setUser(emptyUser());
     resetValidationState();
   };
+
+  // --[ render logic ]--------------------------------------------------------
 
   return (
     <>

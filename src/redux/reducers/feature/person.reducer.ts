@@ -3,7 +3,7 @@ import { SET_DATA } from 'redux/actions/data.actions';
 import { prop } from 'ramda';
 import { Person } from 'types/feature/person.type';
 
-// -- reducer ------------------------------------------------------------------
+// --[ reducer ]---------------------------------------------------------------
 const initialState: Person[] = [];
 
 export const personReducer = (person = initialState, action: any) => {
@@ -16,7 +16,7 @@ export const personReducer = (person = initialState, action: any) => {
   }
 };
 
-// -- selectors ----------------------------------------------------------------
+// --[ selectors ]-------------------------------------------------------------
 export const selectPersons = (state: any) => {
   return prop(PERSON_KEY, state);
 };

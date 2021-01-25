@@ -5,8 +5,8 @@ export interface ApiOptions {
 }
 
 export interface ApiRequest {
-  body: any;
-  method: string;
+  body?: any;
+  method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
   url: string;
   feature: string;
 }

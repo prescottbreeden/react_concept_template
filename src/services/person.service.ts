@@ -6,8 +6,14 @@ import { Person } from 'types/feature/person.type';
 import { ReduxBaseAction } from 'types/core/baseAction.type';
 import { ApiRequest } from 'types/core/api.type';
 
+type UrlArgs = (string | number | undefined)[];
+
 const ENV_URL = 'https://swapi.dev/';
-const generateURL = compose(concat(ENV_URL), join('/'), map(defaultTo('')));
+const generateURL: (args: UrlArgs) => string = compose(
+  concat(ENV_URL),
+  join('/'),
+  map(defaultTo(''))
+);
 const PERSON_URL = ['api', 'people'];
 
 export const createPerson = (person: Person) => {
@@ -21,7 +27,6 @@ export const createPerson = (person: Person) => {
 
 export const readPerson = (id?: number): ReduxBaseAction<ApiRequest> => {
   return apiRequest({
-    body: null,
     method: 'GET',
     url: generateURL([...PERSON_URL, id]),
     feature: PERSON_KEY,
@@ -39,7 +44,6 @@ export const updatePerson = (id: number, person: Partial<Person>) => {
 
 export const deletePerson = (id: number) => {
   return apiRequest({
-    body: null,
     method: 'DELETE',
     url: generateURL([...PERSON_URL, id]),
     feature: PERSON_KEY,

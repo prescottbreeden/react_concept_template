@@ -3,10 +3,11 @@ import { prop } from 'ramda';
 import { LoaderAction } from 'types/core/loaderAction.type';
 import { ReduxBaseAction } from 'types/core/baseAction.type';
 
+// --[ constants ]-------------------------------------------------------------
 export const SET_LOADER = `${LOADING_KEY} STARTED`;
 export const REMOVE_LOADER = `${LOADING_KEY} ENDING`;
 
-// -- actions ------------------------------------------------------------------
+// --[ actions ]---------------------------------------------------------------
 export const setLoader = ({
   id,
   feature,
@@ -27,7 +28,7 @@ export const removeLoader = ({
   };
 };
 
-// -- reducer ------------------------------------------------------------------
+// --[ reducer ]---------------------------------------------------------------
 const initialState: any[] = [];
 
 export const loaderReducer = (loader = initialState, action: any) => {
@@ -46,7 +47,7 @@ export const loaderReducer = (loader = initialState, action: any) => {
   }
 };
 
-// -- selectors ----------------------------------------------------------------
+// --[ selectors ]-------------------------------------------------------------
 export const selectLoader = (state: any) => {
   return prop(LOADING_KEY, state);
 };
