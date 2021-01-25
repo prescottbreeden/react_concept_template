@@ -5,7 +5,10 @@
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@types/react-router-dom": "^5.1.6",
+    "data.task": "^3.1.2",
     "de-formed-validations": "^2.0.3",
+    "fluture": "^13.0.1",
+    "fp-tools": "1.0.4",
     "node-sass": "^5.0.0",
     "ramda": "^0.27.1",
     "react": "^16.13.1",

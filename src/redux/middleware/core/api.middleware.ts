@@ -9,10 +9,7 @@ import { setNotification } from 'redux/reducers/core/notifications.reducer';
 import { ApiOptions } from 'types/core/api.type';
 import { ReduxBaseAction } from 'types/core/baseAction.type';
 import { makeRequest } from 'utilities/fetchData';
-
-const handleSWAPIcrap = (payload: any) => {
-  return 'results' in payload ? payload.results : payload;
-};
+import { prop } from 'utilities/general.utils';
 
 export const apiMiddleware = ({ dispatch }: any) => (next: Function) => (
   action: ReduxBaseAction<ApiOptions>
@@ -20,22 +17,19 @@ export const apiMiddleware = ({ dispatch }: any) => (next: Function) => (
   next(action);
 
   if (action.type.includes(API_REQUEST)) {
-    const { feature } = action.meta;
-    const { method } = action.payload;
+    const {
+      meta: { feature },
+      payload: { method },
+    } = action;
+    const id = new Date().getMilliseconds();
 
-    const loaderId = new Date().getMilliseconds();
-    dispatch(setLoader({ id: loaderId, feature }));
+    dispatch(setLoader({ id, feature }));
     makeRequest(action.payload)
-      .then((response: Response) => response.json())
-      .then((payload) => handleSWAPIcrap(payload))
-      .then((payload) => dispatch(apiSuccess({ payload, feature, method })))
-      .catch((error: any) => dispatch(apiError({ error, feature, method })))
-      .finally(() =>
-        setTimeout(() => {
-          // for testing purposes
-          dispatch(removeLoader({ id: loaderId, feature }));
-        }, 2000)
-      );
+      .then((res: Response) => res.json())
+      .then(prop('results'))
+      .then((response: any) => dispatch(apiSuccess(feature, method, response)))
+      .catch((error: any) => dispatch(apiError(feature, method, error)))
+      .finally(() => dispatch(removeLoader({ id, feature })));
   }
 
   if (action.type.includes(API_ERROR)) {

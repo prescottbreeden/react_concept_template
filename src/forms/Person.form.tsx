@@ -21,7 +21,7 @@ export const PersonForm: React.FC<FormType<Person>> = ({
     validateOnBlur,
   } = PersonValidation();
 
-  // -- form logic --
+  // -- component logic --
   const handleChange = validateOnChange(
     compose(onChange, handleChangeEvent),
     data

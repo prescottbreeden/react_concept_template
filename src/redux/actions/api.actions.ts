@@ -1,3 +1,4 @@
+import { curry } from 'fp-tools';
 import { ApiRequest, ApiResponse } from 'types/core/api.type';
 import { ReduxBaseAction } from 'types/core/baseAction.type';
 
@@ -14,20 +15,22 @@ export const apiRequest = (request: ApiRequest): ReduxBaseAction<any> => {
   };
 };
 
-export const apiSuccess = (response: ApiResponse): ReduxBaseAction<any> => {
-  const { payload, feature, method } = response;
-  return {
-    type: `${feature} ${API_SUCCESS} ${method}`,
-    payload: payload,
-    meta: { feature },
-  };
-};
+export const apiSuccess = curry(
+  (feature: string, method: string, payload: any): ReduxBaseAction<any> => {
+    return {
+      type: `${feature} ${API_SUCCESS} ${method}`,
+      payload: payload,
+      meta: { feature },
+    };
+  }
+);
 
-export const apiError = (response: ApiResponse): ReduxBaseAction<any> => {
-  const { error, feature, method } = response;
-  return {
-    type: `${feature} ${API_ERROR} ${method}`,
-    payload: error,
-    meta: { feature },
-  };
-};
+export const apiError = curry(
+  (feature: string, method: string, error: any): ReduxBaseAction<any> => {
+    return {
+      type: `${feature} ${API_ERROR} ${method}`,
+      payload: error,
+      meta: { feature },
+    };
+  }
+);

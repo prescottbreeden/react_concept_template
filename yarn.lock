@@ -4159,6 +4159,11 @@ data-urls@^2.0.0:
     whatwg-mimetype "^2.3.0"
     whatwg-url "^8.0.0"
 
+data.task@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/data.task/-/data.task-3.1.2.tgz#f61511339ad5c5ac6f417cc2666b95153dc7448d"
+  integrity sha512-gGDjno8m/FS1kdMU3EmKcLaO1enFyfCV/EscvDZ4+KZDSg9xHePa2VFfWd+QO5PUp18NdCIziOpaSUE4Efw8/w==
+
 de-formed-validations@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/de-formed-validations/-/de-formed-validations-2.0.3.tgz#4b78538838cff7c0044a8c71b45e435a2e957c75"
@@ -5380,6 +5385,14 @@ flush-write-stream@^1.0.0:
     inherits "^2.0.3"
     readable-stream "^2.3.6"
 
+fluture@^13.0.1:
+  version "13.0.1"
+  resolved "https://registry.yarnpkg.com/fluture/-/fluture-13.0.1.tgz#2026944079d0c2324949988af15e131d226d7f46"
+  integrity sha512-AhYpO5ZCsy781dtCW3XQH1XOasshr7+zn8aREWZq5FobkqVYp7EXBQnRpY/Rwf6Z4A+BLlOmW8T9U9yacDPppw==
+  dependencies:
+    sanctuary-show "^2.0.0"
+    sanctuary-type-identifiers "^3.0.0"
+
 follow-redirects@^1.0.0:
   version "1.13.0"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.13.0.tgz#b42e8d93a2a7eea5ed88633676d6597bc8e384db"
@@ -5433,6 +5446,11 @@ forwarded@~0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/forwarded/-/forwarded-0.1.2.tgz#98c23dab1175657b8c0573e8ceccd91b0ff18c84"
   integrity sha1-mMI9qxF1ZXuMBXPozszZGw/xjIQ=
+
+fp-tools@1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/fp-tools/-/fp-tools-1.0.4.tgz#dafb3bd3c02b80a6ecf0677d3fd766b00fc28e68"
+  integrity sha512-kHSNTvqRAz/MRsCyt7110+oo++cEuvuXoGeSohL5xqp+5f0ruvDli6XZjjWSpQWRj3Qh/FjhLLjtazT8R9BVGQ==
 
 fragment-cache@^0.2.1:
   version "0.2.1"
@@ -10585,6 +10603,16 @@ safe-regex@^1.1.0:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
+
+sanctuary-show@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/sanctuary-show/-/sanctuary-show-2.0.0.tgz#2326b4744f4b0f993f18ca56a29f68a50f514637"
+  integrity sha512-REj4ZiioUXnDLj6EpJ9HcYDIEGaEexmB9Fg5o6InZR9f0x5PfnnC21QeU9SZ9E7G8zXSZPNjy8VRUK4safbesw==
+
+sanctuary-type-identifiers@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/sanctuary-type-identifiers/-/sanctuary-type-identifiers-3.0.0.tgz#51cb488d2ed9f194946a64ffe2b41dd49a348c0b"
+  integrity sha512-YFXYcG0Ura1dSPd/1xLYtE2XAWUEsBHhMTZvYBOvwT8MeFQwdUOCMm2DC+r94z6H93FVq0qxDac8/D7QpJj6Mg==
 
 sane@^4.0.3:
   version "4.1.0"
