@@ -29,15 +29,17 @@ export const removeLoader = ({
 };
 
 // --[ reducer ]---------------------------------------------------------------
-const initialState: any[] = [];
+const initialState: LoaderAction[] = [];
 
-export const loaderReducer = (loader = initialState, action: any) => {
+export const loaderReducer = (
+  loader = initialState,
+  { payload, type }: ReduxBaseAction<LoaderAction>
+) => {
   switch (true) {
-    case action.type.includes(SET_LOADER):
-      return [...loader, action.payload];
+    case type.includes(SET_LOADER):
+      return [...loader, payload];
 
-    case action.type.includes(REMOVE_LOADER):
-      const { payload } = action;
+    case type.includes(REMOVE_LOADER):
       return loader.filter(({ id }: any) => {
         return id !== payload.id;
       });

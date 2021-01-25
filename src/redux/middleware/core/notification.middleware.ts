@@ -17,7 +17,7 @@ export const notificationMiddleware = () => (next: Function) => (
     next(setNotification(notification));
     setTimeout(() => {
       next(removeNotification(id));
-    }, 2500);
+    }, payload.timeOut);
   } else {
     next(action);
   }

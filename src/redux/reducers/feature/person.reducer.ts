@@ -2,14 +2,18 @@ import { PERSON_KEY } from 'redux/keys';
 import { SET_DATA } from 'redux/actions/data.actions';
 import { prop } from 'ramda';
 import { Person } from 'types/feature/person.type';
+import { ReduxBaseAction } from 'types/core/baseAction.type';
 
 // --[ reducer ]---------------------------------------------------------------
 const initialState: Person[] = [];
 
-export const personReducer = (person = initialState, action: any) => {
-  switch (action.type) {
+export const personReducer = (
+  person = initialState,
+  { payload, type }: ReduxBaseAction<Person[]>
+) => {
+  switch (type) {
     case `${PERSON_KEY} ${SET_DATA}`:
-      return action.payload;
+      return payload;
 
     default:
       return person;

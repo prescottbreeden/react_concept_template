@@ -1,10 +1,9 @@
-import React, { FC } from 'react';
+import React, { CSSProperties, FC } from 'react';
 import { useSelector } from 'react-redux';
 import { NotificationAction } from 'types/core/notificationAction.type';
 import { selectNotifications } from 'redux/reducers/core/notifications.reducer';
 import { compose } from 'utilities/general.utils';
 import { prop, equals } from 'ramda';
-import { FlexColumn } from 'layouts';
 import { map, randomString } from 'fp-tools';
 
 export const Notification: FC = () => {
@@ -15,18 +14,16 @@ export const Notification: FC = () => {
   const notifications: NotificationAction[] = useSelector(selectNotifications);
 
   // --[ render logic ]--------------------------------------------------------
-  const className = notifications.length
-    ? 'notification notification--display'
-    : 'notification';
+  const animation: CSSProperties = {};
 
   const success = (notification: NotificationAction) => (
-    <div className={className} key={randomString()}>
+    <div className="notification" key={randomString()}>
       <p>{prop('message', notification)}</p>
     </div>
   );
 
   const error = (notification: NotificationAction) => (
-    <div className={`${className} notification--error`} key={randomString()}>
+    <div className="notification notification--error" key={randomString()}>
       <p>{prop('message', notification)}</p>
     </div>
   );
@@ -38,8 +35,6 @@ export const Notification: FC = () => {
   };
 
   return (
-    <div className="notification__container">
-      <FlexColumn>{map(render, notifications)}</FlexColumn>
-    </div>
+    <div className="notification__container">{map(render, notifications)}</div>
   );
 };

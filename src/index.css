@@ -128,17 +128,27 @@ body {
   padding: 1rem;
   border: 3px solid green;
   border-radius: 4px;
-  transform: translateX(40rem);
   transition: all 200ms;
+  margin: 0.5rem;
 }
 .notification__container {
   position: fixed;
   bottom: 2%;
   right: 2%;
-}
-.notification--display {
-  transform: translateX(0);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 .notification--error {
   border: 3px solid red;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(40rem);
+  }
+  to {
+    transform: translateX(0rem);
+  }
 }

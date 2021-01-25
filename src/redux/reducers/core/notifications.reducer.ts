@@ -12,10 +12,11 @@ export const setNotification = ({
   id,
   message,
   status,
+  timeOut = 5000,
 }: NotificationAction): ReduxBaseAction<NotificationAction> => {
   return {
     type: SET_NOTIFICATION,
-    payload: { id, message, status },
+    payload: { id, message, status, timeOut },
   };
 };
 
@@ -31,14 +32,13 @@ const initState: NotificationAction[] = [];
 
 export const notificationsReducer = (
   notifications = initState,
-  action: ReduxBaseAction<NotificationAction | number>
+  { payload, type }: ReduxBaseAction<NotificationAction | number>
 ) => {
   switch (true) {
-    case action.type.includes(SET_NOTIFICATION):
-      return [...notifications, action.payload];
+    case type.includes(SET_NOTIFICATION):
+      return [...notifications, payload];
 
-    case action.type.includes(REMOVE_NOTIFICATION):
-      const { payload } = action;
+    case type.includes(REMOVE_NOTIFICATION):
       return notifications.filter(({ id }: NotificationAction) => {
         return id !== payload;
       });
