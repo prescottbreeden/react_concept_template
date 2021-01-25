@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import { Input, InputLabel } from '@material-ui/core';
 import { PersonValidation } from 'validations/person.validation';
 import { Person } from 'types/feature/person.type';
 import { compose, handleChangeEvent, safeGet } from 'utilities/general.utils';
 import { FormType } from 'types/core/form.type';
-import { Error, FlexColumn, FlexRow } from 'layouts';
+import { FlexRow } from 'layouts';
+import { AmpInput } from 'components/AmpInput.component';
 
 export const PersonForm: React.FC<FormType<Person>> = ({
   onChange,
@@ -12,7 +12,7 @@ export const PersonForm: React.FC<FormType<Person>> = ({
   resetValidation,
   submitFailed,
 }) => {
-  // -- dependencies --
+  // --[ dependencies ]--------------------------------------------------------
   const {
     getError,
     resetValidationState,
@@ -21,14 +21,16 @@ export const PersonForm: React.FC<FormType<Person>> = ({
     validateOnBlur,
   } = PersonValidation();
 
-  // -- component logic --
+  // --[ component logic ]-----------------------------------------------------
   const handleChange = validateOnChange(
     compose(onChange, handleChangeEvent),
     data
   );
   const handleBlur = validateOnBlur(data);
+  // get :: string -> Person[string]
+  const get = safeGet(data);
 
-  // -- lifecycle --
+  // --[ lifecycle ]-----------------------------------------------------------
   useEffect(() => {
     resetValidationState();
   }, [data.personId]); //eslint-disable-line
@@ -41,8 +43,7 @@ export const PersonForm: React.FC<FormType<Person>> = ({
     submitFailed && validateAll(data);
   }, [submitFailed, data]); //eslint-disable-line
 
-  // -- display logic --
-  const get = safeGet(data);
+  // --[ render logic ]--------------------------------------------------------
 
   return (
     <>
@@ -50,39 +51,27 @@ export const PersonForm: React.FC<FormType<Person>> = ({
         <h2>Edit Person</h2>
       </FlexRow>
       <FlexRow>
-        <FlexColumn>
-          <InputLabel htmlFor="firstName">First Name</InputLabel>
-          <Input
-            id="name"
-            name="name"
-            onBlur={handleBlur}
-            onChange={handleChange}
-            value={get('name')}
-          />
-          {getError('name') && <Error>{getError('name')}</Error>}
-        </FlexColumn>
-        <FlexColumn>
-          <InputLabel htmlFor="height">Height</InputLabel>
-          <Input
-            id="height"
-            name="height"
-            onBlur={handleBlur}
-            onChange={handleChange}
-            value={get('height')}
-          />
-          {getError('height') && <Error>{getError('height')}</Error>}
-        </FlexColumn>
-        <FlexColumn>
-          <InputLabel htmlFor="gender">Gender</InputLabel>
-          <Input
-            id="gender"
-            name="gender"
-            onBlur={handleBlur}
-            onChange={handleChange}
-            value={get('gender')}
-          />
-          {getError('gender') && <Error>{getError('gender')}</Error>}
-        </FlexColumn>
+        <AmpInput
+          getError={getError}
+          name="name"
+          onBlur={handleBlur}
+          onChange={handleChange}
+          value={get('name')}
+        />
+        <AmpInput
+          getError={getError}
+          name="height"
+          onBlur={handleBlur}
+          onChange={handleChange}
+          value={get('height')}
+        />
+        <AmpInput
+          getError={getError}
+          name="gender"
+          onBlur={handleBlur}
+          onChange={handleChange}
+          value={get('gender')}
+        />
       </FlexRow>
     </>
   );

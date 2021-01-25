@@ -1,5 +1,5 @@
 import { randomString } from 'utilities/general.utils';
-import { Base, emptyBase } from './base.type';
+import { Base } from './base.type';
 import { Address, emptyAddress } from './address.type';
 import { emptyPhone, Phone } from './phone.type';
 import { PermissionRole } from './contact.type';
@@ -20,10 +20,9 @@ export interface User extends Base<User> {
   phones: Phone[];
 }
 
-export const emptyUser = (): User => ({
-  ...emptyBase<User>(),
-  address: emptyAddress(),
+const defaultValues: User = {
   aadB2cId: '',
+  address: emptyAddress(),
   firstName: '',
   id: randomString(),
   isActive: true,
@@ -33,4 +32,11 @@ export const emptyUser = (): User => ({
   title: '',
   emails: [],
   phones: [emptyPhone()],
+};
+
+export const emptyUser = (): User => ({
+  ...defaultValues,
+  meta: {
+    ...defaultValues,
+  },
 });

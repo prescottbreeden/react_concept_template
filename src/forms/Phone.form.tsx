@@ -18,7 +18,7 @@ export const PhoneForm: React.FC<FormType<Phone>> = ({
   resetValidation,
   submitFailed,
 }) => {
-  // -- validation functions --
+  // --[ dependencies ]--------------------------------------------------------
   const {
     getError,
     resetValidationState,
@@ -27,7 +27,7 @@ export const PhoneForm: React.FC<FormType<Phone>> = ({
     validateOnChange,
   } = PhoneValidation();
 
-  // -- component logic --
+  // --[ component logic ]-----------------------------------------------------
   const onPhoneChange = compose(
     onChange,
     mergeDeepRight(data),
@@ -35,8 +35,10 @@ export const PhoneForm: React.FC<FormType<Phone>> = ({
   );
   const handleOnBlur = validateOnBlur(data);
   const handleOnChange = validateOnChange(onPhoneChange, data);
+  // get :: string -> Phone[string]
+  const get = safeGet(data);
 
-  // -- lifecycle --
+  // --[ lifecycle ]-----------------------------------------------------------
   useEffect(() => {
     submitFailed && validateAll(data);
   }, [submitFailed, data]); //eslint-disable-line
@@ -45,8 +47,7 @@ export const PhoneForm: React.FC<FormType<Phone>> = ({
     resetValidationState();
   }, [resetValidation]); //eslint-disable-line
 
-  // -- render logic --
-  const get = safeGet(data);
+  // --[ render logic ]--------------------------------------------------------
 
   return (
     <>

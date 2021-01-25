@@ -14,16 +14,16 @@ import { FlexRow, Paper } from 'layouts';
 import { Button } from '@material-ui/core';
 
 export const EditPerson: React.FC = () => {
-  // -- dependencies --
+  // --[ dependencies ]--------------------------------------------------------
   const dispatch = useDispatch();
   const { resetValidationState, validateAll } = PersonValidation();
 
-  // -- local states --
+  // --[ local state ]---------------------------------------------------------
   const [person, setPerson] = useState<Person>(emptyPerson());
   const [submitFailed, setSubmitFailed] = useState<boolean>(false);
   const [resetValidation, setResetValidation] = useState<boolean>(false);
 
-  // -- component logic --
+  // --[ component logic ]-----------------------------------------------------
   const onChange = compose(setPerson, mergeDeepRight(person));
 
   const handleSave = () => {
@@ -55,10 +55,12 @@ export const EditPerson: React.FC = () => {
     resetValidationState();
   };
 
-  // -- lifecycle --
+  // --[ lifecycle ]-----------------------------------------------------------
   useEffect(() => {
     dispatch(readPerson());
   }, [dispatch]);
+
+  // --[ render logic ]--------------------------------------------------------
 
   return (
     <>

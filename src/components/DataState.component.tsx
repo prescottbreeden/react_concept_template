@@ -1,20 +1,22 @@
 import React from 'react';
 import { equals, isNil, prop } from 'ramda';
 import { compose, depthSearch } from 'utilities/general.utils';
+import { objProp } from 'fp-tools';
 
 interface DataStateProps {
   state: any;
 }
 export const DataState: React.FC<DataStateProps> = ({ state }) => {
-  // -- helpers ----------------------------------------------------------------
+  // --[ component logic ]-----------------------------------------------------
   const metaIsNil = compose(isNil, prop('meta'));
-  const newPerson = compose(equals(-1), prop('personId'));
+  const newPerson = compose(equals(-1), prop('id'));
+  const get = objProp(state);
 
-  // -- display logic ----------------------------------------------------------
+  // --[ render logic ]--------------------------------------------------------
   const showMeta = metaIsNil(state) ? (
     <p>Select a Person to see api data.</p>
   ) : (
-    <pre>{JSON.stringify(state.meta, null, 2)}</pre>
+    <pre>{JSON.stringify(get('meta'), null, 2)}</pre>
   );
 
   const showEditedData = !newPerson(state) && (

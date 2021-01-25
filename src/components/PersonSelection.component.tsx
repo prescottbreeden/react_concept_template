@@ -6,6 +6,7 @@ import { selectPersons } from 'redux/reducers/feature/person.reducer';
 import { randomString } from 'utilities/general.utils';
 import { Person } from 'types/feature/person.type';
 import { FlexRow } from 'layouts';
+import { maybe } from 'fp-tools';
 
 interface PersonSelectionProps {
   setState: Function;
@@ -32,7 +33,7 @@ export const PersonSelection: React.FC<PersonSelectionProps> = ({
       <FlexRow>
         <h2>Select a Person</h2>
       </FlexRow>
-      <List>{renderPeople(people)}</List>
+      <List>{maybe(people).map(renderPeople).join()}</List>
     </div>
   );
 };

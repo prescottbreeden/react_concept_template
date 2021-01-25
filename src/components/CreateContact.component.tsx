@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { mergeDeepRight } from 'ramda';
 import { UserValidation } from 'validations/user.validation';
-import { Button, FlexColumn, FlexRow } from 'layouts';
+import { FlexRow, Paper } from 'layouts';
 import { UserForm } from 'forms/User.form';
 import { User, emptyUser } from 'types/feature/user.type';
 import { compose } from 'utilities/general.utils';
@@ -10,6 +10,7 @@ import { DataState } from './DataState.component';
 import { PersonSelection } from './PersonSelection.component';
 import { useDispatch } from 'react-redux';
 import { setNotification } from 'redux/reducers/core/notifications.reducer';
+import { Button } from '@material-ui/core';
 
 export const CreateUser: FC = () => {
   // -- dependencies
@@ -54,27 +55,29 @@ export const CreateUser: FC = () => {
   return (
     <>
       <BaseLayout>
-        <div className="container">
-          <DataState state={user} />
-          <div className="elements">
-            <FlexColumn>
-              <UserForm
-                onChange={onChange}
-                data={user}
-                resetValidation={resetValidation}
-                submitFailed={submitFailed}
-              />
-              <FlexRow>
-                <Button onClick={handleSave} className="button">
-                  Submit
-                </Button>
-                <Button onClick={handleReset} className="button">
-                  Reset Form
-                </Button>
-              </FlexRow>
-            </FlexColumn>
+        <div style={{ display: 'flex' }}>
+          <Paper>
+            <DataState state={user} />
+          </Paper>
+          <Paper>
+            <UserForm
+              onChange={onChange}
+              data={user}
+              resetValidation={resetValidation}
+              submitFailed={submitFailed}
+            />
+            <FlexRow>
+              <Button onClick={handleSave} className="button">
+                Submit
+              </Button>
+              <Button onClick={handleReset} className="button">
+                Reset Form
+              </Button>
+            </FlexRow>
+          </Paper>
+          <Paper>
             <PersonSelection setState={setUser} />
-          </div>
+          </Paper>
         </div>
       </BaseLayout>
     </>

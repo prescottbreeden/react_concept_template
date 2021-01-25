@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import { DynamicForm } from 'components/DynamicForm.component';
-import { Error, FlexColumn, FlexRow, Input, Label } from 'layouts';
+import { FlexRow } from 'layouts';
 import { UserValidation } from 'validations/user.validation';
 import { PhoneForm } from 'forms/Phone.form';
 import { FormType } from 'types/core/form.type';
@@ -13,14 +13,16 @@ import {
   safeGet,
   set,
 } from 'utilities/general.utils';
+import { AddressForm } from './Address.form';
+import { AmpInput } from 'components/AmpInput.component';
 
-export const UserForm: React.FC<FormType<User>> = ({
+export const UserForm: FC<FormType<User>> = ({
   data,
   onChange,
   resetValidation,
   submitFailed,
 }) => {
-  // -- validation functions --
+  // --[ dependencies ]--------------------------------------------------------
   const {
     getError,
     resetValidationState,
@@ -29,7 +31,7 @@ export const UserForm: React.FC<FormType<User>> = ({
     validateOnChange,
   } = UserValidation();
 
-  // -- component logic --
+  // --[ component logic ]-----------------------------------------------------
   const handleOnBlur = validateOnBlur(data);
   const handleOnChange = validateOnChange(
     compose(onChange, handleChangeEvent),
@@ -50,8 +52,11 @@ export const UserForm: React.FC<FormType<User>> = ({
     });
     return onChange({ phones });
   };
+  const handleAddressChange = compose(onChange, set('address'));
+  // get :: string -> User[string]
+  const get = safeGet(data);
 
-  // -- lifecycle --
+  // --[ lifecycle ]-----------------------------------------------------------
   useEffect(() => {
     submitFailed && validateAll(data);
   }, [submitFailed, data]); //eslint-disable-line
@@ -60,34 +65,25 @@ export const UserForm: React.FC<FormType<User>> = ({
     resetValidationState();
   }, [resetValidation]); //eslint-disable-line
 
-  // -- render logic --
-  const get = safeGet(data);
+  // --[ render logic ]--------------------------------------------------------
 
   return (
     <>
       <FlexRow>
-        <FlexColumn>
-          <Label htmlFor="firstName">First Name</Label>
-          <Input
-            id="firstName"
-            name="firstName"
-            onBlur={handleOnBlur}
-            onChange={handleOnChange}
-            value={get('firstName')}
-          />
-          {getError('firstName') && <Error>{getError('firstName')}</Error>}
-        </FlexColumn>
-        <FlexColumn>
-          <Label htmlFor="lastName">Last Name</Label>
-          <Input
-            id="lastName"
-            name="lastName"
-            onBlur={handleOnBlur}
-            onChange={handleOnChange}
-            value={get('lastName')}
-          />
-          {getError('lastName') && <Error>{getError('lastName')}</Error>}
-        </FlexColumn>
+        <AmpInput
+          getError={getError}
+          name="firstName"
+          onBlur={handleOnBlur}
+          onChange={handleOnChange}
+          value={get('firstName')}
+        />
+        <AmpInput
+          getError={getError}
+          name="lastName"
+          onBlur={handleOnBlur}
+          onChange={handleOnChange}
+          value={get('lastName')}
+        />
       </FlexRow>
       <DynamicForm
         addForm={addNewPhone}
@@ -95,6 +91,12 @@ export const UserForm: React.FC<FormType<User>> = ({
         items={get('phones')}
         onChange={handlePhoneChange}
         removeForm={deletePhone}
+        resetValidation={resetValidation}
+        submitFailed={submitFailed}
+      />
+      <AddressForm
+        data={get('address')}
+        onChange={handleAddressChange}
         resetValidation={resetValidation}
         submitFailed={submitFailed}
       />

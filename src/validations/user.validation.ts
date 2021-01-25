@@ -4,10 +4,12 @@ import { PhoneValidation } from './phone.validation';
 import { compose } from 'utilities/general.utils';
 import { User } from 'types/feature/user.type';
 import { emailIsValid, stringIsNotEmpty } from 'utilities/validation.utils';
+import { AddressValidation } from './address.validation';
 
-// UserValidation :: () -> ValidationObject<Contact>
+// UserValidation :: () -> ValidationObject<User>
 export const UserValidation = () => {
   const { validateAll: validatePhone } = PhoneValidation();
+  const { validateAll: validateAddress } = AddressValidation();
   return useValidation<User>({
     firstName: [
       {
@@ -31,6 +33,12 @@ export const UserValidation = () => {
       {
         errorMessage: 'Not all phones provided are valid.',
         validation: compose(all, map(validatePhone)),
+      },
+    ],
+    address: [
+      {
+        errorMessage: 'Address is invalid',
+        validation: compose(validateAddress),
       },
     ],
   });

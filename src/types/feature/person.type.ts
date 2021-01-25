@@ -1,4 +1,4 @@
-import { Base, emptyBase } from './base.type';
+import { Base } from './base.type';
 
 export interface Person extends Base<Person> {
   personId: number;
@@ -16,7 +16,7 @@ export interface Person extends Base<Person> {
   starships: string[];
 }
 
-const defaultValues = {
+const defaultValues: Person = {
   personId: -1,
   height: '',
   name: '',
@@ -34,10 +34,8 @@ const defaultValues = {
 
 export const emptyPerson = (): Person => {
   return {
-    ...emptyBase<Person>(),
     ...defaultValues,
     meta: {
-      ...emptyBase<Person>(),
       ...defaultValues,
     },
   };
