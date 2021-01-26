@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { Loading } from 'components/Loading.component';
-import { Notification } from 'components/Notification.component';
+import { Loading } from 'components/core/Loading.component';
+import { Notification } from 'components/core/Notification.component';
 
 export const BaseLayout: FC<any> = (props) => {
   return (

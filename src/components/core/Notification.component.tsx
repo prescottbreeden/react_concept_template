@@ -6,11 +6,11 @@ import { compose } from 'utilities/general.utils';
 import { equals, map, prop, randomString } from 'fp-tools';
 
 export const Notification: FC = () => {
-  // --[ helpers ]-------------------------------------------------------------
-  const isSuccessNotification = compose(equals('success'), prop('status'));
-
   // --[ local state ]---------------------------------------------------------
   const notifications: NotificationAction[] = useSelector(selectNotifications);
+
+  // --[ component logic ]-----------------------------------------------------
+  const isSuccessNotification = compose(equals('success'), prop('status'));
 
   // --[ render logic ]--------------------------------------------------------
   const animation: CSSProperties = {};

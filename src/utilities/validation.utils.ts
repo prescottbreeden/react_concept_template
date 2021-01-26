@@ -1,16 +1,6 @@
-import { all, compose } from './general.utils';
-import {
-  length,
-  lt as gt,
-  gt as lt,
-  trim,
-  not,
-  equals,
-  map,
-  split,
-  toLower,
-  test,
-} from 'ramda';
+import { length, trim, not, test } from 'ramda';
+import { all, compose, equals, lt, gt, map, split } from 'fp-tools';
+
 // regular expressions
 const emailRegEx = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -20,15 +10,14 @@ export const isLength = (num: number) => compose(equals(num), length);
 // isNumber :: string -> boolean
 export const isNumber = compose(not, isNaN, Number);
 
+// isTruthy :: a -> boolean
+export const isTruthy = (a: any) => !!a;
+
 // containsNoNumbers :: string -> boolean
 export const containsNoNumbers = test(/^[^0-9()]+$/);
 
-// matchString :: string string -> boolean
-export const matchString = (str1: string, str2: string) =>
-  equals(toLower(str1), toLower(str2));
-
 // onlyContainsNumbers :: string -> boolean
-export const stringIsNumbers = compose(all, map(isNumber), split(''));
+export const stringIsNumbers = compose(all(isTruthy), map(isNumber), split(''));
 
 // lessThan :: num -> string -> boolean
 export const stringIsLessThan = (num: number) => compose(lt(num), length, trim);

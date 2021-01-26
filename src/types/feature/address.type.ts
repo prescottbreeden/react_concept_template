@@ -16,11 +16,7 @@ const defaultValues: Address = {
   zipCode: '',
 };
 
-export const emptyAddress = (): Address => {
-  return {
-    ...defaultValues,
-    meta: {
-      ...defaultValues,
-    },
-  };
-};
+export const emptyAddress = (): Address => ({
+  ...defaultValues,
+  meta: defaultValues,
+});

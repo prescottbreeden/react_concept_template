@@ -1,4 +1,6 @@
-export interface PermissionRole {
+import { Base } from './base.type';
+
+export interface PermissionRole extends Base<PermissionRole> {
   permissionRoleId: number;
   permissionRoleName: string;
   permissionRoleLabelName: string;
@@ -6,12 +8,15 @@ export interface PermissionRole {
   canAssignRoles: boolean;
 }
 
-export const emptyPermissionRole = (): PermissionRole => {
-  return {
-    permissionRoleId: -1,
-    permissionRoleName: '',
-    permissionRoleLabelName: '',
-    permissionRoleDescription: '',
-    canAssignRoles: false,
-  };
+const defaultValues: PermissionRole = {
+  permissionRoleId: -1,
+  permissionRoleName: '',
+  permissionRoleLabelName: '',
+  permissionRoleDescription: '',
+  canAssignRoles: false,
 };
+
+export const emptyPermissionRole = (): PermissionRole => ({
+  ...defaultValues,
+  meta: defaultValues,
+});

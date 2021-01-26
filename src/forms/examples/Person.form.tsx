@@ -1,5 +1,5 @@
 import { FC, useEffect } from 'react';
-import { PersonValidation } from 'validations/person.validation';
+import { PersonValidation } from 'validations/examples/person.validation';
 import { Person } from 'types/feature/person.type';
 import { compose, handleChangeEvent, safeGet } from 'utilities/general.utils';
 import { FormType } from 'types/core/form.type';

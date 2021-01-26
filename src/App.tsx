@@ -1,8 +1,9 @@
 import React from 'react';
-import { EditPerson } from 'components/examples/EditPerson.component';
 import { DevTools } from 'utilities/DevTools';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
-import { CreateUser } from 'components/examples/CreateContact.component';
+import { StarWarsPage } from 'pages/examples/Starwars.page';
+import { UserPage } from 'pages/examples/User.page';
+import { HomePage } from 'pages/Home.page';
 
 function App() {
   return (
@@ -18,15 +19,9 @@ function App() {
         </nav>
 
         <Switch>
-          <Route path="/starwars">
-            <EditPerson />
-          </Route>
-          <Route path="/users">
-            <CreateUser />
-          </Route>
-          <Route path="/">
-            <p>dingo</p>
-          </Route>
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/starwars" component={StarWarsPage} />
+          <Route exact path="/users" component={UserPage} />
         </Switch>
         <DevTools />
       </Router>

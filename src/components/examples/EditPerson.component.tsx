@@ -1,4 +1,4 @@
-import { useState, useEffect, FC } from 'react';
+import React, { useState, useEffect, FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { PersonSelection } from 'components/examples/PersonSelection.component';
 import { DataState } from 'components/examples/DataState.component';
@@ -7,8 +7,7 @@ import { mergeDeepRight } from 'ramda';
 import { PersonForm } from 'forms/examples/Person.form';
 import { emptyPerson, Person } from 'types/feature/person.type';
 import { compose } from 'utilities/general.utils';
-import { BaseLayout } from 'layouts/BaseLayout.layout';
-import { PersonValidation } from 'validations/person.validation';
+import { PersonValidation } from 'validations/examples/person.validation';
 import { setNotification } from 'redux/reducers/core/notifications.reducer';
 import { FlexRow, Paper } from 'layouts';
 
@@ -63,28 +62,26 @@ export const EditPerson: FC = () => {
 
   return (
     <>
-      <BaseLayout>
-        <div style={{ display: 'flex' }}>
-          <Paper>
-            <DataState state={person} />
-          </Paper>
-          <Paper>
-            <PersonForm
-              onChange={onChange}
-              data={person}
-              resetValidation={resetValidation}
-              submitFailed={submitFailed}
-            />
-            <FlexRow>
-              <button onClick={handleSave}>Submit</button>
-              <button onClick={handleReset}>Reset Form</button>
-            </FlexRow>
-          </Paper>
-          <Paper>
-            <PersonSelection setState={setPerson} />
-          </Paper>
-        </div>
-      </BaseLayout>
+      <div style={{ display: 'flex' }}>
+        <Paper>
+          <DataState state={person} />
+        </Paper>
+        <Paper>
+          <PersonForm
+            onChange={onChange}
+            data={person}
+            resetValidation={resetValidation}
+            submitFailed={submitFailed}
+          />
+          <FlexRow>
+            <button onClick={handleSave}>Submit</button>
+            <button onClick={handleReset}>Reset Form</button>
+          </FlexRow>
+        </Paper>
+        <Paper>
+          <PersonSelection setState={setPerson} />
+        </Paper>
+      </div>
     </>
   );
 };

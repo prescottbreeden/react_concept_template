@@ -1,11 +1,10 @@
 import { FC, useState } from 'react';
 import { mergeDeepRight } from 'ramda';
-import { UserValidation } from 'validations/user.validation';
+import { UserValidation } from 'validations/examples/user.validation';
 import { FlexRow, Paper } from 'layouts';
 import { UserForm } from 'forms/examples/User.form';
 import { User, emptyUser } from 'types/feature/user.type';
 import { compose } from 'utilities/general.utils';
-import { BaseLayout } from 'layouts/BaseLayout.layout';
 import { DataState } from './DataState.component';
 import { PersonSelection } from './PersonSelection.component';
 import { useDispatch } from 'react-redux';
@@ -55,32 +54,30 @@ export const CreateUser: FC = () => {
 
   return (
     <>
-      <BaseLayout>
-        <div style={{ display: 'flex' }}>
-          <Paper>
-            <DataState state={user} />
-          </Paper>
-          <Paper>
-            <UserForm
-              onChange={onChange}
-              data={user}
-              resetValidation={resetValidation}
-              submitFailed={submitFailed}
-            />
-            <FlexRow>
-              <button onClick={handleSave} className="button">
-                Submit
-              </button>
-              <button onClick={handleReset} className="button">
-                Reset Form
-              </button>
-            </FlexRow>
-          </Paper>
-          <Paper>
-            <PersonSelection setState={setUser} />
-          </Paper>
-        </div>
-      </BaseLayout>
+      <div style={{ display: 'flex' }}>
+        <Paper>
+          <DataState state={user} />
+        </Paper>
+        <Paper>
+          <UserForm
+            onChange={onChange}
+            data={user}
+            resetValidation={resetValidation}
+            submitFailed={submitFailed}
+          />
+          <FlexRow>
+            <button onClick={handleSave} className="button">
+              Submit
+            </button>
+            <button onClick={handleReset} className="button">
+              Reset Form
+            </button>
+          </FlexRow>
+        </Paper>
+        <Paper>
+          <PersonSelection setState={setUser} />
+        </Paper>
+      </div>
     </>
   );
 };

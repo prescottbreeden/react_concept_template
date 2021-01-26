@@ -36,7 +36,5 @@ const defaultValues: User = {
 
 export const emptyUser = (): User => ({
   ...defaultValues,
-  meta: {
-    ...defaultValues,
-  },
+  meta: defaultValues,
 });

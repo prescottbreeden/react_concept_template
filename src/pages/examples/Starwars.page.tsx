@@ -1,6 +1,14 @@
-import React from 'react';
+import React, { FC } from 'react';
+import { EditPerson } from 'components/examples/EditPerson.component';
+import { BaseLayout } from 'layouts/BaseLayout.layout';
 
 interface StarWarsPageProps {}
-export const StarWarsPage: React.FC<StarWarsPageProps> = (props) => {
-  return <></>;
+export const StarWarsPage: FC<StarWarsPageProps> = () => {
+  return (
+    <>
+      <BaseLayout>
+        <EditPerson />
+      </BaseLayout>
+    </>
+  );
 };

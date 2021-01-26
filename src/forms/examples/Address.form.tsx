@@ -3,7 +3,7 @@ import { FlexRow } from 'layouts';
 import { FormType } from 'types/core/form.type';
 import { compose, handleChangeEvent, safeGet } from 'utilities/general.utils';
 import { Address } from 'types/feature/address.type';
-import { AddressValidation } from 'validations/address.validation';
+import { AddressValidation } from 'validations/examples/address.validation';
 import { Input } from 'components/common/Input.component';
 
 export const AddressForm: FC<FormType<Address>> = ({

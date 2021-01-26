@@ -1,7 +1,7 @@
 import { FC, useEffect } from 'react';
-import { DynamicForm } from 'components/DynamicForm.component';
+import { DynamicForm } from 'components/common/DynamicForm.component';
 import { FlexRow } from 'layouts';
-import { UserValidation } from 'validations/user.validation';
+import { UserValidation } from 'validations/examples/user.validation';
 import { PhoneForm } from 'forms/examples/Phone.form';
 import { FormType } from 'types/core/form.type';
 import { User } from 'types/feature/user.type';

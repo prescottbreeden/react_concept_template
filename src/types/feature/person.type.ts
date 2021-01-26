@@ -32,11 +32,7 @@ const defaultValues: Person = {
   starships: [],
 };
 
-export const emptyPerson = (): Person => {
-  return {
-    ...defaultValues,
-    meta: {
-      ...defaultValues,
-    },
-  };
-};
+export const emptyPerson = (): Person => ({
+  ...defaultValues,
+  meta: defaultValues,
+});

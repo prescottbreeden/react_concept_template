@@ -1,6 +1,6 @@
 import { FC, useEffect } from 'react';
 import { mergeDeepRight } from 'ramda';
-import { PhoneValidation } from 'validations/phone.validation';
+import { PhoneValidation } from 'validations/examples/phone.validation';
 import { Error, FlexColumn } from 'layouts';
 import { FormType } from 'types/core/form.type';
 import { Phone } from 'types/feature/phone.type';

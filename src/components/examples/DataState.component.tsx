@@ -1,6 +1,6 @@
+import React, { FC } from 'react';
 import { compose, depthSearch } from 'utilities/general.utils';
 import { equals, objProp, prop, isNil } from 'fp-tools';
-import { FC } from 'react';
 
 interface DataStateProps {
   state: any;

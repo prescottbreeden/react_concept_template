@@ -22,7 +22,6 @@ export const apiMiddleware = ({ dispatch }: any) => (next: Function) => (
       payload: { method },
     } = action;
     const id = new Date().getMilliseconds();
-    console.log(description);
 
     dispatch(setLoader({ id, feature, description }));
     makeRequest(action.payload)
