@@ -1,4 +1,4 @@
-import React, { CSSProperties, FC } from 'react';
+import { CSSProperties, FC } from 'react';
 import { useSelector } from 'react-redux';
 import { NotificationAction } from 'types/core/notificationAction.type';
 import { selectNotifications } from 'redux/reducers/core/notifications.reducer';

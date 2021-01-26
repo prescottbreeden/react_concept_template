@@ -1,14 +1,4 @@
-import { ButtonBase, InputLabel } from '@material-ui/core';
 import React from 'react';
-export * from './Input.layout';
-
-export const Button: React.FC<any> = (props) => {
-  return <ButtonBase {...props}>{props.children}</ButtonBase>;
-};
-
-export const IconButton: React.FC<any> = (props) => {
-  return <IconButton {...props}>{props.children}</IconButton>;
-};
 
 export const Error: React.FC<any> = (props) => {
   return (
@@ -32,10 +22,6 @@ export const FlexRow: React.FC<any> = (props) => {
       {props.children}
     </div>
   );
-};
-
-export const Label: React.FC<any> = (props) => {
-  return <InputLabel {...props}>{props.children}</InputLabel>;
 };
 
 export const Paper: React.FC<any> = (props) => {

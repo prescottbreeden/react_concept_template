@@ -1,5 +1,4 @@
-import React from 'react';
-import { List, ListItem, ListItemText } from '@material-ui/core';
+import { FC } from 'react';
 import { map, prop } from 'ramda';
 import { useSelector } from 'react-redux';
 import { selectPersons } from 'redux/reducers/feature/person.reducer';
@@ -11,21 +10,19 @@ import { maybe } from 'fp-tools';
 interface PersonSelectionProps {
   setState: Function;
 }
-export const PersonSelection: React.FC<PersonSelectionProps> = ({
-  setState,
-}) => {
+export const PersonSelection: FC<PersonSelectionProps> = ({ setState }) => {
   // --[ local state ]---------------------------------------------------------
   const people: Person[] = useSelector(selectPersons);
 
   // --[ render logic ]--------------------------------------------------------
   const renderPeople = map((person: Person) => (
-    <ListItem
+    <li
       key={randomString()}
       className="list__item"
       onClick={() => setState(person)}
     >
-      <ListItemText primary={prop('name', person)} />
-    </ListItem>
+      <p>{prop('name', person)}</p>
+    </li>
   ));
 
   return (
@@ -33,7 +30,7 @@ export const PersonSelection: React.FC<PersonSelectionProps> = ({
       <FlexRow>
         <h2>Select a Person</h2>
       </FlexRow>
-      <List>{maybe(people).map(renderPeople).join()}</List>
+      <ul>{maybe(people).map(renderPeople).join()}</ul>
     </div>
   );
 };

@@ -4,7 +4,7 @@ import { FormType } from 'types/core/form.type';
 import { compose, handleChangeEvent, safeGet } from 'utilities/general.utils';
 import { Address } from 'types/feature/address.type';
 import { AddressValidation } from 'validations/address.validation';
-import { AmpInput } from 'components/AmpInput.component';
+import { Input } from 'components/common/Input.component';
 
 export const AddressForm: FC<FormType<Address>> = ({
   data,
@@ -44,15 +44,15 @@ export const AddressForm: FC<FormType<Address>> = ({
   return (
     <>
       <FlexRow>
-        <AmpInput
-          getError={getError}
+        <Input
+          error={getError('street1')}
           name="street1"
           onBlur={handleOnBlur}
           onChange={handleOnChange}
           value={get('street1')}
         />
-        <AmpInput
-          getError={getError}
+        <Input
+          error={getError('street2')}
           name="street2"
           onBlur={handleOnBlur}
           onChange={handleOnChange}
@@ -60,22 +60,22 @@ export const AddressForm: FC<FormType<Address>> = ({
         />
       </FlexRow>
       <FlexRow>
-        <AmpInput
-          getError={getError}
+        <Input
+          error={getError('city')}
           name="city"
           onBlur={handleOnBlur}
           onChange={handleOnChange}
           value={get('city')}
         />
-        <AmpInput
-          getError={getError}
+        <Input
+          error={getError('state')}
           name="state"
           onBlur={handleOnBlur}
           onChange={handleOnChange}
           value={get('state')}
         />
-        <AmpInput
-          getError={getError}
+        <Input
+          error={getError('zipCode')}
           name="zipCode"
           onBlur={handleOnBlur}
           onChange={handleOnChange}

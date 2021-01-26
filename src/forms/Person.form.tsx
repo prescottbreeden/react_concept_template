@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { PersonValidation } from 'validations/person.validation';
 import { Person } from 'types/feature/person.type';
 import { compose, handleChangeEvent, safeGet } from 'utilities/general.utils';
 import { FormType } from 'types/core/form.type';
 import { FlexRow } from 'layouts';
-import { AmpInput } from 'components/AmpInput.component';
+import { Input } from 'components/common/Input.component';
 
-export const PersonForm: React.FC<FormType<Person>> = ({
+export const PersonForm: FC<FormType<Person>> = ({
   onChange,
   data,
   resetValidation,
@@ -51,22 +51,22 @@ export const PersonForm: React.FC<FormType<Person>> = ({
         <h2>Edit Person</h2>
       </FlexRow>
       <FlexRow>
-        <AmpInput
-          getError={getError}
+        <Input
+          error={getError('name')}
           name="name"
           onBlur={handleBlur}
           onChange={handleChange}
           value={get('name')}
         />
-        <AmpInput
-          getError={getError}
+        <Input
+          error={getError('name')}
           name="height"
           onBlur={handleBlur}
           onChange={handleChange}
           value={get('height')}
         />
-        <AmpInput
-          getError={getError}
+        <Input
+          error={getError('name')}
           name="gender"
           onBlur={handleBlur}
           onChange={handleChange}

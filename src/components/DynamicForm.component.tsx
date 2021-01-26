@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { FlexColumn, FlexRow } from 'layouts';
 import { idOrRandom } from 'utilities/general.utils';
 import { DynamicFormProps } from 'types/core/form.type';
-import Button from '@material-ui/core/Button';
 
-export const DynamicForm: React.FC<DynamicFormProps> = ({
+export const DynamicForm: FC<DynamicFormProps> = ({
   addForm,
   form,
   items,
@@ -25,18 +24,18 @@ export const DynamicForm: React.FC<DynamicFormProps> = ({
               submitFailed,
             })}
             <div className="u-relative">
-              <Button
+              <button
                 className="button form__btn--add"
                 onClick={() => removeForm(data)}
               >
                 Remove
-              </Button>
+              </button>
             </div>
           </FlexRow>
         ))}
       </FlexColumn>
       <FlexRow>
-        <Button onClick={() => addForm()}>+ Add New Phone</Button>
+        <button onClick={() => addForm()}>+ Add New Phone</button>
       </FlexRow>
     </>
   );

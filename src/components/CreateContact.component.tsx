@@ -10,7 +10,6 @@ import { DataState } from './DataState.component';
 import { PersonSelection } from './PersonSelection.component';
 import { useDispatch } from 'react-redux';
 import { setNotification } from 'redux/reducers/core/notifications.reducer';
-import { Button } from '@material-ui/core';
 
 export const CreateUser: FC = () => {
   // --[ dependencies ]--------------------------------------------------------
@@ -69,12 +68,12 @@ export const CreateUser: FC = () => {
               submitFailed={submitFailed}
             />
             <FlexRow>
-              <Button onClick={handleSave} className="button">
+              <button onClick={handleSave} className="button">
                 Submit
-              </Button>
-              <Button onClick={handleReset} className="button">
+              </button>
+              <button onClick={handleReset} className="button">
                 Reset Form
-              </Button>
+              </button>
             </FlexRow>
           </Paper>
           <Paper>

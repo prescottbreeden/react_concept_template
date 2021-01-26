@@ -1,33 +1,26 @@
 {
-  "name": "concept",
+  "name": "amplify-react-app-template",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^4.11.0",
-    "@types/react-router-dom": "^5.1.6",
-    "data.task": "^3.1.2",
-    "de-formed-validations": "^2.0.3",
-    "fluture": "^13.0.1",
-    "fp-tools": "1.0.4",
+    "de-formed-validations": "^2.0.6",
+    "fp-tools": "1.0.5",
     "lodash.startcase": "^4.4.0",
     "node-sass": "^5.0.0",
     "ramda": "^0.27.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^4.0.0",
-    "react-toastify": "^7.0.0",
-    "redux": "^4.0.5",
-    "typescript": "^4.0.5"
+    "react-scripts": "^4.0.1",
+    "redux": "^4.0.5"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "compile:sass": "node-sass src/sass/main.scss src/index.css",
     "watch:sass": "node-sass src/sass/main.scss src/index.css -w",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "react-scripts test"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -45,26 +38,28 @@
     ]
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "@types/jest": "^24.0.0",
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.3",
+    "@testing-library/user-event": "^12.6.2",
+    "@types/jest": "^26.0.20",
     "@types/lodash.startcase": "^4.4.6",
-    "@types/node": "^12.0.0",
-    "@types/ramda": "^0.27.14",
-    "@types/react": "^16.9.0",
-    "@types/react-dom": "^16.9.0",
-    "@types/react-redux": "^7.1.9",
+    "@types/node": "^14.14.22",
+    "@types/ramda": "^0.27.36",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/react-redux": "^7.1.16",
+    "@types/react-router-dom": "^5.1.7",
     "@types/redux": "^3.6.0",
     "@types/redux-devtools": "^3.0.47",
     "@types/redux-devtools-dock-monitor": "^1.1.33",
     "@types/redux-devtools-log-monitor": "^1.0.35",
-    "husky": "^4.2.5",
-    "prettier": "^2.1.1",
+    "husky": "^4.3.8",
+    "prettier": "^2.2.1",
     "pretty-quick": "^3.0.0",
     "redux-devtools": "^3.6.1",
     "redux-devtools-dock-monitor": "^1.1.4",
-    "redux-devtools-log-monitor": "^2.0.1"
+    "redux-devtools-log-monitor": "^2.0.1",
+    "typescript": "^4.1.3"
   },
   "prettier": {
     "singleQuote": true,

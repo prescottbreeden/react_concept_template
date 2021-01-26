@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Loading } from 'components/Loading.component';
 import { Notification } from 'components/Notification.component';
 

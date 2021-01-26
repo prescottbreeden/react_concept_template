@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { PersonSelection } from 'components/PersonSelection.component';
 import { DataState } from 'components/DataState.component';
@@ -11,9 +11,8 @@ import { BaseLayout } from 'layouts/BaseLayout.layout';
 import { PersonValidation } from 'validations/person.validation';
 import { setNotification } from 'redux/reducers/core/notifications.reducer';
 import { FlexRow, Paper } from 'layouts';
-import { Button } from '@material-ui/core';
 
-export const EditPerson: React.FC = () => {
+export const EditPerson: FC = () => {
   // --[ dependencies ]--------------------------------------------------------
   const dispatch = useDispatch();
   const { resetValidationState, validateAll } = PersonValidation();
@@ -77,12 +76,8 @@ export const EditPerson: React.FC = () => {
               submitFailed={submitFailed}
             />
             <FlexRow>
-              <Button color="primary" onClick={handleSave} size="large">
-                Submit
-              </Button>
-              <Button color="secondary" onClick={handleReset} size="large">
-                Reset Form
-              </Button>
+              <button onClick={handleSave}>Submit</button>
+              <button onClick={handleReset}>Reset Form</button>
             </FlexRow>
           </Paper>
           <Paper>

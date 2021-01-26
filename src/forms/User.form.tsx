@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { DynamicForm } from 'components/DynamicForm.component';
 import { FlexRow } from 'layouts';
 import { UserValidation } from 'validations/user.validation';
@@ -14,7 +14,7 @@ import {
   set,
 } from 'utilities/general.utils';
 import { AddressForm } from './Address.form';
-import { AmpInput } from 'components/AmpInput.component';
+import { Input } from 'components/common/Input.component';
 
 export const UserForm: FC<FormType<User>> = ({
   data,
@@ -70,15 +70,15 @@ export const UserForm: FC<FormType<User>> = ({
   return (
     <>
       <FlexRow>
-        <AmpInput
-          getError={getError}
+        <Input
+          error={getError('firstName')}
           name="firstName"
           onBlur={handleOnBlur}
           onChange={handleOnChange}
           value={get('firstName')}
         />
-        <AmpInput
-          getError={getError}
+        <Input
+          error={getError('lastName')}
           name="lastName"
           onBlur={handleOnBlur}
           onChange={handleOnChange}

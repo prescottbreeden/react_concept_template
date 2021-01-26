@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { mergeDeepRight } from 'ramda';
 import { PhoneValidation } from 'validations/phone.validation';
-import { Error, FlexColumn, Input } from 'layouts';
+import { Error, FlexColumn } from 'layouts';
 import { FormType } from 'types/core/form.type';
 import { Phone } from 'types/feature/phone.type';
 import {
@@ -10,9 +10,8 @@ import {
   handleChangeEvent,
   formatPhone,
 } from 'utilities/general.utils';
-import { InputLabel } from '@material-ui/core';
 
-export const PhoneForm: React.FC<FormType<Phone>> = ({
+export const PhoneForm: FC<FormType<Phone>> = ({
   data,
   onChange,
   resetValidation,
@@ -52,8 +51,8 @@ export const PhoneForm: React.FC<FormType<Phone>> = ({
   return (
     <>
       <FlexColumn>
-        <InputLabel htmlFor={`number_${get('id')}`}>Phone Number</InputLabel>
-        <Input
+        <label htmlFor={`number_${get('id')}`}>Phone Number</label>
+        <input
           id={`number_${get('id')}`}
           name="number"
           onBlur={handleOnBlur}
@@ -63,10 +62,8 @@ export const PhoneForm: React.FC<FormType<Phone>> = ({
         {getError('number') && <Error>{getError('number')}</Error>}
       </FlexColumn>
       <FlexColumn>
-        <InputLabel htmlFor={`description_${get('id')}`}>
-          Description
-        </InputLabel>
-        <Input
+        <label htmlFor={`description_${get('id')}`}>Description</label>
+        <input
           id={`description_${get('id')}`}
           name="description"
           onBlur={handleOnBlur}
