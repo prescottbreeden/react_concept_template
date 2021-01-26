@@ -1,4 +1,4 @@
-import { prop } from 'ramda';
+import { prop } from 'fp-tools';
 import { NOTIFICATION_KEY } from 'redux/keys';
 import { ReduxBaseAction } from 'types/core/baseAction.type';
 import { NotificationAction } from 'types/core/notificationAction.type';

@@ -9,11 +9,11 @@ export const API_ERROR = 'API ERROR';
 
 // --[ actions ]---------------------------------------------------------------
 export const apiRequest = (request: ApiRequest): ReduxBaseAction<any> => {
-  const { body = null, method, url, feature } = request;
+  const { body = null, description, feature, method, url } = request;
   return {
     type: `${feature} ${API_REQUEST} ${method}`,
     payload: { url, method, body },
-    meta: { feature },
+    meta: { feature, description },
   };
 };
 

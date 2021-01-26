@@ -1,3 +1,4 @@
+import { prop } from 'fp-tools';
 import { converge, curry, defaultTo, map, mergeDeepRight, reduce } from 'ramda';
 
 type KeyValuePair = {
@@ -19,9 +20,9 @@ export const compose = (...fns: Function[]) => (x: any) =>
   fns.reduceRight((y: any, f: any) => f(y), x);
 
 // prop :: a -> obj -> obj[a] | undefined
-export const prop = curry((a: any, obj: any) => (obj ? obj[a] : undefined));
+// export const prop = curry((a: any, obj: any) => (obj ? obj[a] : undefined));
 
-// set :: string a -> { [string]: a }
+// set :: string -> a -> { [string]: a }
 export const set = curry((name: string, value: any) => ({ [name]: value }));
 
 // handleChangeEvent :: event -> obj

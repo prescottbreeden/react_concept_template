@@ -1,6 +1,5 @@
-import { equals, isNil, prop } from 'ramda';
 import { compose, depthSearch } from 'utilities/general.utils';
-import { objProp } from 'fp-tools';
+import { equals, objProp, prop, isNil } from 'fp-tools';
 import { FC } from 'react';
 
 interface DataStateProps {

@@ -1,7 +1,7 @@
 import { LOADING_KEY } from 'redux/keys';
-import { prop } from 'ramda';
 import { LoaderAction } from 'types/core/loaderAction.type';
 import { ReduxBaseAction } from 'types/core/baseAction.type';
+import { prop } from 'fp-tools';
 
 // --[ constants ]-------------------------------------------------------------
 export const SET_LOADER = `${LOADING_KEY} STARTED`;
@@ -11,10 +11,11 @@ export const REMOVE_LOADER = `${LOADING_KEY} ENDING`;
 export const setLoader = ({
   id,
   feature,
+  description,
 }: LoaderAction): ReduxBaseAction<LoaderAction> => {
   return {
     type: `${SET_LOADER} ${feature}`,
-    payload: { id, feature },
+    payload: { id, feature, description },
   };
 };
 

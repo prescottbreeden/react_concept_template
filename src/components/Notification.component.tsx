@@ -3,8 +3,7 @@ import { useSelector } from 'react-redux';
 import { NotificationAction } from 'types/core/notificationAction.type';
 import { selectNotifications } from 'redux/reducers/core/notifications.reducer';
 import { compose } from 'utilities/general.utils';
-import { prop, equals } from 'ramda';
-import { map, randomString } from 'fp-tools';
+import { equals, map, prop, randomString } from 'fp-tools';
 
 export const Notification: FC = () => {
   // --[ helpers ]-------------------------------------------------------------

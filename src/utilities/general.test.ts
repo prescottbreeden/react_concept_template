@@ -1,8 +1,8 @@
+import { prop } from 'fp-tools';
 import {
   all,
   formatPhone,
   handleChangeEvent,
-  prop,
   replaceItem,
   safeGet,
   trace,

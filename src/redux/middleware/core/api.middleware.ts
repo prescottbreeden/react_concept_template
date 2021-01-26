@@ -1,3 +1,4 @@
+import { prop } from 'fp-tools';
 import {
   API_REQUEST,
   API_ERROR,
@@ -9,7 +10,6 @@ import { setNotification } from 'redux/reducers/core/notifications.reducer';
 import { ApiOptions } from 'types/core/api.type';
 import { ReduxBaseAction } from 'types/core/baseAction.type';
 import { makeRequest } from 'utilities/fetchData';
-import { prop } from 'utilities/general.utils';
 
 export const apiMiddleware = ({ dispatch }: any) => (next: Function) => (
   action: ReduxBaseAction<ApiOptions>
@@ -18,12 +18,13 @@ export const apiMiddleware = ({ dispatch }: any) => (next: Function) => (
 
   if (action.type.includes(API_REQUEST)) {
     const {
-      meta: { feature },
+      meta: { feature, description },
       payload: { method },
     } = action;
     const id = new Date().getMilliseconds();
+    console.log(description);
 
-    dispatch(setLoader({ id, feature }));
+    dispatch(setLoader({ id, feature, description }));
     makeRequest(action.payload)
       .then((res: Response) => res.json())
       .then(prop('results'))

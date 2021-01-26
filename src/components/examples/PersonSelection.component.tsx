@@ -1,11 +1,10 @@
+import { map, maybe, prop } from 'fp-tools';
 import { FC } from 'react';
-import { map, prop } from 'ramda';
 import { useSelector } from 'react-redux';
 import { selectPersons } from 'redux/reducers/feature/person.reducer';
 import { randomString } from 'utilities/general.utils';
 import { Person } from 'types/feature/person.type';
 import { FlexRow } from 'layouts';
-import { maybe } from 'fp-tools';
 
 interface PersonSelectionProps {
   setState: Function;

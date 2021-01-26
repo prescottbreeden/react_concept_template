@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { FlexRow } from 'layouts';
 import { FormType } from 'types/core/form.type';
 import { compose, handleChangeEvent, safeGet } from 'utilities/general.utils';

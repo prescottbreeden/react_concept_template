@@ -22,6 +22,7 @@ export const createPerson = (person: Person) => {
     method: 'POST',
     url: generateURL(PERSON_URL),
     feature: PERSON_KEY,
+    description: 'Saving Person',
   });
 };
 
@@ -30,6 +31,7 @@ export const readPerson = (id?: number): ReduxBaseAction<ApiRequest> => {
     method: 'GET',
     url: generateURL([...PERSON_URL, id]),
     feature: PERSON_KEY,
+    description: 'Reading Persons',
   });
 };
 
@@ -39,6 +41,7 @@ export const updatePerson = (id: number, person: Partial<Person>) => {
     method: 'PATCH',
     url: generateURL([...PERSON_URL, id]),
     feature: PERSON_KEY,
+    description: 'Updating Persons',
   });
 };
 
@@ -47,5 +50,6 @@ export const deletePerson = (id: number) => {
     method: 'DELETE',
     url: generateURL([...PERSON_URL, id]),
     feature: PERSON_KEY,
+    description: 'Deleting Person',
   });
 };
