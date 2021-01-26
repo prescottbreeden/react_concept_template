@@ -1,8 +1,8 @@
 import React from 'react';
-import { EditPerson } from 'components/EditPerson.component';
+import { EditPerson } from 'components/examples/EditPerson.component';
 import { DevTools } from 'utilities/DevTools';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
-import { CreateUser } from 'components/CreateContact.component';
+import { CreateUser } from 'components/examples/CreateContact.component';
 
 function App() {
   return (

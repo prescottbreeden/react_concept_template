@@ -1,12 +1,12 @@
-import React from 'react';
 import { equals, isNil, prop } from 'ramda';
 import { compose, depthSearch } from 'utilities/general.utils';
 import { objProp } from 'fp-tools';
+import { FC } from 'react';
 
 interface DataStateProps {
   state: any;
 }
-export const DataState: React.FC<DataStateProps> = ({ state }) => {
+export const DataState: FC<DataStateProps> = ({ state }) => {
   // --[ component logic ]-----------------------------------------------------
   const metaIsNil = compose(isNil, prop('meta'));
   const newPerson = compose(equals(-1), prop('id'));
@@ -24,12 +24,14 @@ export const DataState: React.FC<DataStateProps> = ({ state }) => {
   );
 
   return (
-    <div className="json">
-      <h2>Original Data of Selected</h2>
-      {showMeta}
-      <br />
-      <h2>Edited Data of Selected</h2>
-      {showEditedData}
-    </div>
+    <>
+      <div className="json">
+        <h2>Original Data of Selected</h2>
+        {showMeta}
+        <br />
+        <h2>Edited Data of Selected</h2>
+        {showEditedData}
+      </div>
+    </>
   );
 };

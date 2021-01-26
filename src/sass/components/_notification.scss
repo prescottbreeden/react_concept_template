@@ -26,12 +26,3 @@
     border: 3px solid red;
   }
 }
-
-@keyframes slide-in {
-  from {
-    transform: translateX(40rem);
-  }
-  to {
-    transform: translateX(0rem);
-  }
-}

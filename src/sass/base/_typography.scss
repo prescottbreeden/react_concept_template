@@ -1,8 +1,8 @@
 html {
-  // font-size: 62.5%;
+  font-size: 62.5%; // makes rem:pixel = 1rem:10px
 }
 
 body {
-  // font-size: 1.6rem;
-  font-family: sans-serif;
+  font-size: 1.6rem; // makes base body font-size 16px
+  font-family: $default__font-stack;
 }

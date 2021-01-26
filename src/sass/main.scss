@@ -1,12 +1,12 @@
-@import 'base';
-
+@import 'abstracts/functions';
+@import 'abstracts/mixins';
 @import 'abstracts/variables';
 
+@import 'base/animations';
 @import 'base/normalize';
 @import 'base/typography';
-@import 'base/animations';
+@import 'base/utilities';
 
-@import 'layouts/error';
 @import 'layouts/flex';
 @import 'layouts/header';
 @import 'layouts/navigation';

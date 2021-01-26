@@ -1,0 +1,20 @@
+/*
+  [ All code in this file is purely for example organization purposes. ]
+
+  Utilities should be used to override default styles as needed, NOT to build
+  out your CSS classes. All utilities by convention use !important.
+
+  Utility naming: .u-{name}
+
+  If you want to add BEM conventions to your utilities you are most likely
+  creating the rules in the wrong files. Always avoid nesting utilities.
+*/
+
+// ----------------------------------------------------------------------------
+//      ALL UTILITIES SHUOLD BE LISTED ALPHABETICALLY BY CLASS SELECTOR
+// ----------------------------------------------------------------------------
+
+.u-error {
+  margin-top: 0.4rem !important;
+  color: $color__red !important;
+}

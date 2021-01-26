@@ -1,13 +1,36 @@
-.list__container {
-  min-width: 14rem;
-}
+/*
+  Dynamic Content examples:
 
-.list__item {
-  border: 1px solid #333;
-}
-.list__item:hover {
-  cursor: pointer;
-  background-color: rgba(0, 10, 150, 0.2);
+  @respond(big-desktop) {
+    background-color: #BADA55;
+  }
+  @respond(tab-land) {
+    background-color: lightgreen;
+    color: #333;
+  }
+  @respond(tab-port) {
+    background-color: steelblue;
+    color: #EEE;
+  }
+  @respond(phone) {
+    background-color: black;
+    color: #EEE;
+  }
+*/
+/*
+  [ All code in this file is purely for example organization purposes. ]
+
+  Variable Convention Examples (follows BEM naming conventions)
+  color__{name}: base color group
+  color__{name}--{modifier}: modifier adjective of base color group
+*/
+@keyframes slide-in {
+  from {
+    transform: translateX(40rem);
+  }
+  to {
+    transform: translateX(0rem);
+  }
 }
 
 * {
@@ -37,13 +60,43 @@ label {
   margin-bottom: 0.4rem;
 }
 
-body {
-  font-family: sans-serif;
+.list__container {
+  min-width: 14rem;
 }
 
-.error {
-  margin-top: 0.4rem;
-  color: #f50057;
+.list__item {
+  border: 1px solid #333;
+}
+.list__item:hover {
+  cursor: pointer;
+  background-color: rgba(0, 10, 150, 0.2);
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: 'Roboto', '-apple-system', 'BlinkMacSystemFont', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
+/*
+  [ All code in this file is purely for example organization purposes. ]
+
+  Utilities should be used to override default styles as needed, NOT to build
+  out your CSS classes. All utilities by convention use !important.
+
+  Utility naming: .u-{name}
+
+  If you want to add BEM conventions to your utilities you are most likely
+  creating the rules in the wrong files. Always avoid nesting utilities.
+*/
+.u-error {
+  margin-top: 0.4rem !important;
+  color: #bb3131 !important;
 }
 
 .flex__column {
@@ -142,13 +195,4 @@ body {
 }
 .notification--error {
   border: 3px solid red;
-}
-
-@keyframes slide-in {
-  from {
-    transform: translateX(40rem);
-  }
-  to {
-    transform: translateX(0rem);
-  }
 }

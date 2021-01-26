@@ -1,8 +1,8 @@
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 import { mergeDeepRight } from 'ramda';
 import { UserValidation } from 'validations/user.validation';
 import { FlexRow, Paper } from 'layouts';
-import { UserForm } from 'forms/User.form';
+import { UserForm } from 'forms/examples/User.form';
 import { User, emptyUser } from 'types/feature/user.type';
 import { compose } from 'utilities/general.utils';
 import { BaseLayout } from 'layouts/BaseLayout.layout';

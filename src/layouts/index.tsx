@@ -2,7 +2,7 @@ import React from 'react';
 
 export const Error: React.FC<any> = (props) => {
   return (
-    <p className="error" {...props}>
+    <p className="u-error" {...props}>
       {props.children}
     </p>
   );

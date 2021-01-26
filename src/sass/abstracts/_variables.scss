@@ -1,1 +1,49 @@
-$color-red: #f50057;
+/*
+  [ All code in this file is purely for example organization purposes. ]
+
+  Variable Convention Examples (follows BEM naming conventions)
+  color__{name}: base color group
+  color__{name}--{modifier}: modifier adjective of base color group
+*/
+
+// color palette
+$color__red: #bb3131;
+$color__red--pinkish: #ffe5e5;
+$color__orange: #f26d20;
+$color__orange--angry: #c9510c;
+$color__yellow: #db9507;
+$color__green: #76ba43;
+$color__green--dark: #53832f;
+$color__tan: #a97d2e;
+$color__tan--light: #f3e7d2;
+$color__blue: #007d89;
+$color__turquoise: #12b0be;
+$color__purple: #d232ff;
+
+// greyscale
+$color__white: #fff;
+$color__light: #d5e9eb;
+$color__grey--light: rgb(240, 240, 240);
+$color__grey--medium: #909c9d;
+$color__grey--dark: #6b7778;
+$color__grey--label: #6a7677;
+$color__grey--label-dark: #626d6e;
+$color__black: hsl(0, 0, 1);
+$color__black--light: #202425;
+
+// defaults
+$default__font-color: $color__black--light;
+$default__link-color: $color__blue;
+$default__transition: all 250ms ease;
+$default__padding: 2.4rem 2.4rem 1.6rem 2.4rem;
+$default__border-radius: 0.4rem;
+$default__border-radius-top: 0.4rem 0.4rem 0 0;
+$default__box-shadow: 0 1rem 1.5rem rgba(0, 0, 0, 0.1);
+$default__font-stack: 'Roboto', '-apple-system', 'BlinkMacSystemFont', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+$default__hover-bg-green: rgba($color__green, 0.2);
+$default__gutter-margin: 1.6rem;
+
+// aliases & other
+$lighter-font-color: $color__grey--dark;
+$wide-button: 32.8rem;
