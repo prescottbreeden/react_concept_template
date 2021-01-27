@@ -35,30 +35,24 @@ export const HomePage: React.FC<HomePageProps> = () => {
             <p>
               This template is a redux-centric approach to building a react app.
               All API calls, loaders, and notifications are pre-built to go
-              through redux enabling ease of scalability. This reduces both the
-              need and ability to hack a solution that may be efficient in the
-              short term but will undoubtedly come back to haunt you.
+              through redux making it easier to scale. This reduces both the
+              need and ability to hack a solution that may be appealing in the
+              short term but will undoubtedly come back to haunt you or the
+              client.
             </p>
             <p>
               You will also find that all utilities are curried to promote as
               much functional programming as you are comfortable with. FP can
-              take some getting used to if you are new to it, but over the
-              course of a long project will provide extended code coverage,
-              fewer test-writing, and easier to maintain code.
+              take some getting used to if you are new to it, however, over the
+              course of a long project FP will provide extended code coverage,
+              fewer test-writing, and easier to maintain code as the code base
+              grows.
             </p>
             <p>
-              It is highly discouraged to rely on heavy package dependencies as
-              these have not only caused issues with versioning in the past but
-              also can come with heavy performance costs. Packages that Google
-              has already vocally warned developers against include Lodash and
-              Moment.js due to their huge size creating slower loading speeds on
-              slower / older devices.
-            </p>
-            <p>
-              While CSS in JS is quite popular, SASS with BEM is recommended to
-              enhance separation of concerns in the code base and encourage more
-              abstraction and less specialization, reducing a common source of
-              redundancy.
+              While CSS in JS is quite popular, SASS with BEM naming conventions
+              are recommended to both enhance the separation of concerns as well
+              as provide more abstraction and less specialization, reducing a
+              common source of redundancy and bloat.
             </p>
           </FlexColumn>
         </FlexRow>
@@ -100,12 +94,20 @@ export const HomePage: React.FC<HomePageProps> = () => {
         </FlexRow>
         <h2>Additional Resources</h2>
         <FlexRow>
-          <p>
-            The following is a list of available resources to provide additional
-            information and techniques that will both aid the use of this
-            template as well as better understand why it is laid out in this
-            way:
-          </p>
+          <FlexColumn>
+            <p>
+              The following is a list of available resources to provide
+              additional information and techniques that will both aid the use
+              of this template as well as better understand why it is laid out
+              in this way:
+            </p>
+            <ul>
+              <li>Redux: (Redux Book by that guy)</li>
+              <li>SASS: (SASS course / recorded presentation?)</li>
+              <li>Functional Programming: (blogs, book, presentation)</li>
+              <li>De-formed Validations: (blog)</li>
+            </ul>
+          </FlexColumn>
         </FlexRow>
       </Paper>
     </>

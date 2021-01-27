@@ -5,10 +5,11 @@ import { join, concat, defaultTo, map } from 'ramda';
 import { Person } from 'types/feature/person.type';
 import { ReduxBaseAction } from 'types/core/baseAction.type';
 import { ApiRequest } from 'types/core/api.type';
+import { ENV } from 'application.config';
+
+const ENV_URL = ENV.SWAPI_URL;
 
 type UrlArgs = (string | number | undefined)[];
-
-const ENV_URL = 'https://swapi.dev/';
 const generateURL: (args: UrlArgs) => string = compose(
   concat(ENV_URL),
   join('/'),
