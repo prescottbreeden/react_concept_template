@@ -14,7 +14,13 @@
 //      ALL UTILITIES SHUOLD BE LISTED ALPHABETICALLY BY CLASS SELECTOR
 // ----------------------------------------------------------------------------
 
+.u-absolute {
+  position: absolute !important;
+}
 .u-error {
   margin-top: 0.4rem !important;
   color: $color__red !important;
+}
+.u-relative {
+  position: relative !important;
 }

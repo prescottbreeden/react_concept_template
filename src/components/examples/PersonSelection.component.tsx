@@ -29,7 +29,7 @@ export const PersonSelection: FC<PersonSelectionProps> = ({ setState }) => {
       <FlexRow>
         <h2>Select a Person</h2>
       </FlexRow>
-      <ul>{maybe(people).map(renderPeople).join()}</ul>
+      <ul className="list__group">{maybe(people).map(renderPeople).join()}</ul>
     </div>
   );
 };

@@ -10,7 +10,7 @@ function App() {
     <>
       <Router>
         <div className="header">
-          <h1>React Boiler Template</h1>
+          <h1>Amplify Consulting Partners React Template</h1>
         </div>
         <nav className="navigation">
           <Link to="/">Home</Link>

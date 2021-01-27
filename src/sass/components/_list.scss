@@ -1,0 +1,20 @@
+.list {
+  &__container {
+    min-width: 14rem;
+  }
+
+  &__group {
+    list-style: none;
+  }
+
+  &__item {
+    padding: 1.4rem;
+    border: 1px solid #333;
+    border-radius: $default__border-radius;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $color__lavender;
+    }
+  }
+}

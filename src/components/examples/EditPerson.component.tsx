@@ -62,11 +62,11 @@ export const EditPerson: FC = () => {
 
   return (
     <>
-      <div style={{ display: 'flex' }}>
+      <FlexRow>
         <Paper>
           <DataState state={person} />
         </Paper>
-        <Paper>
+        <Paper style={{ flexGrow: 1 }}>
           <PersonForm
             onChange={onChange}
             data={person}
@@ -78,10 +78,10 @@ export const EditPerson: FC = () => {
             <button onClick={handleReset}>Reset Form</button>
           </FlexRow>
         </Paper>
-        <Paper>
+        <Paper style={{ width: '20%' }}>
           <PersonSelection setState={setPerson} />
         </Paper>
-      </div>
+      </FlexRow>
     </>
   );
 };

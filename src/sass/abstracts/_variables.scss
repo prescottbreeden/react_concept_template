@@ -18,6 +18,7 @@ $color__tan: #a97d2e;
 $color__tan--light: #f3e7d2;
 $color__blue: #007d89;
 $color__turquoise: #12b0be;
+$color__lavender: rgba(0, 10, 150, 0.2);
 $color__purple: #d232ff;
 
 // greyscale
@@ -43,6 +44,8 @@ $default__font-stack: 'Roboto', '-apple-system', 'BlinkMacSystemFont', 'Oxygen',
   'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 $default__hover-bg-green: rgba($color__green, 0.2);
 $default__gutter-margin: 1.6rem;
+$default__font-stack--code: source-code-pro, Menlo, Monaco, Consolas,
+  'Courier New', monospace;
 
 // aliases & other
 $lighter-font-color: $color__grey--dark;
