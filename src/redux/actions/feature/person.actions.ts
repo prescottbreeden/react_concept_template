@@ -1,4 +1,4 @@
-import { apiRequest } from 'redux/actions/api.actions';
+import { apiRequest } from 'redux/actions/core/api.actions';
 import { PERSON_KEY } from 'redux/keys';
 import { compose } from 'utilities/general.utils';
 import { join, concat, defaultTo, map } from 'ramda';
@@ -31,7 +31,7 @@ export const readPerson = (id?: number): ReduxBaseAction<ApiRequest> => {
     method: 'GET',
     url: generateURL([...PERSON_URL, id]),
     feature: PERSON_KEY,
-    description: 'Reading Persons',
+    description: id ? 'Reading Person' : 'Reading Persons',
   });
 };
 
@@ -41,7 +41,7 @@ export const updatePerson = (id: number, person: Partial<Person>) => {
     method: 'PATCH',
     url: generateURL([...PERSON_URL, id]),
     feature: PERSON_KEY,
-    description: 'Updating Persons',
+    description: 'Updating Person',
   });
 };
 

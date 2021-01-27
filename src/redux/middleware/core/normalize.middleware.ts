@@ -1,4 +1,4 @@
-import { dataNormalized, SET_DATA } from 'redux/actions/data.actions';
+import { dataNormalized, SET_DATA } from 'redux/actions/core/data.actions';
 import { mergeDeepRight } from 'ramda';
 import { ReduxBaseAction } from 'types/core/baseAction.type';
 import { ApiResponse } from 'types/core/api.type';

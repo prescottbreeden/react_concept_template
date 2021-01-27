@@ -1,5 +1,5 @@
 import { PERSON_KEY } from 'redux/keys';
-import { SET_DATA } from 'redux/actions/data.actions';
+import { SET_DATA } from 'redux/actions/core/data.actions';
 import { prop } from 'fp-tools';
 import { Person } from 'types/feature/person.type';
 import { ReduxBaseAction } from 'types/core/baseAction.type';

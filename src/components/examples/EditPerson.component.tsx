@@ -2,7 +2,7 @@ import React, { useState, useEffect, FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { PersonSelection } from 'components/examples/PersonSelection.component';
 import { DataState } from 'components/examples/DataState.component';
-import { readPerson } from 'services/person.service';
+import { readPerson } from 'redux/actions/feature/person.actions';
 import { mergeDeepRight } from 'ramda';
 import { PersonForm } from 'forms/examples/Person.form';
 import { emptyPerson, Person } from 'types/feature/person.type';

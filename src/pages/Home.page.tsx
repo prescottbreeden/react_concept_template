@@ -6,29 +6,26 @@ export const HomePage: React.FC<HomePageProps> = () => {
   return (
     <>
       <Paper>
-        <h2>This Repository:</h2>
+        <h2>Documentation</h2>
         <FlexRow>
           <p>
-            This is a react template for creating a scalable react with redux
-            application.
+            This is page provides basic documentation regarding the use of this
+            template for creating scalable react with redux applications.
           </p>
         </FlexRow>
         <h2>Dependencies:</h2>
         <FlexRow>
           <FlexColumn>
-            <p>
-              Very few dependencies are baked into this template, however
-              notable packages include:
-            </p>
             <ul>
               <li>React (obviously)</li>
               <li>React Router</li>
               <li>React Helmet</li>
               <li>Redux</li>
-              <li>SASS / node-sass</li>
-              <li>De-formed Validations</li>
+              <li>SASS (node-sass)</li>
+              <li>De-formed Validations (AmplifyCP package)</li>
               <li>Ramda</li>
-              <li>fp-tools</li>
+              <li>fp-tools (AmplifyCP package)</li>
+              <li>No Mouse Days</li>
             </ul>
           </FlexColumn>
         </FlexRow>
@@ -62,6 +59,34 @@ export const HomePage: React.FC<HomePageProps> = () => {
               enhance separation of concerns in the code base and encourage more
               abstraction and less specialization, reducing a common source of
               redundancy.
+            </p>
+          </FlexColumn>
+        </FlexRow>
+        <h2>Redux:</h2>
+        <FlexRow>
+          <FlexColumn>
+            <p>
+              All API services are handled through redux, therefore, to add new
+              endpoints from the API, 3 files will handle the loading,
+              normalization, and selecting of the data:
+            </p>
+            <ul>
+              <li>Action (handles loading)</li>
+              <li>Middleware (handles transformations / dependent actions)</li>
+              <li>Reducer (handles storing / selecting)</li>
+            </ul>
+            <h3>Actions</h3>
+            <p>
+              Actions will dispatch ApiRequest actions containing the feature
+              name (the key), a description for loading and error messaging, the
+              method, body, and url. No asynchronous code is necessary to handle
+              API requests, rather, API middleware will handle every request
+              automatically and dispatch ApiSuccess or ApiError actions.
+            </p>
+            <h3>Middleware</h3>
+            <p>
+              Middleware in Redux is the most commonly under-utilized but also
+              most powerful feature of Redux as a functional messaging loop.
             </p>
           </FlexColumn>
         </FlexRow>
