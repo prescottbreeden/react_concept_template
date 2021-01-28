@@ -1,5 +1,5 @@
 import { compose } from 'utilities/general.utils';
-import { DevTools } from 'utilities/DevTools';
+import { ReduxDevTools } from 'utilities/DevTools';
 import { combineReducers, applyMiddleware, createStore } from 'redux';
 import { stateFreezer } from 'redux/reducers/enhancers/stateFreezer';
 import { personMiddleware } from 'redux/middleware/feature/person.middleware';
@@ -37,7 +37,7 @@ const enhancer =
   process.env.NODE_ENV === 'development'
     ? compose(
         applyMiddleware(...featureMiddleware, ...coreMiddleware),
-        DevTools.instrument()
+        ReduxDevTools.instrument()
       )
     : compose(applyMiddleware(...featureMiddleware, ...coreMiddleware));
 

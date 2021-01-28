@@ -7796,6 +7796,11 @@ no-case@^3.0.3:
     lower-case "^2.0.1"
     tslib "^1.10.0"
 
+no-mouse-days@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/no-mouse-days/-/no-mouse-days-0.0.4.tgz#a57914839ff7dfcd6ddf6ae230d58f3de92017d8"
+  integrity sha512-rwSSuvNrKi1dKKuGFYPFF7U1lPefbk6zcSTy99U99596i4ggONFtxLNFeqMnFSYFoCNRDZhJ/CfPGu/zDphhdg==
+
 node-forge@^0.10.0:
   version "0.10.0"
   resolved "https://registry.yarnpkg.com/node-forge/-/node-forge-0.10.0.tgz#32dea2afb3e9926f02ee5ce8794902691a676bf3"

@@ -8,16 +8,36 @@ import LogMonitor from 'redux-devtools-log-monitor';
 import DockMonitor from 'redux-devtools-dock-monitor';
 
 // createDevTools takes a monitor and produces a DevTools component
-export const DevTools = createDevTools(
+export const ReduxDevTools = createDevTools(
   // Monitors are individually adjustable with props.
   // Consult their repositories to learn about those props.
   // Here, we put LogMonitor inside a DockMonitor.
   // Note: DockMonitor is visible by default.
   <DockMonitor
     toggleVisibilityKey="ctrl-h"
-    changePositionKey="ctrl-q"
+    changePositionKey="ctrl-g"
     defaultIsVisible={false}
   >
     <LogMonitor theme="tomorrow" />
   </DockMonitor>
 );
+
+export const NoMouseDays: React.FC = () => {
+  const date = new Date();
+  const dayOfWeek = date.getDay();
+  // Disable Mouse on Mondays
+  if (dayOfWeek === 1) {
+    //@ts-ignore
+    import('no-mouse-days');
+  }
+  return <></>;
+};
+
+export const DevTools: React.FC = () => {
+  return process.env.NODE_ENV === 'development' ? (
+    <>
+      <NoMouseDays />
+      <ReduxDevTools />
+    </>
+  ) : null;
+};
