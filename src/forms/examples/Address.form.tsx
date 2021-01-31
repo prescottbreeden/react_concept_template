@@ -1,10 +1,11 @@
 import { FC, useEffect } from 'react';
 import { FlexRow } from 'layouts';
 import { FormType } from 'types/core/form.type';
-import { compose, handleChangeEvent, safeGet } from 'utilities/general.utils';
+import { compose, handleChangeEvent } from 'utilities/general.utils';
 import { Address } from 'types/feature/address.type';
 import { AddressValidation } from 'validations/examples/address.validation';
 import { Input } from 'components/common/Input.component';
+import { objProp } from 'fp-tools';
 
 export const AddressForm: FC<FormType<Address>> = ({
   data,
@@ -28,7 +29,7 @@ export const AddressForm: FC<FormType<Address>> = ({
     data
   );
   // get :: string -> address[string]
-  const get = safeGet(data);
+  const get = objProp(data);
 
   // --[ lifecycle ]-----------------------------------------------------------
   useEffect(() => {

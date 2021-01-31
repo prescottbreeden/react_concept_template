@@ -8,15 +8,17 @@ export interface PermissionRole extends Base<PermissionRole> {
   canAssignRoles: boolean;
 }
 
-const defaultValues: PermissionRole = {
-  permissionRoleId: -1,
-  permissionRoleName: '',
-  permissionRoleLabelName: '',
-  permissionRoleDescription: '',
-  canAssignRoles: false,
-};
+export const emptyPermissionRole = (): PermissionRole => {
+  const defaultValues: PermissionRole = {
+    permissionRoleId: -1,
+    permissionRoleName: '',
+    permissionRoleLabelName: '',
+    permissionRoleDescription: '',
+    canAssignRoles: false,
+  };
 
-export const emptyPermissionRole = (): PermissionRole => ({
-  ...defaultValues,
-  meta: defaultValues,
-});
+  return {
+    ...defaultValues,
+    meta: defaultValues,
+  };
+};

@@ -12,6 +12,7 @@ export type DynamicFormProps = {
   form: FunctionComponent<FormType<any>>;
   items: any[];
   onChange: (event: any) => any;
+  primaryKey?: string;
   removeForm: (data: any) => void;
   resetValidation: boolean;
   submitFailed: boolean;

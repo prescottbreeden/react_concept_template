@@ -1,10 +1,11 @@
 import { FC, useEffect } from 'react';
 import { PersonValidation } from 'validations/examples/person.validation';
 import { Person } from 'types/feature/person.type';
-import { compose, handleChangeEvent, safeGet } from 'utilities/general.utils';
+import { compose, handleChangeEvent } from 'utilities/general.utils';
 import { FormType } from 'types/core/form.type';
 import { FlexRow } from 'layouts';
 import { Input } from 'components/common/Input.component';
+import { objProp } from 'fp-tools';
 
 export const PersonForm: FC<FormType<Person>> = ({
   onChange,
@@ -28,7 +29,7 @@ export const PersonForm: FC<FormType<Person>> = ({
   );
   const handleBlur = validateOnBlur(data);
   // get :: string -> Person[string]
-  const get = safeGet(data);
+  const get = objProp(data);
 
   // --[ lifecycle ]-----------------------------------------------------------
   useEffect(() => {

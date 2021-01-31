@@ -35,10 +35,12 @@ export const CreateUser: FC = () => {
       // do the save-y bits
     } else {
       setSubmitFailed(true);
-      setNotification({
-        status: 'error',
-        message: 'Not all validations passed.',
-      });
+      dispatch(
+        setNotification({
+          status: 'error',
+          message: 'Not all validations passed.',
+        })
+      );
       // do the oops-y bits
     }
   };

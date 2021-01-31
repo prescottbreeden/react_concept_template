@@ -1,5 +1,5 @@
-import { length, trim, not, test } from 'ramda';
-import { all, compose, equals, lt, gt, map, split } from 'fp-tools';
+import { all, length, trim, not, test, replace } from 'ramda';
+import { compose, equals, lt, gt, map, split } from 'fp-tools';
 
 // regular expressions
 const emailRegEx = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

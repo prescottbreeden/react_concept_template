@@ -1,5 +1,12 @@
-import { prop } from 'fp-tools';
-import { converge, curry, defaultTo, map, mergeDeepRight, reduce } from 'ramda';
+import { equals, prop } from 'fp-tools';
+import {
+  converge,
+  curry,
+  defaultTo,
+  map,
+  mergeDeepRight,
+  replace,
+} from 'ramda';
 
 type KeyValuePair = {
   [key: string]: any;
@@ -7,6 +14,7 @@ type KeyValuePair = {
 
 // *randomString* :: () -> string
 export const randomString = () => Math.random().toString(36).substring(7);
+export const timeStamp = () => new Date().getMilliseconds();
 
 // *trace* :: string -> a -> a
 export const trace = curry((txt: string, x: any) => {
@@ -31,20 +39,10 @@ export const handleChangeEvent = compose(
   prop('target')
 );
 
-// safeGet :: obj -> string -> obj[string] | string
-export function safeGet<T>(obj: T) {
-  return function (property: keyof T) {
-    return compose(defaultTo(''), prop(property))(obj);
-  };
-}
-
 // replaceItem :: [a] -> a -> [a]
 export const replaceItem = curry((list: any[], b: any) => {
   return list.map((a: any) => (a.id === b.id ? b : a));
 });
-
-// all :: [bool] -> bool
-export const all = reduce((a: boolean, b: boolean) => (a ? b : a), true);
 
 // formatPhone :: string -> string
 export const formatPhone = (phone: string) => {
@@ -56,17 +54,17 @@ export const formatPhone = (phone: string) => {
   return phone;
 };
 
-// idOrRandom :: obj -> string
-export const idOrRandom = compose(defaultTo(randomString()), prop('id'));
+// removePhoneFormat :: string -> string
+export const removePhoneFormat = compose(
+  replace(/-/g, ''),
+  replace(/\s/g, ''),
+  replace(/\(/g, ''),
+  replace(/\)/g, '')
+);
 
-/**
- *  Evaluate any two values for deep equality
- *  @param a any value
- *  @param b any value
- *  @return boolean
- */
-export const deepEqual = (a: unknown, b: unknown) => {
-  return JSON.stringify(a) === JSON.stringify(b);
+// idOrRandom :: obj -> string
+export const idOrRandom = (propery: string) => {
+  return compose(defaultTo(randomString()), prop(propery));
 };
 
 /**
@@ -90,7 +88,12 @@ export const depthSearch = (obj: KeyValuePair, include: string[] = []) => {
         ? mergeDeepRight(prev, { [key]: search })
         : prev;
     }
-    if (include.includes(key) || !deepEqual(obj[key], obj.meta[key])) {
+    if (Array.isArray(obj[key]) && obj[key].length) {
+      const list = defaultTo([], obj[key]);
+      const result = list.map((item: any) => depthSearch(item));
+      return mergeDeepRight(prev, { [key]: result });
+    }
+    if (include.includes(key) || !equals(obj[key], obj.meta[key])) {
       return mergeDeepRight(prev, { [key]: obj[key] });
     }
     return prev;

@@ -8,15 +8,17 @@ export interface Address extends Base<Address> {
   zipCode: string;
 }
 
-const defaultValues: Address = {
-  city: '',
-  state: '',
-  street1: '',
-  street2: '',
-  zipCode: '',
-};
+export const emptyAddress = (): Address => {
+  const defaultValues: Address = {
+    city: '',
+    state: '',
+    street1: '',
+    street2: '',
+    zipCode: '',
+  };
 
-export const emptyAddress = (): Address => ({
-  ...defaultValues,
-  meta: defaultValues,
-});
+  return {
+    ...defaultValues,
+    meta: defaultValues,
+  };
+};

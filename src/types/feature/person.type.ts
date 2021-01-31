@@ -16,23 +16,24 @@ export interface Person extends Base<Person> {
   starships: string[];
 }
 
-const defaultValues: Person = {
-  personId: -1,
-  height: '',
-  name: '',
-  hair_color: '',
-  skin_color: '',
-  eye_color: '',
-  birth_year: '',
-  gender: '',
-  homeworld: '',
-  films: [],
-  species: [],
-  vehicles: [],
-  starships: [],
+export const emptyPerson = (): Person => {
+  const defaultValues: Person = {
+    personId: -1,
+    height: '',
+    name: '',
+    hair_color: '',
+    skin_color: '',
+    eye_color: '',
+    birth_year: '',
+    gender: '',
+    homeworld: '',
+    films: [],
+    species: [],
+    vehicles: [],
+    starships: [],
+  };
+  return {
+    ...defaultValues,
+    meta: defaultValues,
+  };
 };
-
-export const emptyPerson = (): Person => ({
-  ...defaultValues,
-  meta: defaultValues,
-});

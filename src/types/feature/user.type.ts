@@ -20,21 +20,23 @@ export interface User extends Base<User> {
   phones: Phone[];
 }
 
-const defaultValues: User = {
-  aadB2cId: '',
-  address: emptyAddress(),
-  firstName: '',
-  id: randomString(),
-  isActive: true,
-  lastName: '',
-  loginEmail: '',
-  permissionRoles: [],
-  title: '',
-  emails: [],
-  phones: [emptyPhone()],
-};
+export const emptyUser = (): User => {
+  const defaultValues: User = {
+    aadB2cId: '',
+    address: emptyAddress(),
+    firstName: '',
+    id: randomString(),
+    isActive: true,
+    lastName: '',
+    loginEmail: '',
+    permissionRoles: [],
+    title: '',
+    emails: [],
+    phones: [emptyPhone()],
+  };
 
-export const emptyUser = (): User => ({
-  ...defaultValues,
-  meta: defaultValues,
-});
+  return {
+    ...defaultValues,
+    meta: defaultValues,
+  };
+};

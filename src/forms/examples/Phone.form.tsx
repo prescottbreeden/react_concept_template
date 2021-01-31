@@ -6,10 +6,10 @@ import { FormType } from 'types/core/form.type';
 import { Phone } from 'types/feature/phone.type';
 import {
   compose,
-  safeGet,
   handleChangeEvent,
   formatPhone,
 } from 'utilities/general.utils';
+import { objProp } from 'fp-tools';
 
 export const PhoneForm: FC<FormType<Phone>> = ({
   data,
@@ -35,7 +35,7 @@ export const PhoneForm: FC<FormType<Phone>> = ({
   const handleOnBlur = validateOnBlur(data);
   const handleOnChange = validateOnChange(onPhoneChange, data);
   // get :: string -> Phone[string]
-  const get = safeGet(data);
+  const get = objProp(data);
 
   // --[ lifecycle ]-----------------------------------------------------------
   useEffect(() => {

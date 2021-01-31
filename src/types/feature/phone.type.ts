@@ -7,13 +7,14 @@ export interface Phone extends Base<Phone> {
   number: string;
 }
 
-const defaultValues = {
-  id: randomString(),
-  description: '',
-  number: '',
+export const emptyPhone = (): Phone => {
+  const defaultValues = {
+    id: randomString(),
+    description: '',
+    number: '',
+  };
+  return {
+    ...defaultValues,
+    meta: defaultValues,
+  };
 };
-
-export const emptyPhone = (): Phone => ({
-  ...defaultValues,
-  meta: defaultValues,
-});
